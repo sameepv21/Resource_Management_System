@@ -3,6 +3,7 @@ import {Navbar, NavItem, Nav, Collapse, NavbarToggler, NavbarBrand, Form, FormGr
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Verify from './Verify';
+import cookie from 'react-cookies';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -71,7 +72,22 @@ class LoginForm extends Component {
     }
 
     componentDidMount() {
-        this.checkLoginStatus();
+        //ON MOUNT CHECK FOR COOKIE STATUS
+        console.log("COOKIE= "+ cookie.load("cookie"))
+
+        if(cookie.load("cookie")){
+            this.setState({
+                redirectVar: true,
+            });
+        }
+       /* axios.post('http://localhost:5000/login')
+            .then( response => {
+                if(response.data.success) {
+                    this.setState({
+                        redirectVar: true,
+                    });
+                }
+            })*/
     }
 
     toggleModal() {
@@ -131,32 +147,17 @@ class LoginForm extends Component {
             password: this.state.password,
         }
 
-        let options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        }
-        
-        let response = await fetch('/login', options);
-        let res = await response.json();
-        if(res.success){
-            this.setState({
-                redirectVar: true,
-            });
-        }
-
-        // axios.post('http://localhost:5000/login', data)
-        //     .then(response => {
-        //         if(response.data.success) {
-        //             this.setState({
-        //                 redirectVar: true,
-        //             });
-        //         } else {
-        //             alert(response.data.msg);
-        //         }
-        //     });
+         axios.post('http://localhost:5000/login', data)
+             .then(response => {
+                 if(response.data.success) {
+                    cookie.save("cookie", response.data.data.email, {path: '/'})
+                     this.setState({
+                         redirectVar: true,
+                     });
+                 } else {
+                     alert(response.data.msg);
+                 }
+             });
     }
 
     validate(firstname, lastname, roll, email, password, confirmPassword) {

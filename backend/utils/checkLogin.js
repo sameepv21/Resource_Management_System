@@ -44,6 +44,7 @@ exports.checkLogin = (req, res) => {
                         });
                     }
                     else if(results[0].password === password){
+                        res.cookie('cookie', email, { maxAge: 60 * 60 * 1000, httpOnly: false, path: '/' });
                         req.session.user = email;
                         console.log(req.session.user);
                         res.send({
