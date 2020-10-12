@@ -42,6 +42,7 @@ exports.signUp = (req, res) => {
                         }
                     });
 
+                    res.cookie('cookie', email, { maxAge: 60 * 60 * 1000, httpOnly: false, path: '/' });
                     req.session.user = email;
                     console.log("New User session created.");
                     
@@ -49,7 +50,7 @@ exports.signUp = (req, res) => {
                         status: 1,
                         success: true,
                         msg: "You have successfully registered.",
-                        data: {},
+                        data: {email},
                     });
                 }
             });
