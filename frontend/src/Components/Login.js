@@ -36,33 +36,6 @@ class LoginForm extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
         this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
-        this.checkLoginStatus = this.checkLoginStatus.bind(this);
-    }
-
-    async checkLoginStatus() {
-        let options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        }
-        
-        let response = await fetch('/login', options);
-        let res = await response.json();
-        if(res.success){
-            this.setState({
-                redirectVar: true,
-            });
-        }
-        // axios.post('http://localhost:5000/login')
-        //     .then(response => {
-        //         console.log(response);
-        //         if(response.data.success) {
-        //             this.setState({
-        //                 redirectVar: true,
-        //             });
-        //         }
-        //     });
     }
 
     toggleNav() {
@@ -72,22 +45,11 @@ class LoginForm extends Component {
     }
 
     componentDidMount() {
-        //ON MOUNT CHECK FOR COOKIE STATUS
-        console.log("COOKIE= "+ cookie.load("cookie"))
-
         if(cookie.load("cookie")){
             this.setState({
                 redirectVar: true,
             });
         }
-       /* axios.post('http://localhost:5000/login')
-            .then( response => {
-                if(response.data.success) {
-                    this.setState({
-                        redirectVar: true,
-                    });
-                }
-            })*/
     }
 
     toggleModal() {
@@ -113,6 +75,7 @@ class LoginForm extends Component {
     }
 
     async handleSignUpSubmit(event) {
+        event.preventDefault();
         this.setState({
             redirectVarSignUp: true,
         });
@@ -121,27 +84,19 @@ class LoginForm extends Component {
             email: this.state.email,
         }
 
-        let options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        }
-
-        let responseSignUp = await fetch('/verify', options);
-        let dataResponse = await responseSignUp.json();
-        console.log(dataResponse);
-        if(dataResponse.success) {
-            this.setState({
-                redirectVarSignUp: true,
-                otp: dataResponse.data.otp,
+        axios.defaults.withCredentials = true;
+        axios.post('http://localhost:5000/verify', data)
+            .then(response => {
+                if(response.data.success) {
+                    this.setState({
+                        redirectVarSignUp: true,
+                        otp: response.data.data.otp,
+                    });
+                }
             });
-        }
     }
 
     async handleLoginSubmit(event) {
-        //alert(JSON.stringify(this.state));
         let data = {
             email: this.state.email,
             password: this.state.password,

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
 import { Form, FormGroup, Input, Label, Button, FormFeedback } from 'reactstrap';
+import axios from 'axios';
 import Header from './Header';
 
 class EditProfile extends Component {
@@ -42,21 +43,16 @@ class EditProfile extends Component {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
         }
-        const options = {
-            method: "POST",
-            header: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        }
 
-        const updated = await fetch('/editProfile', options);
-        const response = await updated.json();
-        if(response.success) {
-            this.setState({
-                redirectVar: true,
+        axios.defaults.withCredentials = true;
+        axios.post('http://localhost:5000/editProfile', data)
+            .then(response => {
+                if(response.data.success) {
+                    this.setState({
+                        redirectVar: true,
+                    });
+                }
             });
-        }
     }
 
     validate(firstName, lastName) {

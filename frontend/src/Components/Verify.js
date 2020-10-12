@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
 import {Input, Button, Label} from 'reactstrap';
 import Header from './Header';
+import axios from 'axios';
+import cookie from 'react-cookies';
 
 class Verify extends Component {
     constructor(props) {
@@ -49,22 +51,15 @@ class Verify extends Component {
                 otp: this.state.otp,
             }
     
-            const options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            }
-    
-            const responseSignUp = await fetch('/signUp', options);
-            const dataResponse = await responseSignUp.json();
-            if(dataResponse.success) {
-                this.setState({
-                    redirectVar: true,
+            axios.post('http://localhost:5000/signUp', data)
+                .then(response => {
+                    cookie.save('cookie', response.data.data.email, { path: '/' });
+                    if(response.data.success) {
+                        this.setState({
+                            redirectVar: true,
+                        });
+                    }
                 });
-                console.log("Successfull");
-            }
         } else {
             console.log('Wrong OTP!');
         }

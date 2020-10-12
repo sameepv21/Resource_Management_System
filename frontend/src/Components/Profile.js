@@ -3,6 +3,7 @@ import Header from './Header';
 import {Button, Card, CardImg, CardBody, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import EditProfile from './EditProfile';
+import axios from 'axios';
 
 class ShowProfile extends Component{
     constructor(props) {
@@ -72,19 +73,16 @@ class Profile extends Component{
     }
 
     async getProfile(){
-        var options = {
-            method: 'GET',
-            header:{
-                'Content-Type': 'application/json' 
-            } 
-        }
-        
-        var response = await fetch('/profile', options);
-        var res = await response.json();
-        var dataResponse = JSON.parse(res.data);
-        this.setState({
-            data: dataResponse,
-        });
+        axios.defaults.withCredentials = true;
+        axios.get('http://localhost:5000/profile')
+            .then(response => {
+                this.setState({
+                    data: JSON.parse(response.data.data),
+                })
+            })
+            .catch(response => {
+                alert(response);
+            })
     }
 
     render(){

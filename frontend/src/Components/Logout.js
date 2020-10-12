@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
+import axios from 'axios';
+import cookie from 'react-cookies';
 
 class Logout extends Component {
     constructor(props) {
@@ -13,14 +15,8 @@ class Logout extends Component {
     }
 
     async logoutStatus() {
-        const options = {
-            method: 'GET',
-            header: {
-                'Content-type': 'application/json',
-            },
-        }
-
-        const getResponse = await fetch('/logout', options);
+        axios.get('http://localhost:5000/logout');
+        cookie.remove('cookie');
     }
 
     render() {

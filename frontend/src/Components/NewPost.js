@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Input, Card, Button, CardBody, Label, CardHeader, FormFeedback } from 'reactstrap';
 import Header from './Header';
+import axios from 'axios';
 
 class NewPost extends Component {
     constructor(props) {
@@ -36,19 +37,8 @@ class NewPost extends Component {
         // formData.append('description', this.state.description);
         formData.append('file', this.state.file);
 
-        let options = {
-            method: 'POST',
-            body: formData
-        }
-
-        let response = await fetch('/uploadPost', options);
-        let responseData = await response.json();
-        console.log(responseData);
-        // if(responseData.success) {
-        //     this.setState({
-        //         redirectVar: true,
-        //     });
-        // }
+        axios.defaults.withCredentials = true;
+        axios.post('http://localhost:5000/uploadPost', formData);
     }
 
     handleInputChange = (event) => {
