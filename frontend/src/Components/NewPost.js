@@ -32,9 +32,9 @@ class NewPost extends Component {
     async handleSubmit(event) {
         event.preventDefault();
         let formData = new FormData();
-        // formData.append('title', this.state.title);
-        // formData.append('url', this.state.url);
-        // formData.append('description', this.state.description);
+        formData.append('title', this.state.title);
+        formData.append('url', this.state.url);
+        formData.append('description', this.state.description);
         formData.append('file', this.state.file);
 
         axios.defaults.withCredentials = true;

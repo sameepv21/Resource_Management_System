@@ -1,23 +1,23 @@
 var express = require('express');
+var mysql = require('mysql');
 var router = express.Router();
 var multer = require('multer');
 var checkLogin = require('./utils/checkLogin');
 var signUp = require('./utils/signUp');
-var uploadPostRouter = require('./utils/uploadPost');
-var path = require('path');
 var logout = require('./utils/logout');
 var editProfile = require('./utils/editProfile');
 var profile = require('./utils/profile');
 var verify = require('./utils/verify');
-var uploadPost = require('./utils/uploadPost');
+const { query } = require('express');
+var fileName = '';
 
 var storage  = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, './uploads/AU1940049')
   },
   filename: function(req, file, cb) {
-    let temp = file.originalname;
-    cb(null, temp);
+    fileName = Date.now() + "_" + file.originalname;
+    cb(null, fileName);
   }
 });
 
@@ -37,10 +37,46 @@ router.post('/editProfile', editProfile.editProfile);
 
 router.post('/uploadPost', upload.single('file'), function(req, res, next){
   console.log("File uploaded successfully!");
-  res.send({
-    status: 1,
-    msg: "File uploaded succesffuly!",
-    data: {},
+
+  var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "root",
+    database: "mydb",
+  });
+
+  con.connect(function(err) {
+    if(err) {
+      res.send({
+        status: 1,
+        msg: 'User already logged in',
+        success: true,
+        data: {},
+      });
+    } else {
+      let postInsertQuery = "INSERT INTO posts (email,title,url,description,file_name) VALUES ('" + req.cookies.cookie +"','" + req.body.title +"','" + req.body.url +"','"+ req.body.description +"','"+ fileName + "');"
+      console.log("post inster query "+postInsertQuery);
+
+      con.query(postInsertQuery, function(err, results) {
+        if(err) {
+          console.log(err.message);
+          res.send({
+            status: 0,
+            msg: err.message,
+            data: {},
+          });
+        } else {
+          console.log('Successfull');
+          res.send({
+            status: 1,
+            msg: 'Upload Successfull',
+            uploadSuccess: true,
+            data: {},
+          });
+        }
+      })
+
+    }
   });
 });
 
