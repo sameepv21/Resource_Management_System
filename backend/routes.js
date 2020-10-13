@@ -8,6 +8,7 @@ var logout = require('./utils/logout');
 var editProfile = require('./utils/editProfile');
 var profile = require('./utils/profile');
 var verify = require('./utils/verify');
+var userPost = require('./utils/userPost')
 const { query } = require('express');
 var fileName = '';
 
@@ -85,6 +86,8 @@ router.get('/logout', logout.logout);
 
 
 router.get('/profile', profile.profile);
+
+router.get('/userPost', userPost.userPost);
 
 router.get('/', (req, res) => {
   res.send('React is connected to express backend');

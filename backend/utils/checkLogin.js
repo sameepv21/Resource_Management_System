@@ -27,7 +27,7 @@ exports.checkLogin = (req, res) => {
                 });
                 
             } else {
-                let sqlQuery = "SELECT password FROM temp WHERE email='" + email + "'";
+                let sqlQuery = "SELECT * FROM temp WHERE email='" + email + "'";
                 con.query(sqlQuery, function(err, results){
                     if(err) {
                         res.send({
