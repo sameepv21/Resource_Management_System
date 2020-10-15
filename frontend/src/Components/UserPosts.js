@@ -62,7 +62,7 @@ class UserPosts extends Component{
                 <div className="bg">
                     <Header />
                     {display}
-                    <br /><br /><br /><br /><br /><br /><br />
+                    <br /><br /><br /><br /><br /><br /><br /><br />
                 </div>
             );
         } else {
