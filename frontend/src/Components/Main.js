@@ -7,7 +7,9 @@ import Logout from './Logout';
 import Profile from './Profile';
 import EditProfile from './EditProfile';
 import Verify from './Verify';
+import SavedPost from './SavedPost';
 import UserPosts from './UserPosts';
+import School from './School';
 
 class Main extends Component {
     render() {
@@ -16,11 +18,13 @@ class Main extends Component {
                 <Route path="/home" component={Home} />
                 <Route path="/login" component={Login} />
                 <Route path='/logout' component={Logout} />
+                <Route path="/verify" component={Verify} />
+                <Route path="/school" component={School} />
                 <Route path="/newPost" component={NewPost} />
-                <Route path='/editProfile' component={EditProfile} />
                 <Route path="/profile" component={Profile} />
                 <Route path='/userPosts' component={UserPosts} />
-                <Route path="/verify" component={Verify} />
+                <Route path='/savedPosts' component={SavedPost} />
+                <Route path='/editProfile' component={EditProfile} />
                 <Redirect to="/login" />
             </Switch>
         );

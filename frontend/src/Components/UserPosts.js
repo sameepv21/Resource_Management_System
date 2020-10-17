@@ -1,30 +1,115 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import Header from "./Header";
-import { Card, CardHeader, CardBody, CardImg, CardFooter, Button } from 'reactstrap';
+import { Card, CardHeader, CardBody, CardImg, CardFooter, Button,Modal, ModalHeader, ModalBody } from 'reactstrap';
+import {Redirect} from 'react-router-dom';
+import EditPost from './EditPost';
+import ShowBreadcrumb from './ShowBreadcrumb';
 
-function ShowPost({particularPostDetail}) {
+class ShowPost extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            isModalOpen: false,
+            deleterRdirectVar: false,
+            redirectEditPost: false,
+        }
+        this.addToSavePosts = this.addToSavePosts.bind(this);
+        this.toggleEditPost = this.toggleEditPost.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
+        this.deletePost = this.deletePost.bind(this);
+    }
+
+    toggleEditPost() {
+        this.setState({
+            redirectEditPost: true,
+        });
+    }
+
+    toggleModal() {
+        this.setState({
+            isModalOpen: !this.state.isModalOpen,
+        });
+    }
+
+    deletePost(event){
+        event.preventDefault();
+        let data = {
+            id: this.props.particularPostDetail.idposts,
+            fileName: this.props.particularPostDetail.file_name,
+        }
+
+        axios.post('http://localhost:5000/deletePost', data)
+            .then(response => {
+                alert(response.data.msg);
+                this.setState({
+                    deleteRedirectVar: true,
+                })
+            })
+            .catch(response => {
+                alert(response);
+            });
+    }
+
+    addToSavePosts(event){
+        event.preventDefault();
+
+        let data={
+            id: this.props.particularPostDetail.idposts,
+        }
+
+        axios.defaults.withCredentials = true;
+        axios.post('/addToSavedPosts', data)
+            .then((response) =>{
+                alert(response.data.msg);
+            })
+            .catch((response) => {
+                alert(response);
+            })
+    }
+
     //alert(JSON.stringify(particularPostDetail));
-    let filePath = '../../backend/uploads/AU1940049' + '/' + particularPostDetail.file_name;
-    return(
-        <div className="container">
-            <Card className="col-10 m-2">
-                <CardHeader className="bg-white"><div className="d-flex justify-content-center"><h3>{particularPostDetail.title}</h3></div></CardHeader>
-                <CardBody>
-                    Description: {particularPostDetail.description}<br />
-                    Want to view the site? <a href={particularPostDetail.url} >Click Me</a>
-                </CardBody>
-                <div className="d-flex justify-content-center">
-                    <CardFooter className="bg-white">
-                        <Button className="btn m-1" color="warning">Edit<span className="ml-2 fa fa-pencil"></span></Button>
-                        <Button className="btn m-1" color="success" href="./Header.js" download>Download<span className="ml-2 fa fa-download"></span> </Button>
-                        <Button className="btn m-1" color="danger">Delete this Post<span className="ml-2 fa fa-trash-o"></span></Button>
-                        <Button className="btn m-1" color="primary">Add to saved posts<span className="ml-2 fa fa-bookmark"></span></Button>
-                    </CardFooter>
+    render(){
+    let filePath = '../../backend/uploads/AU1940049' + '/' + this.props.particularPostDetail.file_name;
+        if(this.state.deleteRedirectVar){
+            return(
+                <Redirect to="/userPosts" />
+            );
+        } else if(this.state.redirectEditPost) {
+            return(
+                <EditPost details={this.props.particularPostDetail} />
+            );
+        }
+        return(
+            <div>
+                <div className="container d-flex justify-content-center">
+                    <Card className="col-12 mb-4">
+                        <CardHeader className="bg-white"><div className="d-flex justify-content-center"><h3>{this.props.particularPostDetail.title}</h3></div></CardHeader>
+                        <CardBody>
+                            Description: {this.props.particularPostDetail.description}<br />
+                            Want to view the site? <a href={this.props.particularPostDetail.url} >Click Me</a>
+                        </CardBody>
+                        <div className="d-flex justify-content-center">
+                            <CardFooter className="bg-white">
+                                <Button className="btn m-1" color="warning" onClick={this.toggleEditPost}>Edit<span className="ml-2 fa fa-pencil"></span></Button>
+                                <Button className="btn m-1" color="success">Download<span className="ml-2 fa fa-download"></span> </Button>
+                                <Button className="btn m-1" color="danger" onClick={this.toggleModal}>Delete this Post<span className="ml-2 fa fa-trash-o"></span></Button>
+                                <Button className="btn m-1" color="primary" onClick={this.addToSavePosts}>Add to saved posts<span className="ml-2 fa fa-bookmark"></span></Button>
+                            </CardFooter>
+                            <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                                <ModalHeader toggle={this.toggleModal}>Confirm Delete</ModalHeader>
+                                <ModalBody>
+                                    <h6>Are you sure you want to delete?</h6>
+                                    <Button className="btn mt-2 mr-2" color="danger" onClick={this.deletePost}>Confirm</Button>
+                                    <Button className="btn mt-2" color="success" onClick={this.toggleModal}>Cancel</Button> 
+                                </ModalBody>
+                            </Modal>
+                        </div>
+                    </Card>
                 </div>
-            </Card>
-        </div>
-    );
+            </div>
+        );
+    }
 }
 
 class UserPosts extends Component{
@@ -33,6 +118,7 @@ class UserPosts extends Component{
 
         this.state = {
             postDetails: [],
+            redirectvar: false,
         }
     }
 
@@ -41,10 +127,13 @@ class UserPosts extends Component{
         axios.get('http://localhost:5000/userPost')
             .then(response => {
                 //alert(JSON.stringify(response.data.data.results[0].email) + "             " + typeof response.data.data.results);
-                this.setState({
-                    postDetails: response.data.data.results,
-                    redirectVar: true,
-                })
+                if(response.data.data.results.length !== 0) {
+                    this.setState({
+                        postDetails: response.data.data.results,
+                        redirectVar: true,
+                    });
+                }
+                
             })
             .catch(response => {
                 alert(response);
@@ -61,14 +150,16 @@ class UserPosts extends Component{
             return(
                 <div className="bg">
                     <Header />
+                    <ShowBreadcrumb />
                     {display}
-                    <br /><br /><br /><br /><br /><br /><br /><br />
+                    <br />
                 </div>
             );
         } else {
             return(
-                <div className="bg">
+                <div>
                     <Header />
+                    <h5>No posts yet</h5>
                 </div>
             )
         }

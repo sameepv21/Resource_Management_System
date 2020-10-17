@@ -8,7 +8,11 @@ var logout = require('./utils/logout');
 var editProfile = require('./utils/editProfile');
 var profile = require('./utils/profile');
 var verify = require('./utils/verify');
-var userPost = require('./utils/userPost')
+var userPost = require('./utils/userPost');
+var addToSavedPosts = require('./utils/addToSavedPosts');
+var deletePost = require('./utils/deletePost');
+var editPost = require('./utils/editPost');
+var savedPosts = require('./utils/savedPosts');
 const { query } = require('express');
 var fileName = '';
 
@@ -26,8 +30,12 @@ var upload = multer({storage: storage});
 
 router.post('/login', checkLogin.checkLogin);
 
+router.get('/savedPosts', savedPosts.savedPosts);
+
 
 router.post('/signUp', signUp.signUp);
+
+router.post('/editPost', editPost.editPost);
 
 
 router.post('/verify', verify.verify);
@@ -35,6 +43,9 @@ router.post('/verify', verify.verify);
 
 router.post('/editProfile', editProfile.editProfile);
 
+router.post('/addToSavedPosts', addToSavedPosts.addToSavedPosts);
+
+router.post('/deletePost', deletePost.deletePost);
 
 router.post('/uploadPost', upload.single('file'), function(req, res, next){
   console.log("File uploaded successfully!");

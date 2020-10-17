@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import Header from './Header';
 import {Button, Card, CardImg, CardBody, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import { Link } from 'react-router-dom';
+import ShowBreadcrumb from './ShowBreadcrumb';
 import EditProfile from './EditProfile';
 import axios from 'axios';
 
@@ -89,14 +90,7 @@ class Profile extends Component{
         return(
             <div>
                 <Header />
-                <div className="container">
-                    <Breadcrumb>
-                        <BreadcrumbItem active><Link to="/profile">Profile</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to="/security">Change Password</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to="/userPosts">Your Post</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to="/savedPost">Saved Post</Link></BreadcrumbItem>
-                    </Breadcrumb>
-                </div>
+                <ShowBreadcrumb />
                 <ShowProfile data={this.state.data}/>
             </div>
             
