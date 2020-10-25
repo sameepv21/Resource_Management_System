@@ -31,10 +31,10 @@ class ShowProfile extends Component{
         }
         else {
             return(
-                <div className="mt-5 container d-flex justify-content-center">
-                   <Card className="col-12">
+                <div className="mt-5 container d-flex justify-content-center ">
+                   <Card className="col-12 mb-5">
                         <div className="d-flex mt-3 justify-content-center">
-                            <CardImg className="col-md-3 col-sm-10 rounded-circle" src="assests/images/sameep.jpg"/>
+                            <CardImg className="col-md-3 col-sm-10 rounded-circle" src="assets/images/sameep.jpg"/>
                         </div>
                         <div className="d-flex justify-content-center">
                             <CardBody>
@@ -88,7 +88,7 @@ class Profile extends Component{
 
     render(){
         return(
-            <div>
+            <div className="bg">
                 <Header />
                 <ShowBreadcrumb />
                 <ShowProfile data={this.state.data}/>

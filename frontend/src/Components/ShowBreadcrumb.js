@@ -5,7 +5,7 @@ import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 class ShowBreadcrumb extends Component {
     render() {
         return(
-            <div className="container d-flex justify-content-center">
+            <div className="container d-flex justify-content-center" >
                 <Breadcrumb>
                     <BreadcrumbItem active><Link to="/profile">Profile</Link></BreadcrumbItem>
                     <BreadcrumbItem><Link to="/security">Change Password</Link></BreadcrumbItem>
