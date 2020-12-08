@@ -21,11 +21,11 @@ class Stream extends Component{
         let RenderStreams = this.props.school.stream.map((stream) => {
             return(
                 <Card className="mt-3 col-md-4">
-                    <CardHeader className="d-flex justify-content-center">
+                    <CardHeader className="d-flex justify-content-center" style = {{background: "white"}}>
                             <h4>{stream.streamName}</h4>
                     </CardHeader>
                     <CardImg className="img-fluid" src={stream.streamImage}></CardImg>
-                    <CardFooter>
+                    <CardFooter style = {{background: "white"}}>
                         <div className="d-flex justify-content-center">
                             <Button role="button" id={stream.streamId} className="stretched-link btn btn-lg text-light" color="primary">Explore</Button>
                         </div>

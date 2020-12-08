@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Input, Card, Button, CardBody, Label, CardHeader, FormFeedback } from 'reactstrap';
+import { Form, FormGroup, Input, Card, Button, CardBody, Label, DropdownToggle, CardHeader, FormFeedback } from 'reactstrap';
 import Header from './Header';
 import axios from 'axios';
 
@@ -11,6 +11,7 @@ class NewPost extends Component {
             title: '',
             url: '',
             file: '',
+            school: '',
             description: '',
             redirectVar: false,
             touched: {
@@ -32,6 +33,7 @@ class NewPost extends Component {
     async handleSubmit(event) {
         event.preventDefault();
         let formData = new FormData();
+        formData.append('school', this.state.school);
         formData.append('title', this.state.title);
         formData.append('url', this.state.url);
         formData.append('description', this.state.description);
@@ -91,6 +93,20 @@ class NewPost extends Component {
                             </div>
                         </CardHeader>
                         <CardBody className="color-nav">
+                            <FormGroup>
+                                <Label htmlFor="title" className="text-light">Choose school to post in</Label><br/>
+                                <select style={{width: "100%"}} id= "school" onBlur={this.handleInputChange}>
+                                    <option value="seas">SEAS
+                                        <select style={{width: "100%"}} onBlur={this.handleInputChange}>
+                                            <option>ce</option>
+                                            <option>ce</option>
+                                            <option>ce</option>
+                                        </select>
+                                    </option>
+                                    <option value="sas">SAS</option>
+                                    <option value="amsom">AMSOM</option>
+                                </select>    
+                            </FormGroup>
                             <FormGroup>
                                 <Label htmlFor="title" className="text-light">Title</Label>
                                 <Input type="text" id="title" name="title" placeholder="Title"

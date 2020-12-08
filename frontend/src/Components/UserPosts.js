@@ -94,8 +94,8 @@ class ShowPost extends Component {
                             <CardFooter className="bg-white">
                                 <Button className="btn m-1" color="warning" onClick={this.toggleEditPost}>Edit<span className="ml-2 fa fa-pencil"></span></Button>
                                 <Button className="btn m-1" color="success">Download<span className="ml-2 fa fa-download"></span> </Button>
-                                <Button className="btn m-1" color="danger" onClick={this.toggleModal}>Delete this Post<span className="ml-2 fa fa-trash-o"></span></Button>
-                                <Button className="btn m-1" color="primary" onClick={this.addToSavePosts}>Add to saved posts<span className="ml-2 fa fa-bookmark"></span></Button>
+                                <Button className="btn m-1" color="danger" onClick={this.toggleModal}>Delete<span className="ml-2 fa fa-trash-o"></span></Button>
+                                <Button className="btn m-1" color="primary" onClick={this.addToSavePosts}>Save<span className="ml-2 fa fa-bookmark"></span></Button>
                             </CardFooter>
                             <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                                 <ModalHeader toggle={this.toggleModal}>Confirm Delete</ModalHeader>

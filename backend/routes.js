@@ -66,7 +66,7 @@ router.post('/uploadPost', upload.single('file'), function(req, res, next){
         data: {},
       });
     } else {
-      let postInsertQuery = "INSERT INTO posts (email,title,url,description,file_name) VALUES ('" + req.cookies.cookie +"','" + req.body.title +"','" + req.body.url +"','"+ req.body.description +"','"+ fileName + "');"
+      let postInsertQuery = "INSERT INTO posts (email,school,title,url,description,file_name) VALUES ('" + req.cookies.cookie +"','" + req.body.school+ "','" + req.body.title +"','" + req.body.url +"','"+ req.body.description +"','"+ fileName + "');"
       console.log("post inster query "+postInsertQuery);
 
       con.query(postInsertQuery, function(err, results) {

@@ -32,11 +32,11 @@ class RenderSchools extends Component{
         var renderSchool = SchoolDetails.map((school)=>{
             return(
                     <Card className="mt-3 col-md-4">
-                        <CardHeader className="d-flex justify-content-center">
+                        <CardHeader className="d-flex justify-content-center" style = {{background: "white"}}>
                              <h2>{school.schoolName}</h2>
                         </CardHeader>
                         <CardImg className="img-fluid" src={school.image}></CardImg>
-                        <CardFooter>
+                        <CardFooter style = {{background: "white"}}>
                             <div className="d-flex justify-content-center">
                                 <Button role="button" id={school.schoolName} onClick={this.exploreSchool} className="stretched-link btn btn-lg text-light" color="primary">Explore</Button>
                             </div>

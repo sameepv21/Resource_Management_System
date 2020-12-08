@@ -51,16 +51,32 @@ class SavedPost extends Component {
     }
 
     render() {
-        let display = this.state.details_saved.map((post) => {
-            return(
-                <ShowSavedPost details={post} />
-            );
-        })
-        if(this.state.redirectVar) {
+        let display, msg="";
+        if(this.state.details_saved){
+            display = this.state.details_saved.map((post) => {
+                return(
+                    <ShowSavedPost details={post} />
+                );
+            })
+        }
+        else{
+            msg = "No saved post";
+        }
+        if(this.state.redirectVar && msg == "") {
             return(
                 <div className="bg">
                     <Header />
                     {display}
+                </div>
+            );
+        }
+        else if(this.state.redirectVar && msg != ""){
+            return(
+                <div className="bg">
+                        <Header />
+                    <div className="d-flex justify-content-center text-light">
+                        <h1>{msg}</h1>
+                    </div>
                 </div>
             );
         }
