@@ -41,7 +41,7 @@ class Header extends Component {
                             </NavItem>
                             <NavItem>
                                 <Dropdown isOpen={this.state.isDropdownOpen} toggle={this.handleToggle}>
-                                    <DropdownToggle><span className="fa fa-user fa-lg mr-2"></span>Profile</DropdownToggle>
+                                    <DropdownToggle style={{backgroundColor: "black", borderColor: "black"}}><span className="fa fa-user fa-lg mr-2"></span>Profile</DropdownToggle>
                                     <DropdownMenu>
                                         <DropdownItem>
                                             <NavLink className="nav-link text-dark text-decoration-none" to='/profile'>Account</NavLink>

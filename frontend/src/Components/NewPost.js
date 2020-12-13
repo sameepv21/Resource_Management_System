@@ -22,6 +22,16 @@ class NewPost extends Component {
         this.handleBlur = this.handleBlur.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.selectStream = this.selectStream.bind(this);
+    }
+
+    selectStream(){
+        if(this.state.school === "seas"){
+        } else if(this.state.school === "sas"){
+        } else if(this.state.school === "amsom"){
+        } else{
+            
+        }
     }
 
     handleBlur = (field) => (evt) => {
@@ -31,6 +41,7 @@ class NewPost extends Component {
     }
 
     async handleSubmit(event) {
+        
         event.preventDefault();
         let formData = new FormData();
         formData.append('school', this.state.school);
@@ -57,28 +68,34 @@ class NewPost extends Component {
         } else {
             value = target.value;
             let name = target.name;
-
+            console.log('name is: ' + name);
             this.setState({
                 [name]: value,
             });
+            console.log("school=" + this.state.school);
         }
 
     }
 
-    validate(title) {
+    validate(title, school) {
         let errors = {
             title: '',
+            schoolOption: '',
         }
 
         if (this.state.touched.title && title.length === 0) {
             errors.title = 'Required';
         }
 
+        if(school == "chooseSchool") {
+            errors.schoolOption = 'Please Choose this field';
+        }
+
         return errors;
     }
 
     render() {
-        let errors = this.validate(this.state.title);
+        let errors = this.validate(this.state.title, this.state.school);
         return (
             <div className="bg">
                 <Header />
@@ -95,17 +112,13 @@ class NewPost extends Component {
                         <CardBody className="color-nav">
                             <FormGroup>
                                 <Label htmlFor="title" className="text-light">Choose school to post in</Label><br/>
-                                <select style={{width: "100%"}} id= "school" onBlur={this.handleInputChange}>
-                                    <option value="seas">SEAS
-                                        <select style={{width: "100%"}} onBlur={this.handleInputChange}>
-                                            <option>ce</option>
-                                            <option>ce</option>
-                                            <option>ce</option>
-                                        </select>
-                                    </option>
+                                <select name="school" valid={errors.schoolOption === ''} invalid={errors.schoolOption !== ''} style={{width: "100%"}} id= "school" onBlur={this.handleInputChange}>
+                                    <option value="chooseSchool">Choose here</option>
+                                    <option value="seas">SEAS</option>
                                     <option value="sas">SAS</option>
                                     <option value="amsom">AMSOM</option>
-                                </select>    
+                                </select> 
+                                <FormFeedback>{errors.schoolOption}</FormFeedback>   
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor="title" className="text-light">Title</Label>

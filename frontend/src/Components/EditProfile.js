@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
-import { Form, FormGroup, Input, Label, Button, FormFeedback } from 'reactstrap';
+import { Form, FormGroup, Input, Label, Button, Card, FormFeedback } from 'reactstrap';
 import axios from 'axios';
 import Header from './Header';
 
@@ -91,34 +91,36 @@ class EditProfile extends Component {
             );
         } else {
             return(
-                <div className="container">
-                    <Form className="mt-5">
-                        <div className="d-flex justify-content-center">
-                            <img className="col-md-3 col-sm-10 rounded-circle" src="assests/images/sameep.jpg" />
-                        </div>
-                            <FormGroup>
-                                <Label htmlFor='firstName'>First Name</Label>
-                                <Input type="text" id="firstName" name="firstName"
-                                    onBlur={this.handlerBlur('firstName')} valid={errors.firstName === ''}
-                                    invalid={errors.firstName !== ''} onChange={this.handleInputChange}
-                                    value={this.state.firstName} />
-                                <FormFeedback>{errors.firstName }</FormFeedback>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor='lastName'>Last Name</Label>
-                                <Input type="text" id="lastName" name="lastName"
-                                    onBlur={this.handlerBlur('lastName')} valid={errors.lastName === ''}
-                                    invalid={errors.lastName !== ''} onChange={this.handleInputChange}
-                                    value={this.state.lastName} />
-                                <FormFeedback>{errors.firstName }</FormFeedback>
-                            </FormGroup>
+                <div className="container d-flex justify-content-center mb-5" >
+                    <Card style={{width: "70%"}}>
+                        <Form className="m-5">
                             <div className="d-flex justify-content-center">
-                                <Button onClick={this.handleSubmit} type='button' color="success">
-                                    <span className="fa fa-check mr-2"></span>
-                                    Save Changes
-                                </Button>
+                                <img className="col-md-4 col-sm-10 rounded-circle" src="assets/images/sameep.jpg" />
                             </div>
-                    </Form>
+                                <FormGroup>
+                                    <Label htmlFor='firstName'>First Name</Label>
+                                    <Input type="text" id="firstName" name="firstName"
+                                        onBlur={this.handlerBlur('firstName')} valid={errors.firstName === ''}
+                                        invalid={errors.firstName !== ''} onChange={this.handleInputChange}
+                                        value={this.state.firstName} />
+                                    <FormFeedback>{errors.firstName }</FormFeedback>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor='lastName'>Last Name</Label>
+                                    <Input type="text" id="lastName" name="lastName"
+                                        onBlur={this.handlerBlur('lastName')} valid={errors.lastName === ''}
+                                        invalid={errors.lastName !== ''} onChange={this.handleInputChange}
+                                        value={this.state.lastName} />
+                                    <FormFeedback>{errors.firstName }</FormFeedback>
+                                </FormGroup>
+                                <div className="d-flex justify-content-center">
+                                    <Button onClick={this.handleSubmit} type='button' color="success">
+                                        <span className="fa fa-check mr-2"></span>
+                                        Save Changes
+                                    </Button>
+                                </div>
+                        </Form>
+                    </Card>
                 </div>
             );
         }

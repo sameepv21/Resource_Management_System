@@ -7,10 +7,10 @@ class ShowBreadcrumb extends Component {
         return(
             <div className="container d-flex justify-content-center" >
                 <Breadcrumb>
-                    <BreadcrumbItem active><Link to="/profile">Profile</Link></BreadcrumbItem>
-                    <BreadcrumbItem><Link to="/security">Change Password</Link></BreadcrumbItem>
-                    <BreadcrumbItem><Link to="/userPosts">Your Post</Link></BreadcrumbItem>
-                    <BreadcrumbItem><Link to="/savedPosts">Saved Post</Link></BreadcrumbItem>
+                    <BreadcrumbItem active><Link to="/profile" className="text-decoration-none">Profile</Link></BreadcrumbItem>
+                    <BreadcrumbItem><Link to="/security" className="text-decoration-none">Change Password</Link></BreadcrumbItem>
+                    <BreadcrumbItem><Link to="/userPosts" className="text-decoration-none">Your Post</Link></BreadcrumbItem>
+                    <BreadcrumbItem><Link to="/savedPosts" className="text-decoration-none">Saved Post</Link></BreadcrumbItem>
                 </Breadcrumb>
             </div>
         );

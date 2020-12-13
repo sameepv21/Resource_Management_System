@@ -32,15 +32,15 @@ class ShowProfile extends Component{
         else {
             return(
                 <div className="mt-5 container d-flex justify-content-center ">
-                   <Card className="col-12 mb-5">
+                   <Card style={{width: "70%"}}>
                         <div className="d-flex mt-3 justify-content-center">
-                            <CardImg className="col-md-3 col-sm-10 rounded-circle" src="assets/images/sameep.jpg"/>
+                            <CardImg className="col-md-4 col-sm-10 rounded-circle" src="assets/images/sameep.jpg"/>
                         </div>
                         <div className="d-flex justify-content-center">
                             <CardBody>
-                                <h5>Name: {this.props.data.firstName} {this.props.data.lastName}</h5>
-                                <h5>Email: {this.props.data.email}</h5>
-                                <h5>Enrollment Number: AU{this.props.data.roll}</h5>
+                                <h6>Name: {this.props.data.firstName} {this.props.data.lastName}</h6>
+                                <h6>Email: {this.props.data.email}</h6>
+                                <h6>Enrollment Number: AU{this.props.data.roll}</h6>
                                 <div className="d-flex justify-content-center">
                                     
                                     <Button onClick={this.handleClick} type="button" color="success">

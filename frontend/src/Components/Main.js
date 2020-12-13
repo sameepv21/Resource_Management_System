@@ -21,12 +21,6 @@ class Main extends Component {
             );
         }
 
-        // const StreamWithId = ({match}) => {
-        //     return(
-        //         <AllPosts />
-        //     );
-        // }
-
         return(
             <Switch>
                 <Route exact path="/home" component={Home} />
