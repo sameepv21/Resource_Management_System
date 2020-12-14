@@ -68,6 +68,29 @@ const SchoolDetails = [
         ]
 
     },
+    {
+        id: 3,
+        schoolName: "SCS",
+        image: "assets/images/scs.jpeg",
+        stream: [
+            {
+                streamId: 0,
+                streamName: "Computer Science and Engineering",
+                streamImage: "../../assets/images/cse.jpg",
+            },
+            {
+                streamId: 1,
+                streamName: "Chemical Engineering",
+                streamImage: "../../assets/images/chemical.jpg",
+            },
+            {
+                streamId: 2,
+                streamName: "Mechanical Engineering",
+                streamImage: "../../assets/images/mechanical.jpg",
+            }
+        ]
+
+    }
 ];
 
 export default SchoolDetails;

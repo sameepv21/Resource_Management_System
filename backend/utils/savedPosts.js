@@ -16,7 +16,7 @@ exports.savedPosts = (req, res) => {
                 data: {},
             });
         } else {
-            let query = "SELECT * FROM saved FULL OUTER JOIN posts ON saved.postId = posts.idposts WHERE saved.email ='" + req.cookies.cookie + "';";
+            let query = "SELECT posts.* FROM saved RIGHT JOIN posts ON saved.postId = posts.idposts WHERE saved.email ='" + req.cookies.cookie + "';";
             console.log("query "+ query);
             con.query(query, function(err, results) {
                 console.log("saved=" + results);

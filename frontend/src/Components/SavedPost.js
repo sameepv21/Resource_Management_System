@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ShowBreadcrumb from './ShowBreadcrumb';
-import {Card, CardHeader, CardBody} from 'reactstrap';
+import {Card, CardHeader, CardBody, CardFooter, Button} from 'reactstrap';
 import axios from 'axios';
 import Header from './Header';
 
@@ -9,20 +9,47 @@ class ShowSavedPost extends Component {
         super(props);
     }
     render() {
-        return(
-            <div>
-                <ShowBreadcrumb />
-                <div className="container">
-                    <Card className="col-12 mb-2">
-                        <CardHeader className="bg-white"><div className="d-flex justify-content-center"><h3>{this.props.details.title}</h3></div></CardHeader>
-                        <CardBody>
-                            Description: {this.props.details.description}<br />
-                            Want to view the site? <a href={this.props.details.url} >Click Me</a>
-                        </CardBody>
-                    </Card>
+        if(this.props.details.file){
+            return(
+                <div>
+                    <ShowBreadcrumb />
+                    <div className="container">
+                        <Card className="col-12 mb-2">
+                            <CardHeader className="bg-white"><div className="d-flex justify-content-center"><h3>{this.props.details.title}</h3></div></CardHeader>
+                            <CardBody>
+                                (*File comes here*)<br/>
+                                Description: {this.props.details.description}<br />
+                                Want to view the site? <a href={this.props.details.url} >Click Me</a>
+                            </CardBody>
+                            <CardFooter className="bg-white d-flex justify-content-center">
+                                <Button className="btn m-1" color="success">Download<span className="ml-2 fa fa-download"></span> </Button>
+                                <Button className="btn m-1" color="danger" onClick={this.addToSavePosts}>Unsave<span className="ml-2 fa fa-ban"></span></Button>
+                            </CardFooter>
+                        </Card>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
+       else{
+            return(
+                <div>
+                    <ShowBreadcrumb />
+                    <div className="container">
+                        <Card className="col-12 mb-2">
+                            <CardHeader className="bg-white"><div className="d-flex justify-content-center"><h3>{this.props.details.title}</h3></div></CardHeader>
+                            <CardBody>
+                                (*File comes here*)<br/>
+                                Description: {this.props.details.description}<br />
+                                Want to view the site? <a href={this.props.details.url} >Click Me</a>
+                            </CardBody>
+                            <CardFooter className="bg-white d-flex justify-content-center">
+                                <Button className="btn m-1" color="danger" onClick={this.addToSavePosts}>Unsave<span className="ml-1 fa fa-ban"></span></Button>
+                            </CardFooter>
+                        </Card>
+                    </div>
+                </div>
+            );
+       } 
     }
 }
 
