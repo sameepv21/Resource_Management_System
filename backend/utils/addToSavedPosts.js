@@ -19,7 +19,8 @@ exports.addToSavedPosts = (req,res) => {
         } else{
             let check = "SELECT * FROM saved where email= '" + req.cookies.cookie + "' AND postId = " + req.body.id + ";" ;
             con.query(check,function(err,results){
-                if(results.length === 0){
+                console.log(results);
+                if(results.length == 0){
                     let query = "INSERT INTO saved (email,postId) VALUES ('" + req.cookies.cookie + "','" + req.body.id + "');";
                     con.query(query, function(err, results) {
                         if(err){

@@ -66,7 +66,8 @@ router.post('/uploadPost', upload.single('file'), function(req, res, next){
         data: {},
       });
     } else {
-      let postInsertQuery = "INSERT INTO posts (email,school,title,url,description,file_name) VALUES ('" + req.cookies.cookie +"','" + req.body.school+ "','" + req.body.title +"','" + req.body.url +"','"+ req.body.description +"','"+ fileName + "');"
+      let d = new Date();
+      let postInsertQuery = "INSERT INTO posts (email,title,url,description,file_name,school,stream,date_time) VALUES ('" + req.cookies.cookie +"','" + req.body.title +"','" + req.body.url +"','"+ req.body.description +"','"+ fileName + "','" + req.body.school+ "','"  + req.body.stream + "','" + new Date(d + 'UTC').toISOString().replace(/T/, ' ').replace(/\..+/, '') + "');";
       console.log("post inster query "+postInsertQuery);
 
       con.query(postInsertQuery, function(err, results) {

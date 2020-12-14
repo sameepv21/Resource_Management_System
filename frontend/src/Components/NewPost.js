@@ -11,7 +11,8 @@ class NewPost extends Component {
             title: '',
             url: '',
             file: '',
-            school: '',
+            school: 'seas',
+            stream: 'cse',
             description: '',
             redirectVar: false,
             touched: {
@@ -49,6 +50,7 @@ class NewPost extends Component {
         formData.append('url', this.state.url);
         formData.append('description', this.state.description);
         formData.append('file', this.state.file);
+        formData.append('stream', this.state.stream);
 
         axios.defaults.withCredentials = true;
         axios.post('http://localhost:5000/uploadPost', formData);
@@ -56,7 +58,7 @@ class NewPost extends Component {
 
     handleInputChange = (event) => {
         let target = event.target;
-        console.log('The target is: ' + target.value);
+        // console.log('The target is: ' + target.value);
         let value;
         if (target.type === 'file') {
             // console.log('The file is: ' + JSON.stringify(target.files));
@@ -68,11 +70,11 @@ class NewPost extends Component {
         } else {
             value = target.value;
             let name = target.name;
-            console.log('name is: ' + name);
+            // console.log('name is: ' + name);
             this.setState({
                 [name]: value,
             });
-            console.log("school=" + this.state.school);
+            // console.log("school=" + this.state.school);
         }
 
     }
@@ -95,7 +97,51 @@ class NewPost extends Component {
     }
 
     render() {
+        // console.log(this.state.school);
         let errors = this.validate(this.state.title, this.state.school);
+        let streamVar;
+        if(this.state.school === "seas") {
+            streamVar = <FormGroup>
+                <Label htmlFor="title" className="text-light">Choose stream</Label><br/>
+                <select name="stream" style={{width: "100%"}} id= "stream" onBlur={this.handleInputChange}>
+                    <option value="cse">Computer Science and Engineering</option>
+                    <option value="ce">Chemical Engineering</option>
+                    <option value="me">Mechanical Engineering</option>
+                </select>
+                <FormFeedback>{errors.schoolOption}</FormFeedback>   
+            </FormGroup>
+        } else if(this.state.school === "amsom") {
+            streamVar = <FormGroup>
+                <Label htmlFor="title" className="text-light">Choose stream</Label><br/>
+                <select name="stream" style={{width: "100%"}} id= "stream" onChange={this.handleInputChange}>
+                    <option value="af">Accounting and Finance</option>
+                    <option value="ba">Business Analytics</option>
+                    <option value="f">Finance</option>
+                    <option value="fe">Finance and Economics</option>
+                    <option value="hro">Human Resource and Organisation</option>
+                    <option value="m">Marketing</option>
+                    <option value="om">Operations Management</option>
+                    <option value="ors">Operations Research and Statistics</option>
+                    <option value="scm">Supply Chain Management</option>
+                </select>
+                <FormFeedback>{errors.schoolOption}</FormFeedback>   
+            </FormGroup>
+        }  else if(this.state.school === "sas") {
+            streamVar = <FormGroup>
+                <Label htmlFor="title" className="text-light">Choose stream</Label><br/>
+                <select name="stream" style={{width: "100%"}} id= "stream" onBlur={this.handleInputChange}>
+                    <option value="cs">Computer Science</option> 
+                    <option value="economics">Economics</option> 
+                    <option value="history">History</option>
+                    <option value="ls">Life Sciences</option>
+                    <option value="phl">Philosophy, History and Languages</option>
+                    <option value="physics">Physics</option>
+                    <option value="psychology">Psychology</option>
+                    <option value="sps">Social and Political Sciences</option>
+                </select>
+                <FormFeedback>{errors.schoolOption}</FormFeedback>   
+            </FormGroup>
+        }
         return (
             <div className="bg">
                 <Header />
@@ -112,14 +158,13 @@ class NewPost extends Component {
                         <CardBody className="color-nav">
                             <FormGroup>
                                 <Label htmlFor="title" className="text-light">Choose school to post in</Label><br/>
-                                <select name="school" valid={errors.schoolOption === ''} invalid={errors.schoolOption !== ''} style={{width: "100%"}} id= "school" onBlur={this.handleInputChange}>
-                                    <option value="chooseSchool">Choose here</option>
+                                <select name="school" id= "school" style={{width: '100%'}} onChange={this.handleInputChange}>
                                     <option value="seas">SEAS</option>
                                     <option value="sas">SAS</option>
                                     <option value="amsom">AMSOM</option>
                                 </select> 
-                                <FormFeedback>{errors.schoolOption}</FormFeedback>   
                             </FormGroup>
+                            {streamVar}
                             <FormGroup>
                                 <Label htmlFor="title" className="text-light">Title</Label>
                                 <Input type="text" id="title" name="title" placeholder="Title"

@@ -80,15 +80,19 @@ class ShowPost extends Component {
                 <EditPost details={this.props.particularPostDetail} />
             );
         }
+        let displayURL;
+        if(this.props.particularPostDetail.url.length !== 0) {
+            console.log('url ' + this.props.particularPostDetail.url);
+            displayURL = <div>Want to view the site? <a href={this.props.particularPostDetail.url} >Click Me</a></div>
+        }
         return(
             <div>
-                <ShowBreadcrumb />
                 <div className="container">
                     <Card className="col-12 mb-2">
                         <CardHeader className="bg-white"><div className="d-flex justify-content-center"><h3>{this.props.particularPostDetail.title}</h3></div></CardHeader>
                         <CardBody>
                             Description: {this.props.particularPostDetail.description}<br />
-                            Want to view the site? <a href={this.props.particularPostDetail.url} >Click Me</a>
+                            {displayURL}
                         </CardBody>
                         <div className="d-flex justify-content-center">
                             <CardFooter className="bg-white">
@@ -151,7 +155,15 @@ class UserPosts extends Component{
             return(
                 <div className="bg">
                     <Header />
+                    <ShowBreadcrumb />
                     {display}
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                     <br />
                 </div>
             );
@@ -159,6 +171,7 @@ class UserPosts extends Component{
             return(
                 <div>
                     <Header />
+                    <ShowBreadcrumb />
                     <h5>No posts yet</h5>
                 </div>
             )
