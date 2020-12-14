@@ -29,19 +29,44 @@ const SchoolDetails = [
         stream: [
             {
                 streamId: 0,
-                streamName: "Computer Science and Engineering",
+                streamName: "Computer Science",
                 streamImage: "../../assets/images/cse.jpg",
             },
             {
                 streamId: 1,
-                streamName: "Chemical Engineering",
-                streamImage: "../../assets/images/chemical.jpg",
+                streamName: "Economics",
+                streamImage: "../../assets/images/economics.jpg",
             },
             {
                 streamId: 2,
-                streamName: "Mechanical Engineering",
-                streamImage: "../../assets/images/mechanical.jpg",
-            }
+                streamName: "History",
+                streamImage: "../../assets/images/history.jpg",
+            },
+            {
+                streamId: 3,
+                streamName: "Life Sciences",
+                streamImage: "../../assets/images/lifeSciences.jpg",
+            },
+            {
+                streamId: 4,
+                streamName: "Philosophy, History and Languages",
+                streamImage: "../../assets/images/philosophy.jpg",
+            },
+            {
+                streamId: 5,
+                streamName: "Physics",
+                streamImage: "../../assets/images/physics.png",
+            },
+            {
+                streamId: 6,
+                streamName: "Psychology",
+                streamImage: "../../assets/images/psychology.jpg",
+            },
+            {
+                streamId: 7,
+                streamName: "Social and Political Sciences",
+                streamImage: "../../assets/images/socialPolitical.png",
+            },
         ]
 
     },
@@ -52,45 +77,52 @@ const SchoolDetails = [
         stream: [
             {
                 streamId: 0,
-                streamName: "Computer Science and Engineering",
-                streamImage: "../../assets/images/cse.jpg",
+                streamName: "Accounting and Finance",
+                streamImage: "../../assets/images/accounting.jpg",
             },
             {
                 streamId: 1,
-                streamName: "Chemical Engineering",
-                streamImage: "../../assets/images/chemical.jpg",
+                streamName: "Business Analytics",
+                streamImage: "../../assets/images/businessAnalytics.jpg",
             },
             {
                 streamId: 2,
-                streamName: "Mechanical Engineering",
-                streamImage: "../../assets/images/mechanical.jpg",
-            }
+                streamName: "Finance",
+                streamImage: "../../assets/images/finance.jpg",
+            },
+            {
+                streamId: 3,
+                streamName: "Finance and Economics",
+                streamImage: "../../assets/images/economics.jpg",
+            },
+            {
+                streamId: 4,
+                streamName: "Human Resource and Organisation",
+                streamImage: "../../assets/images/hro.jpg",
+            },
+            {
+                streamId: 5,
+                streamName: "Marketing",
+                streamImage: "../../assets/images/marketing.jpg",
+            },
+            {
+                streamId: 6,
+                streamName: "Operations Management",
+                streamImage: "../../assets/images/operationsManagement.jpg",
+            },
+            {
+                streamId: 7,
+                streamName: "Operations Research and Statistics",
+                streamImage: "../../assets/images/research.jpg",
+            },
+            {
+                streamId: 8,
+                streamName: "Supply Chain Management",
+                streamImage: "../../assets/images/scm.jpg",
+            },
         ]
 
     },
-    {
-        id: 3,
-        schoolName: "SCS",
-        image: "assets/images/scs.jpeg",
-        stream: [
-            {
-                streamId: 0,
-                streamName: "Computer Science and Engineering",
-                streamImage: "../../assets/images/cse.jpg",
-            },
-            {
-                streamId: 1,
-                streamName: "Chemical Engineering",
-                streamImage: "../../assets/images/chemical.jpg",
-            },
-            {
-                streamId: 2,
-                streamName: "Mechanical Engineering",
-                streamImage: "../../assets/images/mechanical.jpg",
-            }
-        ]
-
-    }
 ];
 
 export default SchoolDetails;
