@@ -81,7 +81,7 @@ class ShowPost extends Component {
             );
         }
         let displayURL;
-        if(this.props.particularPostDetail.url.length !== 0) {
+        if(this.props.particularPostDetail.url) {
             console.log('url ' + this.props.particularPostDetail.url);
             displayURL = <div>Want to view the site? <a href={this.props.particularPostDetail.url} >Click Me</a></div>
         }

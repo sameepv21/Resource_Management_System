@@ -31,9 +31,9 @@ class RenderSchools extends Component{
         }
         var renderSchool = SchoolDetails.map((school)=>{
             return(
-                    <Card className="mt-3 col-md-4">
+                    <Card className="mt-3 col-md-3">
                         <CardHeader className="d-flex justify-content-center" style = {{background: "white"}}>
-                             <h2>{school.schoolName}</h2>
+                             <h3><strong>{school.schoolName}</strong></h3>
                         </CardHeader>
                         <CardImg className="img-fluid" src={school.image}></CardImg>
                         <CardFooter style = {{background: "white"}}>
