@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import ShowBreadcrumb from './ShowBreadcrumb';
 import {Card, CardHeader, CardBody, CardFooter, Button} from 'reactstrap';
 import axios from 'axios';
@@ -79,6 +80,7 @@ class SavedPost extends Component {
 
     render() {
         let display, msg="";
+        
         if(this.state.details_saved){
             display = this.state.details_saved.map((post) => {
                 return(
