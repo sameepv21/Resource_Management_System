@@ -88,7 +88,7 @@ class Profile extends Component{
 
     render(){
         return(
-            <div className="bg">
+            <div className="bg_fixed">
                 <Header />
                 <ShowBreadcrumb />
                 <ShowProfile data={this.state.data}/>

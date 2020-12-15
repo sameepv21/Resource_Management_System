@@ -188,7 +188,7 @@ class LoginForm extends Component {
                             </Collapse>
                         </div>
                     </Navbar>
-                    <div className="bg">
+                    <div className="bg_fixed">
                         <div className="d-flex justify-content-center">
                             <Card className="mb-5 mt-5">
                                 <CardHeader>
@@ -278,8 +278,6 @@ class LoginForm extends Component {
                             </CardBody>
                         </Card>
                     </Modal>
-                    
-                    <br /><br /><br /><br /><br /><br /><br /><br /><br />
                     </div>
                 </div>
             );

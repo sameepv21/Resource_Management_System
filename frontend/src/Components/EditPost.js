@@ -112,7 +112,7 @@ class EditPost extends Component {
             let errors = this.validate(this.state.title);
         return(
             <div>
-                <div className="bg">
+                <div className="bg_fixed">
                     <div className="d-flex justify-content-center mt-5">
                         <Card className=" mb-5">
                             <CardHeader>

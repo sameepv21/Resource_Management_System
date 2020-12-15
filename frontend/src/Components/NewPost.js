@@ -143,7 +143,7 @@ class NewPost extends Component {
             </FormGroup>
         }
         return (
-            <div className="bg">
+            <div className="bg_relative">
                 <Header />
                 <div className="d-flex justify-content-center mt-5">
                     <Card className=" mb-5">

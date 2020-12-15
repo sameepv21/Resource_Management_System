@@ -24,12 +24,22 @@
   border-color: black;
 }
 
-.bg {
+.bg_fixed {
   background-image: url(./images/background.jpg);
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
   background-size: cover;
+  background-position: center;
+}
+
+.bg_relative {
+  background-image: url(./images/background.jpg);
+  /* position: fixed; */
+  min-width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center;
 }
 
 .App-logo {

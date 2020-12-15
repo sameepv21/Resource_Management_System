@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React,{Component} from 'react';
-import {Card, CardImg, CardBody, CardImgOverlay, CardHeader, CardFooter, Button, Form, Input, Label, FormGroup} from 'reactstrap';
+import {Card, CardImg, CardBody, CardImgOverlay, CardHeader, CardFooter, Button, Form, Input, Label, FormGroup, FormFeedback} from 'reactstrap';
 import Header from './Header';
 import ShowBreadcrumb from './ShowBreadcrumb';
 
@@ -16,6 +16,10 @@ class ChangePassword extends Component{
             verifyPassword: "",
             authorised : false,
             incorrectPassword: false,
+            touched: {
+                change: false,
+                confirmChange: false,
+            },
             success: false,
             changedSuccessfully: false
         }
@@ -25,25 +29,33 @@ class ChangePassword extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleNext = this.handleNext.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-
+        this.handleBlur = this.handleBlur.bind(this);
     }
 
-    /*validate(password, confirmPassword) {
+    handleBlur = (field) => (evt) => {
+        console.log('inside handle blur');
+        console.log('touched properties: ' + JSON.stringify(this.state.touched))
+        this.setState({
+            touched: {...this.state.touched, [field]: true},
+        });
+    }
+
+    validate(password, confirmPassword) {
         let errors = {
             password: '',
             confirmPassword: '',
         }
-        if(password.length < 8) {
-            errors.password = 'Length of password should be >= 8.'
+        if(this.state.touched.change && password.length < 8) {
+            errors.password = 'Length of password should be more than 8 characters.'
         }
 
-        if(this.state.touched.confirmPassword && password !== confirmPassword) {
+        if(this.state.touched.confirmChange && password !== confirmPassword) {
             errors.confirmPassword = 'Passwords do not match.';
         }
 
         return errors;
 
-    }*/
+    }
 
     handleSubmit(){
         let data ={
@@ -99,9 +111,9 @@ class ChangePassword extends Component{
     }       
 
     change(){
+        let errors = this.validate(this.state.change, this.state.confirmChange)
         return(
             <div className="container mt-5" style={{width: "50%"}}>
-                <br/><br/><br/><br/>
                     <Card>
                         <CardHeader className= "text-dark d-flex justify-content-center">
                             <h4>You are authenticated to change your password :)</h4>
@@ -109,9 +121,11 @@ class ChangePassword extends Component{
                         <CardBody className="color-nav">
                             <Form className="m-3">
                                     <Label htmlfor="change" className="text-light">Enter new password</Label>
-                                    <Input type="password" id="change" name="change" onChange={this.handleInputChange}/>
+                                    <Input valid={errors.password === ''} invalid={errors.password !== ''} type="password" id="change" name="change" onChange={this.handleInputChange} onBlur={this.handleBlur('change')} />
+                                    <FormFeedback>{errors.password}</FormFeedback>
                                     <Label htmlfor="confirmChange" className="text-light">Confirm password</Label>
-                                    <Input type="password" id="confirmChange" name="confirmChange" onChange={this.handleInputChange}/>
+                                    <Input valid={errors.confirmPassword === ''} invalid={errors.confirmPassword !== ''} type="password" id="confirmChange" name="confirmChange" onBlur={this.handleBlur('confirmChange')} onChange={this.handleInputChange}/>
+                                    <FormFeedback>{errors.confirmPassword}</FormFeedback>
                                     <div className="d-flex justify-content-center mt-3">
                                         <Button onClick={this.handleSubmit} type='button' color="success">
                                             <span className="fa fa-check mr-2"></span>
@@ -121,8 +135,6 @@ class ChangePassword extends Component{
                             </Form>
                         </CardBody>
                     </Card>
-                    <br/><br/><br/><br/>
-                    <br/><br/><br/><br/><br/><br/>
                 </div>
         );
     }
@@ -130,7 +142,6 @@ class ChangePassword extends Component{
     verify(){
         return(
             <div className="container mt-5" style={{width: "37%"}}>
-                <br/><br/><br/><br/><br/><br/>
                 <Card className="mb-5 mt-2">
                     <CardHeader className= "text-dark d-flex justify-content-center">
                         <h4>Verify its you <span className="fa fa-check-square-o ml-2"></span></h4>
@@ -147,7 +158,6 @@ class ChangePassword extends Component{
                             </div>
                     </CardBody>
                 </Card>
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
             </div>
         );
     }
@@ -158,7 +168,7 @@ class ChangePassword extends Component{
             alert("Password changed successfully");
         } else if(this.state.authorised){
             return(
-                <div className="bg">
+                <div className="bg_fixed">
                     <Header />
                     {this.change()}
                 </div>
@@ -169,7 +179,7 @@ class ChangePassword extends Component{
 
         }
         return(
-            <div className="bg">
+            <div className="bg_fixed">
                 <Header />
                 {this.verify()}
             </div>

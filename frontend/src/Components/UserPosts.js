@@ -153,7 +153,7 @@ class UserPosts extends Component{
         });
         if(this.state.redirectVar) {
             return(
-                <div className="bg">
+                <div className="bg_relative">
                     <Header />
                     <ShowBreadcrumb />
                     {display}
