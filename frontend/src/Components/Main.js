@@ -10,6 +10,7 @@ import Verify from './Verify';
 import SavedPost from './SavedPost';
 import UserPosts from './UserPosts';
 import Stream from './Stream';
+import Feed from './Feed';
 import ChangePassword from "./ChangePassword";
 import SchoolDetails from '../Shared/SchoolDetails';
 
@@ -21,7 +22,11 @@ class Main extends Component {
                 <Stream school={SchoolDetails.filter((school) => school.schoolName === (match.params.schoolName))[0]} />
             );
         }
-
+        const FeedWithId = ({match}) => {
+            return(
+                <Feed stream = {match.params.stream} />
+            )
+        }
         return(
             <Switch>
                 <Route exact path="/home" component={Home} />
@@ -31,6 +36,7 @@ class Main extends Component {
                 <Route path="/newPost" component={NewPost} />
                 <Route path="/profile" component={Profile} />
                 <Route path='/userPosts' component={UserPosts} />
+                <Route path='/feed/:stream' component={FeedWithId} />
                 <Route path='/savedPosts' component={SavedPost} />
                 <Route path='/editProfile' component={EditProfile} />
                 <Route path='/changePassword' component={ChangePassword} />

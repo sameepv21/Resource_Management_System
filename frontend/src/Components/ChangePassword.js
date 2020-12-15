@@ -62,7 +62,7 @@ class ChangePassword extends Component{
             newPassword: this.state.change,
             oldPassword: this.state.verifyPassword
         }
-        axios.default.withCredentias = true;
+        axios.defaults.withCredentias = true;
         axios.post("http://localhost:5000/changePassword", data)
             .then((response) => {
                 console.log(response.data);
