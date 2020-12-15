@@ -50,7 +50,7 @@ class Header extends Component {
                                             <NavLink className="nav-link text-dark text-decoration-none" to='/savedPosts'>Saved Posts</NavLink>
                                         </DropdownItem>
                                         <DropdownItem>
-                                            <NavLink className="nav-link text-dark text-decoration-none" to='/security'>Change Password</NavLink>
+                                            <NavLink className="nav-link text-dark text-decoration-none" to='/changePassword'>Change Password</NavLink>
                                         </DropdownItem>
                                         <DropdownItem>
                                             <NavLink className="nav-link text-dark text-decoration-none" to='/userPosts'>Your Posts</NavLink>

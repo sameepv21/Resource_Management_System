@@ -13,6 +13,8 @@ var addToSavedPosts = require('./utils/addToSavedPosts');
 var deletePost = require('./utils/deletePost');
 var editPost = require('./utils/editPost');
 var savedPosts = require('./utils/savedPosts');
+var verifyChangePassword = require('./utils/verifyChangePassword');
+var changePassword = require('./utils/changePassword');
 const { query } = require('express');
 var fileName = '';
 
@@ -32,16 +34,17 @@ router.post('/login', checkLogin.checkLogin);
 
 router.get('/savedPosts', savedPosts.savedPosts);
 
+router.post('/verifyChangePassword', verifyChangePassword.verifyChangePassword)
 
 router.post('/signUp', signUp.signUp);
 
 router.post('/editPost', editPost.editPost);
 
-
 router.post('/verify', verify.verify);
 
-
 router.post('/editProfile', editProfile.editProfile);
+
+router.post('/changePassword', changePassword.changePassword);
 
 router.post('/addToSavedPosts', addToSavedPosts.addToSavedPosts);
 
