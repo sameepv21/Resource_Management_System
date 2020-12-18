@@ -93,7 +93,7 @@ class SavedPost extends Component {
         }
         if(this.state.redirectVar && msg == "") {
             return(
-                <div className="bg">
+                <div className="bg_relative">
                     <Header />
                     {display}
                 </div>
@@ -101,7 +101,7 @@ class SavedPost extends Component {
         }
         else if(this.state.redirectVar && msg != ""){
             return(
-                <div className="bg">
+                <div className="bg_relative">
                         <Header />
                     <div className="d-flex justify-content-center text-light">
                         <h1>{msg}</h1>
@@ -110,7 +110,7 @@ class SavedPost extends Component {
             );
         }
         return(
-            <div>
+            <div className="bg_relative">
                 <Header />
                 <ShowBreadcrumb />
             </div>

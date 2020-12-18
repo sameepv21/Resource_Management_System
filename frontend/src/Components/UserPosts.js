@@ -157,14 +157,6 @@ class UserPosts extends Component{
                     <Header />
                     <ShowBreadcrumb />
                     {display}
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
                 </div>
             );
         } else {
