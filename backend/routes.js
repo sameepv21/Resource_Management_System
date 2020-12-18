@@ -15,6 +15,7 @@ var editPost = require('./utils/editPost');
 var savedPosts = require('./utils/savedPosts');
 var verifyChangePassword = require('./utils/verifyChangePassword');
 var changePassword = require('./utils/changePassword');
+var getFeed = require('./utils/getFeed');
 const { query } = require('express');
 var fileName = '';
 
@@ -29,6 +30,8 @@ var storage  = multer.diskStorage({
 });
 
 var upload = multer({storage: storage});
+
+router.get('/getFeed', getFeed.getFeed);
 
 router.post('/login', checkLogin.checkLogin);
 

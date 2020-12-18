@@ -182,7 +182,7 @@ class NewPost extends Component {
                             <form method="post" action="" enctype='multipart/form-data'>
                                 <Label htmlFor="file" className="text-light">Upload a document here</Label>
                                 <input type="file" id="file1" name="file1" className="form-control mb-1 bg-light"
-                                    accept="image/*" onChange={this.handleInputChange} />
+                                    onChange={this.handleInputChange} />
                             </form>
                             {/* </FormGroup>     */}
                             <FormGroup>

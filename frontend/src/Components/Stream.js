@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {Card, CardHeader, CardImg, CardFooter, CardImgOverlay, CardBody, Button} from 'reactstrap';
 import Header from './Header';
+import {Redirect} from 'react-router-dom';
 
 // class RenderStream extends Component{
 //     constructor(props){
@@ -15,9 +16,19 @@ class Stream extends Component{
 
     constructor(props){
         super(props);
+
+        this.state = {
+            redirectVar: false,
+            id: '',
+        }
     }
 
     render(){
+        if(this.state.redirectVar) {
+            return(
+                <Redirect to={`/feed/${this.state.id}`} />
+            );
+        }
         let RenderStreams = this.props.school.stream.map((stream) => {
             return(
                 <Card className="mt-3 col-md-4">
@@ -27,7 +38,13 @@ class Stream extends Component{
                     <CardImg className="img-fluid" src={stream.streamImage}></CardImg>
                     <CardFooter style = {{background: "white"}}>
                         <div className="d-flex justify-content-center">
-                            <Button role="button" id={stream.streamId} className="stretched-link btn btn-lg text-light" color="primary">Explore</Button>
+                            <Button role="button" onClick={(event) => {
+                                event.preventDefault();
+                                this.setState({
+                                    redirectVar: true,
+                                    id: event.target.id,
+                                });
+                            }} id={stream.streamAbstract} className="stretched-link btn btn-lg text-light" color="primary">Explore</Button>
                         </div>
                     </CardFooter>
                 </Card>
