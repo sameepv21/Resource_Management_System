@@ -31,14 +31,14 @@ class RenderSchools extends Component{
         }
         var renderSchool = SchoolDetails.map((school)=>{
             return(
-                    <Card className="mt-3 col-md-4">
+                    <Card className="mt-3 col-md-4 ">
                         <CardHeader className="d-flex justify-content-center" style = {{background: "white"}}>
                              <h3><strong>{school.schoolName}</strong></h3>
                         </CardHeader>
                         <CardImg className="img-fluid" src={school.image}></CardImg>
                         <CardFooter style = {{background: "white"}}>
                             <div className="d-flex justify-content-center">
-                                <Button role="button" id={school.schoolName} onClick={this.exploreSchool} className="stretched-link btn btn-lg text-light" color="primary">Explore</Button>
+                                <Button role="button" id={school.schoolName} onClick={this.exploreSchool} className="stretched-link btn btn-lg text-light shadow p-1 rounded" color="primary">Explore</Button>
                             </div>
                         </CardFooter>
                     </Card>

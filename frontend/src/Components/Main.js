@@ -29,10 +29,10 @@ class Main extends Component {
         }
         return(
             <Switch>
-                <Route exact path="/home" component={Home} />
                 <Route path="/login" component={Login} />
                 <Route path='/logout' component={Logout} />
                 <Route path="/verify" component={Verify} />
+                <Route exact path="/home" component={Home} />
                 <Route path="/newPost" component={NewPost} />
                 <Route path="/profile" component={Profile} />
                 <Route path='/userPosts' component={UserPosts} />

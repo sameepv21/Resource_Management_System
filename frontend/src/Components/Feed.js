@@ -35,7 +35,9 @@ class Feed extends Component {
                 </div>
             );
         } else{
-            <ShowPosts result={this.state.result} />   
+            return(
+                <ShowPosts result={this.state.result} />   
+            )
         }
         
     }
