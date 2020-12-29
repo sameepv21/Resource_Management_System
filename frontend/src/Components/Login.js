@@ -24,6 +24,7 @@ class LoginForm extends Component {
             google: false,
             otp: '',
             standardSignUpError: '',
+            responseMsg: '',
             touched: {
                 firstname: false,
                 lastname: false,
@@ -90,6 +91,7 @@ class LoginForm extends Component {
     handleInputChange(event) {
         this.setState({
             standardSignUpError: '',
+            responseMsg: '',
         });
         let target = event.target;
         let value = target.type === 'checkbox' ? target.checked : target.value;
@@ -128,7 +130,7 @@ class LoginForm extends Component {
                     }
                 })
                 .catch(response => {
-                    alert('SOmething went wrong. Please try again later');
+                    alert('Something went wrong. Please try again later');
                 })
         }
     }
@@ -148,7 +150,10 @@ class LoginForm extends Component {
                          redirectVar: true,
                      });
                  } else {
-                     alert(response.data.msg);
+                    //  alert(response.data.msg);
+                     this.setState({
+                        responseMsg: response.data.msg,
+                     });
                  }
              });
     }
@@ -247,6 +252,7 @@ class LoginForm extends Component {
                                             <Label htmlFor="password" className="text-light">Password</Label>
                                             <Input type="password" onChange={this.handleInputChange} id="password" name="password" placeholder="Password" />
                                         </FormGroup>
+                                        <p className="text-danger d-flex justify-content-center">{this.state.responseMsg}</p>
                                         <div className="d-flex justify-content-center">
                                             <GoogleLogin
                                                 clientId="671959910473-q5vu4qnig20dkibffi718pha5vcsjvn2.apps.googleusercontent.com"

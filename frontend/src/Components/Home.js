@@ -31,7 +31,7 @@ class RenderSchools extends Component{
         }
         var renderSchool = SchoolDetails.map((school)=>{
             return(
-                <Card className="mt-3 col-md-4 ">
+                <Card className="mt-3 col-md-4">
                     <CardHeader className="d-flex justify-content-center" style = {{background: "white"}}>
                             <h3>{school.schoolName}</h3>
                     </CardHeader>
@@ -52,7 +52,7 @@ class RenderSchools extends Component{
 class Home extends Component{
     render(){
         return(
-            <div>
+            <div style={{overflowX: 'hidden'}}>
                 <Header />
                 <div >
                     <Card>
