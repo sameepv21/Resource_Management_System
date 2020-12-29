@@ -23,6 +23,7 @@ class LoginForm extends Component {
             redirectVarSignUp: false,
             google: false,
             otp: '',
+            standardSignUpError: '',
             touched: {
                 firstname: false,
                 lastname: false,
@@ -87,6 +88,9 @@ class LoginForm extends Component {
     }
 
     handleInputChange(event) {
+        this.setState({
+            standardSignUpError: '',
+        });
         let target = event.target;
         let value = target.type === 'checkbox' ? target.checked : target.value;
         let name = target.name;
@@ -97,29 +101,40 @@ class LoginForm extends Component {
     }
 
     async handleSignUpSubmit(event) {
-        event.preventDefault();
-        this.setState({
-            redirectVarSignUp: true,
-        });
-
-        let data = {
-            email: this.state.email,
-        }
-
-        axios.defaults.withCredentials = true;
-        axios.post('http://localhost:5000/verify', data)
-            .then(response => {
-                if(response.data.success) {
-                    this.setState({
-                        google: false,
-                        redirectVarSignUp: true,
-                        otp: response.data.data.otp,
-                    });
-                }
+        if(this.state.firstname.length < 3 || this.state.lastname.length < 3 || this.state.roll.length < 3 || this.state.email.length === 0 || this.state.password.length === 0) {
+            this.setState({
+                standardSignUpError: 'You have not filled all the fields',
             });
+        }
+        if(this.state.standardSignUpError !== '') {
+            event.preventDefault();
+            this.setState({
+                redirectVarSignUp: true,
+            });
+
+            let data = {
+                email: this.state.email,
+            }
+
+            axios.defaults.withCredentials = true;
+            axios.post('http://localhost:5000/verify', data)
+                .then(response => {
+                    if(response.data.success) {
+                        this.setState({
+                            google: false,
+                            redirectVarSignUp: true,
+                            otp: response.data.data.otp,
+                        });
+                    }
+                })
+                .catch(response => {
+                    alert('SOmething went wrong. Please try again later');
+                })
+        }
     }
 
     async handleLoginSubmit(event) {
+        event.preventDefault();
         let data = {
             email: this.state.email,
             password: this.state.password,
@@ -232,15 +247,13 @@ class LoginForm extends Component {
                                             <Label htmlFor="password" className="text-light">Password</Label>
                                             <Input type="password" onChange={this.handleInputChange} id="password" name="password" placeholder="Password" />
                                         </FormGroup>
-                                        <FormGroup className="d-flex justify-content-center">
-                                            <GoogleLogin
-                                            clientId="671959910473-q5vu4qnig20dkibffi718pha5vcsjvn2.apps.googleusercontent.com"
-                                            buttonText="Login" onSuccess={this.responseGoogle} onFaliure={this.responseGoogle}
-                                            cookiePolicy={'single_host_origin'}
-                                            ></GoogleLogin>
-                                        </FormGroup>
                                         <div className="d-flex justify-content-center">
-                                            <Button type="button" onClick={this.handleLoginSubmit} color="success"><span className="fa fa-sign-in fa-lg mr-2"></span> Login</Button>
+                                            <GoogleLogin
+                                                clientId="671959910473-q5vu4qnig20dkibffi718pha5vcsjvn2.apps.googleusercontent.com"
+                                                buttonText="Login" onSuccess={this.responseGoogle} onFaliure={this.responseGoogle}
+                                                cookiePolicy={'single_host_origin'}
+                                            />
+                                            <Button className="ml-4" type="button" onClick={this.handleLoginSubmit} color="success"><span className="fa fa-sign-in fa-lg mr-2"></span> Login</Button>
                                         </div>
                                     </Form>
                                 </CardBody>
@@ -300,6 +313,7 @@ class LoginForm extends Component {
                                                 placeholder="Confirm Password" onChange={this.handleInputChange} />
                                                 <FormFeedback>{errors.confirmPassword}</FormFeedback>
                                         </FormGroup>
+                                        <p className="text-danger d-flex justify-content-center">{this.state.standardSignUpError}</p>
                                         <div className="d-flex justify-content-center">
                                             <Button type="button" onClick={this.handleSignUpSubmit} value="submit" color="success"><span className="fa fa-user fa-lg mr-1"></span> Sign Up</Button>
                                         </div>

@@ -12,7 +12,7 @@ function ShowPosts({result}){
         }
         return(
             <div className="d-flex justify-content-center">
-                <Card className="col-6 mb-2">
+                <Card className="col-md-6 mb-2">
                     <CardHeader className="bg-white"><div className="d-flex justify-content-center"><h3>{post.title}</h3></div></CardHeader>
                     <CardBody>
                         Description: {post.description}<br />
@@ -49,12 +49,12 @@ class Feed extends Component {
             })
     }
     render() {
-        console.log(this.state);
-        if(this.state.result.length == 0){
+        console.log(JSON.stringify(this.state));
+        if(this.state.result === null){
             return (
                 <div className="bg_fixed">
                     <Header />
-                    <h1 className="text-light">No posts yet</h1>
+                    <h1 className="d-flex justify-content-center mt-3 text-light">No posts yet</h1>
                 </div>
             );
         } else{

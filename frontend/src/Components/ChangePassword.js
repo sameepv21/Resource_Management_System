@@ -2,7 +2,6 @@ import axios from 'axios';
 import React,{Component} from 'react';
 import {Card, CardImg, CardBody, CardImgOverlay, CardHeader, CardFooter, Button, Form, Input, Label, FormGroup, FormFeedback} from 'reactstrap';
 import Header from './Header';
-import ShowBreadcrumb from './ShowBreadcrumb';
 
 class ChangePassword extends Component{
 
