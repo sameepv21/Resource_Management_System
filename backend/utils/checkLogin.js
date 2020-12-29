@@ -3,6 +3,7 @@ var mysql = require('mysql');
 exports.checkLogin = (req, res) => {
     let email = req.body.email;
     let password = req.body.password; 
+    let google = req.body.google;
     var con = mysql.createConnection({
         host: "localhost",
         user: "root",
@@ -25,7 +26,6 @@ exports.checkLogin = (req, res) => {
                    msg: 'Something is wrong with the server. Please try again later',
                    data: {}, 
                 });
-                
             } else {
                 let sqlQuery = "SELECT * FROM temp WHERE email='" + email + "'";
                 con.query(sqlQuery, function(err, results){
@@ -42,8 +42,19 @@ exports.checkLogin = (req, res) => {
                             msg: "User does not exist.",
                             data: {},
                         });
+                    } else if(google){
+                        res.cookie('cookie', email, { maxAge: 60 * 60 * 1000, httpOnly: false, path: '/' });
+                        req.session.user = email;
+                        console.log(req.session.user);
+
+                        res.send({
+                            status: 1,
+                            msg: 'Welcome, you have successfully logged in.',
+                            success: true,
+                            data: {email},
+                        });
                     }
-                    else if(results[0].password === password){
+                    else if(!google && results[0].password === password){
 
                         res.cookie('cookie', email, { maxAge: 60 * 60 * 1000, httpOnly: false, path: '/' });
                         req.session.user = email;
@@ -55,7 +66,7 @@ exports.checkLogin = (req, res) => {
                             success: true,
                             data: {email},
                         });
-                    } else {
+                    } else if(!google){
                         res.send({
                             status: 1,
                             msg: 'Invalid email or Password.',

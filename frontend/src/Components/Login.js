@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Verify from './Verify';
 import cookie from 'react-cookies';
+import GoogleLogin from 'react-google-login';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -20,6 +21,7 @@ class LoginForm extends Component {
             confirmPassword: '',
             redirectVar: false,
             redirectVarSignUp: false,
+            google: false,
             otp: '',
             touched: {
                 firstname: false,
@@ -36,6 +38,26 @@ class LoginForm extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
         this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
+        this.responseGoogle = this.responseGoogle.bind(this);
+    }
+
+    responseGoogle = (response) => {
+        console.log(response);
+        console.log(response.profileObj.email);
+        let data = {
+            google: true,
+            email: response.profileObj.email,
+        }
+
+        axios.post("http://localhost:5000/login", data)
+            .then((response) => {
+                if(response.data.success){
+                    cookie.save("cookie", response.data.data.email, {path: '/'});
+                    this.setState({
+                        redirectVar: true,
+                    })
+                }
+            })
     }
 
     toggleNav() {
@@ -89,6 +111,7 @@ class LoginForm extends Component {
             .then(response => {
                 if(response.data.success) {
                     this.setState({
+                        google: false,
                         redirectVarSignUp: true,
                         otp: response.data.data.otp,
                     });
@@ -209,8 +232,15 @@ class LoginForm extends Component {
                                             <Label htmlFor="password" className="text-light">Password</Label>
                                             <Input type="password" onChange={this.handleInputChange} id="password" name="password" placeholder="Password" />
                                         </FormGroup>
+                                        <FormGroup className="d-flex justify-content-center">
+                                            <GoogleLogin
+                                            clientId="671959910473-q5vu4qnig20dkibffi718pha5vcsjvn2.apps.googleusercontent.com"
+                                            buttonText="Login" onSuccess={this.responseGoogle} onFaliure={this.responseGoogle}
+                                            cookiePolicy={'single_host_origin'}
+                                            ></GoogleLogin>
+                                        </FormGroup>
                                         <div className="d-flex justify-content-center">
-                                            <Button type="button" onClick={this.handleLoginSubmit} color="success"><span className="fa fa-sign-in fa-lg mr-1"></span> Login</Button>
+                                            <Button type="button" onClick={this.handleLoginSubmit} color="success"><span className="fa fa-sign-in fa-lg mr-2"></span> Login</Button>
                                         </div>
                                     </Form>
                                 </CardBody>
