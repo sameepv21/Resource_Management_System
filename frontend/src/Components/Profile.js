@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import ShowBreadcrumb from './ShowBreadcrumb';
 import EditProfile from './EditProfile';
 import axios from 'axios';
+import CardHeader from 'reactstrap/lib/CardHeader';
 
 class ShowProfile extends Component{
     constructor(props) {
@@ -17,6 +18,7 @@ class ShowProfile extends Component{
         this.handleClick = this.handleClick.bind(this);
     }
 
+    
     handleClick() {
         this.setState({
             redirectVar: true,
@@ -31,25 +33,31 @@ class ShowProfile extends Component{
         }
         else {
             return(
-                <div className="mt-5 container d-flex justify-content-center ">
+                <div className="mt-2 container d-flex justify-content-center ">
                    <Card style={{width: "70%"}}>
-                        <div className="d-flex mt-3 justify-content-center">
-                            <CardImg className="col-md-4 col-sm-10 rounded-circle" src="assets/images/sameep.jpg"/>
-                        </div>
-                        <div className="d-flex justify-content-center">
-                            <CardBody>
+                       <CardHeader style={{backgroundColor: "white", borderColor: "white"}}>
+                       <div className="d-flex justify-content-center">
+                            <img src="\assets\images\Profile.gif" style={{width:"50%"}}></img>
+                       </div>
+                       </CardHeader>
+                       <CardBody>
+                        <div className="d-flex justify-content-center row ">
+                            <div className="mx-auto d-flex justify-content-end">
+                                <img className="rounded-circle d-flex justify-content-end" src={this.props.data.imageUrl}/>
+                            </div>
+                            <div  className="mx-auto">
                                 <h6>Name: {this.props.data.firstName} {this.props.data.lastName}</h6>
                                 <h6>Email: {this.props.data.email}</h6>
                                 <h6>Enrollment Number: AU{this.props.data.roll}</h6>
-                                <div className="d-flex justify-content-center">
-                                    
-                                    <Button onClick={this.handleClick} type="button" color="success">
-                                        <span className="mr-2 fa fa-pencil"></span>
-                                        Edit Profile
-                                    </Button>
-                                </div>
-                            </CardBody>
-                       </div>
+                            </div>
+                        </div>
+                        </CardBody>
+                        <div className="d-flex justify-content-center">
+                            <Button onClick={this.handleClick} type="button" color="success" className="mb-2">
+                                <span className="mr-2 fa fa-pencil"></span>
+                                Edit Profile
+                            </Button>
+                        </div>
                     </Card> 
                 </div>
             );

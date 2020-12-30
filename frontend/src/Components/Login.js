@@ -11,6 +11,9 @@ class LoginForm extends Component {
         super(props);
     
         this.state = {
+            loginEmailError: '',
+            loginPasswordError: '',
+            loginError: '',
             isNavOpen: false,
             isModalOpen: false,
             firstname: '',
@@ -42,11 +45,11 @@ class LoginForm extends Component {
     }
 
     responseGoogle = (response) => {
-        console.log(response);
         console.log(response.profileObj.email);
         let data = {
             google: true,
             email: response.profileObj.email,
+            imageUrl: response.profileObj.imageUrl,
         }
 
         axios.post("http://localhost:5000/login", data)
@@ -120,22 +123,32 @@ class LoginForm extends Component {
     }
 
     async handleLoginSubmit(event) {
-        let data = {
-            email: this.state.email,
-            password: this.state.password,
+        if(this.state.email != "" && this.state.password != ""){
+            this.setState({
+              loginError: "Please fill both the fields."  
+            })
         }
-
-         axios.post('http://localhost:5000/login', data)
-             .then(response => {
-                 if(response.data.success) {
-                    cookie.save("cookie", response.data.data.email, {path: '/'})
-                     this.setState({
-                         redirectVar: true,
-                     });
-                 } else {
-                     alert(response.data.msg);
-                 }
-             });
+        else{
+            let data = {
+                email: this.state.email,
+                password: this.state.password,
+            }
+    
+             axios.post('http://localhost:5000/login', data)
+                 .then(response => {
+                     if(response.data.success) {
+                        cookie.save("cookie", response.data.data.email, {path: '/'})
+                         this.setState({
+                             redirectVar: true,
+                         });
+                     } else {
+                        this.setState({
+                            loginError: response.data.msg
+                        })
+                     }
+                 });
+        }
+        
     }
 
     validate(firstname, lastname, roll, email, password, confirmPassword) {
@@ -213,8 +226,8 @@ class LoginForm extends Component {
                     </Navbar>
                     <div className="bg_fixed">
                         <div className="d-flex justify-content-center">
-                            <Card className="mb-5 mt-5">
-                                <CardHeader>
+                            <Card className="mb-5 mt-4">
+                                <CardHeader className="color-nav">
                                     <div className="container d-flex justify-content-center">
                                         <h3>Get all Resources to Learn at One Place</h3>
                                     </div>
@@ -222,16 +235,23 @@ class LoginForm extends Component {
                                         <p>Stop Wasting Time... Here's what you need to know</p>
                                     </div>
                                 </CardHeader>
-                                <CardBody className="color-nav">
+                                <CardBody >
                                     <Form method="post">
-                                        <FormGroup>
+                                        {/* <FormGroup>
                                             <Label htmlFor="email" className="text-light">Email</Label>
-                                            <Input type="text" onChange={this.handleInputChange} id="email" pattern="[a-z0-9._%+-]+@ahduni+.edu+.in" name="email" placeholder="Email" />
+                                            <Input type="text" onChange={this.handleInputChange} id="email" pattern="[a-z0-9._%+-]+@ahduni+.edu+.in" name="email" placeholder="Email" required/>
                                         </FormGroup>
                                         <FormGroup>
                                             <Label htmlFor="password" className="text-light">Password</Label>
-                                            <Input type="password" onChange={this.handleInputChange} id="password" name="password" placeholder="Password" />
+                                            <Input type="password" onChange={this.handleInputChange} id="password" name="password" placeholder="Password" required/>
                                         </FormGroup>
+                                        
+                                        <div className="d-flex justify-content-center">
+                                            <Button type="button" onClick={this.handleLoginSubmit} color="success"><span className="fa fa-sign-in fa-lg mr-2"></span> Login</Button>
+                                        </div> */}
+                                        <div className="d-flex justify-content-center">
+                                            <img src="\assets\images\Login.gif" width="80%" height="80%"/>
+                                            </div>
                                         <FormGroup className="d-flex justify-content-center">
                                             <GoogleLogin
                                             clientId="671959910473-q5vu4qnig20dkibffi718pha5vcsjvn2.apps.googleusercontent.com"
@@ -239,9 +259,6 @@ class LoginForm extends Component {
                                             cookiePolicy={'single_host_origin'}
                                             ></GoogleLogin>
                                         </FormGroup>
-                                        <div className="d-flex justify-content-center">
-                                            <Button type="button" onClick={this.handleLoginSubmit} color="success"><span className="fa fa-sign-in fa-lg mr-2"></span> Login</Button>
-                                        </div>
                                     </Form>
                                 </CardBody>
                             </Card>

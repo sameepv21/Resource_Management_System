@@ -35,6 +35,7 @@ exports.profile = (req, res) =>{
                         email: results[0].email,
                         roll: results[0].rollNo,
                         password: results[0].password,
+                        imageUrl: results[0].imageUrl,
                     }
                     res.send({
                         status: 1,

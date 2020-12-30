@@ -43,6 +43,12 @@ exports.checkLogin = (req, res) => {
                             data: {},
                         });
                     } else if(google){
+                        let updateImage = "UPDATE temp SET imageUrl = '" + req.body.imageUrl + "' WHERE email='" + email + "';"; 
+                        con.query(updateImage,function(err,results){
+                            if(err){
+                                console.log("err while updating url");
+                            }
+                        })
                         res.cookie('cookie', email, { maxAge: 60 * 60 * 1000, httpOnly: false, path: '/' });
                         req.session.user = email;
                         console.log(req.session.user);
