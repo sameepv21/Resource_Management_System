@@ -15,6 +15,7 @@ class NewPost extends Component {
             stream: 'cse',
             description: '',
             redirectVar: false,
+            standardError: '',
             touched: {
                 title: false,
             },
@@ -42,18 +43,24 @@ class NewPost extends Component {
     }
 
     async handleSubmit(event) {
-        
-        event.preventDefault();
-        let formData = new FormData();
-        formData.append('school', this.state.school);
-        formData.append('title', this.state.title);
-        formData.append('url', this.state.url);
-        formData.append('description', this.state.description);
-        formData.append('file', this.state.file);
-        formData.append('stream', this.state.stream);
+        if(this.state.title === '') {
+            this.setState({
+                standardError: 'You have not added title',
+            });
+        }
+        if(this.state.standardError === '') {
+            event.preventDefault();
+            let formData = new FormData();
+            formData.append('school', this.state.school);
+            formData.append('title', this.state.title);
+            formData.append('url', this.state.url);
+            formData.append('description', this.state.description);
+            formData.append('file', this.state.file);
+            formData.append('stream', this.state.stream);
 
-        axios.defaults.withCredentials = true;
-        axios.post('http://localhost:5000/uploadPost', formData);
+            axios.defaults.withCredentials = true;
+            axios.post('http://localhost:5000/uploadPost', formData);
+        }
     }
 
     handleInputChange = (event) => {
@@ -70,6 +77,11 @@ class NewPost extends Component {
         } else {
             value = target.value;
             let name = target.name;
+            if(name === 'title') {
+                this.setState({
+                    standardError: '',
+                });
+            }
             // console.log('name is: ' + name);
             this.setState({
                 [name]: value,
@@ -190,6 +202,7 @@ class NewPost extends Component {
                                 <Input type="textarea" rows="3" id="description" name="description"
                                     value={this.state.description} onBlur={this.handleBlur('description')} onChange={this.handleInputChange} />
                             </FormGroup>
+                            <p className="d-flex justify-content-center text-danger">{this.state.standardError}</p>
                             <div className="d-flex justify-content-center">
                                 <Button type="button" onClick={this.handleSubmit} color="success">Upload and Publish</Button>
                             </div>

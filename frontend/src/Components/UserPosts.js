@@ -87,8 +87,8 @@ class ShowPost extends Component {
         }
         return(
             <div>
-                <div className="container">
-                    <Card className="col-12 mb-2">
+                <div className="d-flex justify-content-center">
+                    <Card className="col-md-6 mb-2">
                         <CardHeader className="bg-white"><div className="d-flex justify-content-center"><h3>{this.props.particularPostDetail.title}</h3></div></CardHeader>
                         <CardBody>
                             Description: {this.props.particularPostDetail.description}<br />
@@ -155,7 +155,7 @@ class UserPosts extends Component{
             return(
                 <div className="bg_relative">
                     <Header />
-                    <ShowBreadcrumb />
+                    {/* <ShowBreadcrumb /> */}
                     {display}
                 </div>
             );
@@ -163,7 +163,7 @@ class UserPosts extends Component{
             return(
                 <div>
                     <Header />
-                    <ShowBreadcrumb />
+                    {/* <ShowBreadcrumb /> */}
                     <h5>No posts yet</h5>
                 </div>
             )

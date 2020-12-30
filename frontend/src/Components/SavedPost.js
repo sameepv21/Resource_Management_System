@@ -13,9 +13,9 @@ class ShowSavedPost extends Component {
         if(this.props.details.file){
             return(
                 <div>
-                    <ShowBreadcrumb />
-                    <div className="container">
-                        <Card className="col-12 mb-2">
+                    {/* <ShowBreadcrumb /> */}
+                    <div className="d-flex justify-content-center">
+                        <Card className="col-md-6 mb-2">
                             <CardHeader className="bg-white"><div className="d-flex justify-content-center"><h3>{this.props.details.title}</h3></div></CardHeader>
                             <CardBody>
                                 (*File comes here*)<br/>
@@ -34,9 +34,9 @@ class ShowSavedPost extends Component {
        else{
             return(
                 <div>
-                    <ShowBreadcrumb />
-                    <div className="container">
-                        <Card className="col-12 mb-2">
+                    {/* <ShowBreadcrumb /> */}
+                    <div className="d-flex justify-content-center">
+                        <Card className="col-md-6 mb-2">
                             <CardHeader className="bg-white"><div className="d-flex justify-content-center"><h3>{this.props.details.title}</h3></div></CardHeader>
                             <CardBody>
                                 (*File comes here*)<br/>
@@ -112,7 +112,7 @@ class SavedPost extends Component {
         return(
             <div className="bg_relative">
                 <Header />
-                <ShowBreadcrumb />
+                {/* <ShowBreadcrumb /> */}
             </div>
         );
     }
