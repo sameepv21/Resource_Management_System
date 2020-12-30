@@ -44,8 +44,8 @@ class LoginForm extends Component {
     }
 
     responseGoogle = (response) => {
-        console.log(response);
-        console.log(response.profileObj.email);
+        // console.log(response);
+        // console.log(response.profileObj.email);
         let data = {
             google: true,
             email: response.profileObj.email,
@@ -108,7 +108,7 @@ class LoginForm extends Component {
                 standardSignUpError: 'You have not filled all the fields',
             });
         }
-        if(this.state.standardSignUpError !== '') {
+        if(true) {
             event.preventDefault();
             this.setState({
                 redirectVarSignUp: true,
