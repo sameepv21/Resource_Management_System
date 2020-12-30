@@ -1,10 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import axios from 'axios';
-import {Card, CardImg, CardBody, CardImgOverlay, CardHeader, CardFooter, Button, Form, Input, Label, FormGroup, FormFeedback} from 'reactstrap';
+import {Card, CardBody, CardImgOverlay, CardHeader, CardFooter, Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 import Header from './Header';
+import {NavLink} from 'react-router-dom';
 
 function ShowPosts({result}){
-    // alert('display is: ' + JSON.stringify(result))
+    
+    const [isDropdownOpen, changeisDropdownOpen] = useState(false);
+
+    function handleToggle() {
+        changeisDropdownOpen(!isDropdownOpen);
+    }
     var display = result.map((post)=> {
         let displayURL;
         if(post.url) {
@@ -13,7 +19,32 @@ function ShowPosts({result}){
         return(
             <div className="d-flex justify-content-center">
                 <Card className="col-md-6 mb-2">
-                    <CardHeader className="bg-white"><div className="d-flex justify-content-center"><h3>{post.title}</h3></div></CardHeader>
+                    <CardHeader className="bg-white">
+                        <div className="d-flex justify-content-center">
+                            <h3>{post.title}</h3>
+                        </div>
+                        <div className="d-flex justify-content-end">
+                            <Dropdown isOpen={isDropdownOpen} toggle={handleToggle}>
+                            <DropdownToggle>HEY
+                                <i className="fa fa-caret-down ml-1" />
+                            </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem>
+                                        <NavLink className="nav-link text-dark text-decoration-none" to='/profile'>Account</NavLink>
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        <NavLink className="nav-link text-dark text-decoration-none" to='/savedPosts'>Saved Posts</NavLink>
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        <NavLink className="nav-link text-dark text-decoration-none" to='/userPosts'>Your Posts</NavLink>
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                    <NavLink className="nav-link text-dark text-decoration-none" to='/logout'>Sign Out</NavLink>
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        </div>
+                    </CardHeader>
                     <CardBody>
                         Description: {post.description}<br />
                         {displayURL}

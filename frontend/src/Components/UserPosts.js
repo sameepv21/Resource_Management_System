@@ -3,23 +3,31 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import Header from "./Header";
-import { Card, CardHeader, CardBody, CardImg, CardFooter, Button,Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Card, CardHeader, CardBody, CardImg, CardFooter, Button,Modal, ModalHeader, ModalBody, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 import EditPost from './EditPost';
-import ShowBreadcrumb from './ShowBreadcrumb';
+import {NavLink} from 'react-router-dom';
 
 class ShowPost extends Component {
-    constructor(props){
+constructor(props){
         super(props);
         this.state={
             isModalOpen: false,
             deleterRdirectVar: false,
             redirectEditPost: false,
+            isDropdownOpen: false,
         }
         this.addToSavePosts = this.addToSavePosts.bind(this);
         this.toggleEditPost = this.toggleEditPost.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
         this.deletePost = this.deletePost.bind(this);
+        this.handleToggle = this.handleToggle.bind(this);
+    }
+
+    handleToggle() {
+        this.setState({
+            isDropdownOpen: !this.state.isDropdownOpen,
+        });
     }
 
     toggleEditPost() {
@@ -85,36 +93,53 @@ class ShowPost extends Component {
         let displayURL;
         if(this.props.particularPostDetail.url) {
             // console.log('url ' + this.props.particularPostDetail.url);
-            displayURL = <div>Want to view the site? <a href={this.props.particularPostDetail.url} >Click Me</a></div>
+            displayURL = <div className="mt-2"><strong>Want to view the site? </strong><a href={this.props.particularPostDetail.url} >Click Me</a></div>
         }
         return(
-            <div>
                 <div className="d-flex justify-content-center">
-                    <Card className="col-md-6 mb-2">
-                        <CardHeader className="bg-white"><div className="d-flex justify-content-center"><h3>{this.props.particularPostDetail.title}</h3></div></CardHeader>
-                        <CardBody>
-                            Description: {this.props.particularPostDetail.description}<br />
+                    <Card className="col-md-6 col-9 mb-3 shadow-white">
+                        <CardHeader style={{backgroundColor: "black", width:'100%'}}>
+                            <div className="d-flex justify-content-center text-light">
+                                <h3>{this.props.particularPostDetail.title}</h3>
+                                <Dropdown isOpen={this.state.isDropdownOpen} toggle={this.handleToggle} className="ml-auto">
+                                <DropdownToggle style={{backgroundColor: "black", borderColor:"black"}}>
+                                    <i className="fa fa-ellipsis-v fa-dark ml-1" />
+                                </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem>
+                                            <Button className="btn m-1" color="warning" onClick={this.toggleEditPost}>Edit<span className="ml-2 fa fa-pencil"></span></Button>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <Button className="btn" color="danger" onClick={this.toggleModal}>Delete<span className="ml-2 fa fa-trash-o"></span></Button>
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </div>
+                        </CardHeader>
+                        <CardBody className="bg-white">
+                           <strong> Description: </strong>{this.props.particularPostDetail.description}<br />
                             {displayURL}
                         </CardBody>
-                        <div className="d-flex justify-content-center">
-                            <CardFooter className="bg-white">
-                                <Button className="btn m-1" color="warning" onClick={this.toggleEditPost}>Edit<span className="ml-2 fa fa-pencil"></span></Button>
-                                <Button className="btn m-1" color="success">Download<span className="ml-2 fa fa-download"></span> </Button>
-                                <Button className="btn m-1" color="danger" onClick={this.toggleModal}>Delete<span className="ml-2 fa fa-trash-o"></span></Button>
-                                <Button className="btn m-1" color="primary" onClick={this.addToSavePosts}>Save<span className="ml-2 fa fa-bookmark"></span></Button>
-                            </CardFooter>
-                            <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                                <ModalHeader toggle={this.toggleModal}>Confirm Delete</ModalHeader>
-                                <ModalBody>
-                                    <h6>Are you sure you want to delete?</h6>
-                                    <Button className="btn mt-2 mr-2" color="danger" onClick={this.deletePost}>Confirm</Button>
-                                    <Button className="btn mt-2" color="success" onClick={this.toggleModal}>Cancel</Button> 
-                                </ModalBody>
-                            </Modal>
-                        </div>
+                        <CardFooter className="bg-white">
+                            <div className="d-flex justify-content-center">
+                                <div>
+                                <h6 className="d-flex justify-content-start text-small" style={{textColor: "grey"}}>Aneri Dalwadi</h6>
+                                <h6 className="text-small">{this.props.particularPostDetail.date_time}</h6>
+                            </div>
+                                {/* <Button className="btn m-1" color="success">Download<span className="ml-2 fa fa-download"></span> </Button> */}
+                                <Button className="btn m-1 ml-auto" color="primary" onClick={this.addToSavePosts}>Save<span className="ml-2 fa fa-bookmark"></span></Button>
+                            </div>
+                        </CardFooter>
+                        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                            <ModalHeader toggle={this.toggleModal}>Confirm Delete</ModalHeader>
+                            <ModalBody>
+                                <h6>Are you sure you want to delete?</h6>
+                                <Button className="btn mt-2 mr-2" color="danger" onClick={this.deletePost}>Confirm</Button>
+                                <Button className="btn mt-2" color="success" onClick={this.toggleModal}>Cancel</Button> 
+                            </ModalBody>
+                        </Modal>
                     </Card>
                 </div>
-            </div>
         );
     }
 }

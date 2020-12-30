@@ -23,8 +23,6 @@ class LoginForm extends Component {
             lastname: '',
             roll: '',
             email: '',
-            password: '',
-            confirmPassword: '',
             redirectVar: false,
             redirectVarSignUp: false,
             google: false,
@@ -36,8 +34,6 @@ class LoginForm extends Component {
                 lastname: false,
                 roll: false,
                 email: false,
-                password: false,
-                confirmPassword: false,
             }
         }
         this.toggleNav = this.toggleNav.bind(this);
@@ -109,7 +105,7 @@ class LoginForm extends Component {
     }
 
     async handleSignUpSubmit(event) {
-        if(this.state.firstname.length < 3 || this.state.lastname.length < 3 || this.state.roll.length < 3 || this.state.email.length === 0 || this.state.password.length === 0) {
+        if(this.state.firstname.length < 3 || this.state.lastname.length < 3 || this.state.roll.length < 3 || this.state.email.length === 0 ) {
             this.setState({
                 standardSignUpError: 'You have not filled all the fields',
             });
@@ -142,7 +138,7 @@ class LoginForm extends Component {
     }
 
     async handleLoginSubmit(event) {
-        if(this.state.email != "" && this.state.password != ""){
+        if(this.state.email != ""){
             this.setState({
               loginError: "Please fill both the fields."  
             })
@@ -150,7 +146,6 @@ class LoginForm extends Component {
         else{
             let data = {
                 email: this.state.email,
-                password: this.state.password,
             }
     
              axios.post('http://localhost:5000/login', data)
@@ -170,14 +165,12 @@ class LoginForm extends Component {
         
     }
 
-    validate(firstname, lastname, roll, email, password, confirmPassword) {
+    validate(firstname, lastname, roll, email) {
         let errors = {
             firstname: '',
             lastname: '',
             roll: '',
             email: '',
-            password: '',
-            confirmPassword: '',
         }
 
         if(this.state.touched.firstname && firstname.length < 3) {
@@ -202,21 +195,12 @@ class LoginForm extends Component {
         if(this.state.touched.email && email.split('@').filter(x => x === 'ahduni.edu.in').length !== 1) {
             errors.email = 'Email should contain @ahduni.edu.in';
         }
-
-        if(this.state.touched.password && password.length < 8) {
-            errors.password = 'Length of password should be >= 8.'
-        }
-
-        if(this.state.touched.password && this.state.touched.confirmPassword && password !== confirmPassword) {
-            errors.confirmPassword = 'Passwords do not match.';
-        }
-
         return errors;
 
     }
 
     render() {
-        let errors = this.validate(this.state.firstname, this.state.lastname, this.state.roll, this.state.email, this.state.password, this.state.confirmPassword)
+        let errors = this.validate(this.state.firstname, this.state.lastname, this.state.roll, this.state.email)
         if(this.state.redirectVar) {
             return(
                 <Redirect to="/home" />
@@ -256,18 +240,6 @@ class LoginForm extends Component {
                                 </CardHeader>
                                 <CardBody >
                                     <Form method="post">
-                                        {/* <FormGroup>
-                                            <Label htmlFor="email" className="text-light">Email</Label>
-                                            <Input type="text" onChange={this.handleInputChange} id="email" pattern="[a-z0-9._%+-]+@ahduni+.edu+.in" name="email" placeholder="Email" required/>
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Label htmlFor="password" className="text-light">Password</Label>
-                                            <Input type="password" onChange={this.handleInputChange} id="password" name="password" placeholder="Password" required/>
-                                        </FormGroup>
-                                        
-                                        <div className="d-flex justify-content-center">
-                                            <Button type="button" onClick={this.handleLoginSubmit} color="success"><span className="fa fa-sign-in fa-lg mr-2"></span> Login</Button>
-                                        </div> */}
                                         <div className="d-flex justify-content-center">
                                             <img src="\assets\images\Login.gif" width="80%" height="80%"/>
                                             </div>
@@ -324,22 +296,6 @@ class LoginForm extends Component {
                                                 valid={errors.email === ''} invalid={errors.email !== ''}
                                                 placeholder="Email" onChange={this.handleInputChange} />
                                                 <FormFeedback>{errors.email}</FormFeedback>
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Label className="text-light" htmlFor="password">Password</Label>
-                                            <Input type="password" name="password" id="password" 
-                                                value={this.state.password} onBlur={this.handlerBlur('password')} 
-                                                valid={errors.password === ''} invalid={errors.password !== ''}
-                                                placeholder="Password" onChange={this.handleInputChange} />
-                                                <FormFeedback>{errors.password}</FormFeedback>
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Label className="text-light" htmlFor="confirmPassword">Confirm Password</Label>
-                                            <Input type="password" name="confirmPassword" id="confirmPassword" 
-                                                value={this.state.confirmPassword} onBlur={this.handlerBlur('confirmPassword')} 
-                                                valid={errors.confirmPassword === ''} invalid={errors.confirmPassword !== ''}
-                                                placeholder="Confirm Password" onChange={this.handleInputChange} />
-                                                <FormFeedback>{errors.confirmPassword}</FormFeedback>
                                         </FormGroup>
                                         <p className="text-danger d-flex justify-content-center">{this.state.standardSignUpError}</p>
                                         <div className="d-flex justify-content-center">

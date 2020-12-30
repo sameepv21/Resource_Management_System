@@ -71,16 +71,16 @@ class Header extends Component {
                             </NavItem>
                             <NavItem>
                                 <Dropdown isOpen={this.state.isDropdownOpen} toggle={this.handleToggle}>
-                                    <DropdownToggle style={{backgroundColor: "black", borderColor: "black"}} className="mt-1"><img src={this.state.data.imageUrl} className="rounded-circle mr-2" width="35px" height="35px"></img><i className="fa fa-caret-down ml-1" /></DropdownToggle>
+                                    <DropdownToggle style={{backgroundColor: "black", borderColor: "black"}} className="mt-1">
+                                        <img src={this.state.data.imageUrl} className="rounded-circle mr-2" width="35px" height="35px"></img>
+                                        <i className="fa fa-caret-down ml-1" />
+                                    </DropdownToggle>
                                     <DropdownMenu>
                                         <DropdownItem>
                                             <NavLink className="nav-link text-dark text-decoration-none" to='/profile'>Account</NavLink>
                                         </DropdownItem>
                                         <DropdownItem>
                                             <NavLink className="nav-link text-dark text-decoration-none" to='/savedPosts'>Saved Posts</NavLink>
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            <NavLink className="nav-link text-dark text-decoration-none" to='/changePassword'>Change Password</NavLink>
                                         </DropdownItem>
                                         <DropdownItem>
                                             <NavLink className="nav-link text-dark text-decoration-none" to='/userPosts'>Your Posts</NavLink>

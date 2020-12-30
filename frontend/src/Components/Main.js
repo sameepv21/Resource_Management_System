@@ -11,7 +11,6 @@ import SavedPost from './SavedPost';
 import UserPosts from './UserPosts';
 import Stream from './Stream';
 import Feed from './Feed';
-import ChangePassword from "./ChangePassword";
 import SchoolDetails from '../Shared/SchoolDetails';
 
 class Main extends Component {
@@ -39,7 +38,6 @@ class Main extends Component {
                 <Route path='/feed/:stream' component={FeedWithId} />
                 <Route path='/savedPosts' component={SavedPost} />
                 <Route path='/editProfile' component={EditProfile} />
-                <Route path='/changePassword' component={ChangePassword} />
                 <Route exact path='/home/:schoolName' component={SchoolWithId} />
                 {/* <Route exact path='/home/:schoolName/:streamName' component={StreamWithId} /> */}
                 <Redirect to="/login" />
