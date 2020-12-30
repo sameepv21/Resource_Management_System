@@ -17,10 +17,10 @@ exports.changePassword = (req,res) =>{
             });
         } else {
             let insertQuery = "UPDATE temp SET password = REPLACE(password," + req.body.oldPassword + "," + req.body.newPassword + ") WHERE email= '" + req.cookies.cookie + "';";
-            console.log('inserted here');
+            // console.log('inserted here');
             con.query(insertQuery, function(err, result){
                 if(err){
-                    console.log('error is: '+err.message);
+                    // console.log('error is: '+err.message);
                     res.send({
                         status: 0,
                         msg: err.message,
@@ -28,7 +28,7 @@ exports.changePassword = (req,res) =>{
                     });
                 } else {
                     res.send({
-                        success:true,
+                        success: true,
                         status: 1,
                         msg: "Password changed successfully",
                         data: {},

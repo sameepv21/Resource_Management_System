@@ -49,7 +49,7 @@ class Feed extends Component {
             })
     }
     render() {
-        console.log(JSON.stringify(this.state));
+        // console.log(JSON.stringify(this.state));
         if(this.state.result === null){
             return (
                 <div className="bg_fixed">

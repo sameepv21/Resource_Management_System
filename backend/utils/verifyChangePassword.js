@@ -17,18 +17,18 @@ exports.verifyChangePassword = (req,res) => {
                 status: 0,
             })
         } else{
-            console.log(req.cookies.cookie);
+            // console.log(req.cookies.cookie);
             var query = "SELECT password FROM temp WHERE email= '" + req.cookies.cookie + "';";
             con.query(query, function(err,results){
                 if(err){
-                    console.log(err.message);
+                    // console.log(err.message);
                     res.send({
                         msg: err.message,
                         data:[],
                         status: 0,
                     })
                 } else{
-                    console.log(results[0].password);
+                    // console.log(results[0].password);
                     if(req.body.currentPassword === results[0].password){
                         res.send({
                             msg: "authenticated",

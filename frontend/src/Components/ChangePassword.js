@@ -1,3 +1,6 @@
+// Contains an alert that needs to be handled
+
+
 import axios from 'axios';
 import React,{Component} from 'react';
 import {Card, CardImg, CardBody, CardImgOverlay, CardHeader, CardFooter, Button, Form, Input, Label, FormGroup, FormFeedback} from 'reactstrap';
@@ -32,8 +35,8 @@ class ChangePassword extends Component{
     }
 
     handleBlur = (field) => (evt) => {
-        console.log('inside handle blur');
-        console.log('touched properties: ' + JSON.stringify(this.state.touched))
+        // console.log('inside handle blur');
+        // console.log('touched properties: ' + JSON.stringify(this.state.touched))
         this.setState({
             touched: {...this.state.touched, [field]: true},
         });
@@ -64,12 +67,12 @@ class ChangePassword extends Component{
         axios.defaults.withCredentias = true;
         axios.post("http://localhost:5000/changePassword", data)
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 if(response.data.success){
                     this.setState({
                         changedSuccessfully: true
                     })
-                    alert(response.data.msg);
+                    // alert(response.data.msg);
                 } else{
                     alert(response.data.msg);
                 }
@@ -105,8 +108,8 @@ class ChangePassword extends Component{
         this.setState({
             [name]: value,
         });
-        console.log('state is: ' + JSON.stringify(this.state));
-        console.log('Name and value is: ' + name + " " + value);
+        // console.log('state is: ' + JSON.stringify(this.state));
+        // console.log('Name and value is: ' + name + " " + value);
     }       
 
     change(){

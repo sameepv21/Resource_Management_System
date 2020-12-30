@@ -1,3 +1,6 @@
+// Contains an alert that needs to be handled
+
+
 import React, {Component} from 'react';
 import { FormGroup, Input, Card, Button, CardBody, Label, CardHeader, FormFeedback, CardImg } from 'reactstrap';
 import {Redirect} from 'react-router-dom';
@@ -56,7 +59,7 @@ class EditPost extends Component {
 
     handleInputChange = (event) => {
         let target = event.target;
-        console.log('The target is: ' + target.value);
+        // console.log('The target is: ' + target.value);
         let value;
         if (target.type === 'file') {
             // console.log('The file is: ' + JSON.stringify(target.files));

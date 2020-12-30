@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 
 exports.userPost = (req, res) => {
-    console.log('Entered userPost');
+    // console.log('Entered userPost');
     var con = mysql.createConnection({
         host: 'localhost',
         user: "root",
@@ -19,7 +19,7 @@ exports.userPost = (req, res) => {
         } else {
             let query = "SELECT * FROM posts WHERE email='" + req.cookies.cookie + "';";
             con.query(query, function(err, results) {
-                console.log(results);
+                // console.log(results);
                 if(err) {
                     res.send({
                         status: 0,

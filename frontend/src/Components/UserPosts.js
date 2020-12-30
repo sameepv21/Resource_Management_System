@@ -1,3 +1,5 @@
+//Contains many alerts to be handled
+
 import React, {Component} from 'react';
 import axios from 'axios';
 import Header from "./Header";
@@ -41,7 +43,7 @@ class ShowPost extends Component {
 
         axios.post('http://localhost:5000/deletePost', data)
             .then(response => {
-                alert(response.data.msg);
+                // alert(response.data.msg);
                 this.setState({
                     deleteRedirectVar: true,
                 })
@@ -82,7 +84,7 @@ class ShowPost extends Component {
         }
         let displayURL;
         if(this.props.particularPostDetail.url) {
-            console.log('url ' + this.props.particularPostDetail.url);
+            // console.log('url ' + this.props.particularPostDetail.url);
             displayURL = <div>Want to view the site? <a href={this.props.particularPostDetail.url} >Click Me</a></div>
         }
         return(

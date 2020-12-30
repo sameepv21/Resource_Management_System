@@ -24,10 +24,10 @@ exports.signUp = (req, res) => {
             });
         } else {
             let insertQuery = "INSERT INTO temp (fname, lname, rollNo, email, password) VALUES  ('" + firstName + "','" + lastName + "','" + roll + "','" + email + "','" + password + "')";
-            console.log('inserted here');
+            // console.log('inserted here');
             con.query(insertQuery, function(err, result){
                 if(err){
-                    console.log('error is: '+err.message);
+                    // console.log('error is: '+err.message);
                     res.send({
                         status: 0,
                         msg: err.message,
@@ -36,15 +36,20 @@ exports.signUp = (req, res) => {
                 } else {
                     fs.mkdir("./uploads/AU"+roll, {recursive: true}, function(err){
                         if(err) {
-                            console.log(err);
+                            // console.log(err);
+                            res.send({
+                                status: 0,
+                                msg: err.message,
+                                data: {},
+                            });
                         } else {
-                            console.log("New folder created.");
+                            // console.log("New folder created.");
                         }
                     });
 
                     res.cookie('cookie', email, { maxAge: 60 * 60 * 1000, httpOnly: false, path: '/' });
                     req.session.user = email;
-                    console.log("New User session created.");
+                    // console.log("New User session created.");
                     
                     res.send({
                         status: 1,

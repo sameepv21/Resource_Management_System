@@ -2,7 +2,7 @@ var nodemailer = require('nodemailer');
 var mysql = require('mysql');
 
 exports.verify = (req, res) => {
-    console.log('Entered verify');
+    // console.log('Entered verify');
 
     let email = req.body.email;
 
@@ -15,7 +15,7 @@ exports.verify = (req, res) => {
 
     con.connect(function(err){
         if(err){
-            console.log('error connecting the database ' + err.message);
+            // console.log('error connecting the database ' + err.message);
             res.send({
                status: 0,
                msg: 'Something is wrong with the server. Please try again later',
@@ -25,7 +25,7 @@ exports.verify = (req, res) => {
             let checkQuery = "SELECT email from temp where email='" + email + "';";
             con.query(checkQuery, function(err, result) {
                 if(err) {
-                    console.log('error in running query ' + err.message);
+                    // console.log('error in running query ' + err.message);
                     res.send({
                         status: 0,
                         msg: err.message,
@@ -33,7 +33,7 @@ exports.verify = (req, res) => {
                     });
                 } else {
                     if(result.length === 0) {
-                        console.log('unique email/mail sent');
+                        // console.log('unique email/mail sent');
                         let transporter = nodemailer.createTransport({
                             service: 'gmail',
                             auth: {

@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 
 exports.profile = (req, res) =>{
-    console.log("Entered profile backend");
+    // console.log("Entered profile backend");
     var con = mysql.createConnection ({
         host: "localhost",
         user:"root",
@@ -18,9 +18,9 @@ exports.profile = (req, res) =>{
         }
         else{
             var query = "SELECT * FROM temp WHERE email='"+ req.cookies.cookie +"';" ;
-            console.log("query: "+ query);
+            // console.log("query: "+ query);
             con.query(query, function(err,results){
-                console.log("results: "+ JSON.stringify(results));
+                // console.log("results: "+ JSON.stringify(results));
                 if(err){
                     res.send({
                         status: 0,

@@ -1,3 +1,5 @@
+// Contains an alert that needs to be handled
+
 import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
 import {Input, Button, Label} from 'reactstrap';
@@ -64,7 +66,7 @@ class Verify extends Component {
                     }
                 });
         } else {
-            console.log('Wrong OTP!');
+            alert('Wrong OTP!');
         }
     }
 

@@ -1,3 +1,5 @@
+// Contains an alert that needs to be handled
+
 import React,{Component} from 'react';
 import Header from './Header';
 import {Button, Card, CardImg, CardBody, Breadcrumb, BreadcrumbItem} from 'reactstrap';

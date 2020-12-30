@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
+//Contains an alert that needs to be handled
 
+
+import React, {Component} from 'react';
 import ShowBreadcrumb from './ShowBreadcrumb';
 import {Card, CardHeader, CardBody, CardFooter, Button} from 'reactstrap';
 import axios from 'axios';

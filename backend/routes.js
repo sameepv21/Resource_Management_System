@@ -54,7 +54,7 @@ router.post('/addToSavedPosts', addToSavedPosts.addToSavedPosts);
 router.post('/deletePost', deletePost.deletePost);
 
 router.post('/uploadPost', upload.single('file'), function(req, res, next){
-  console.log("File uploaded successfully!");
+  // console.log("File uploaded successfully!");
 
   var con = mysql.createConnection({
     host: "localhost",
@@ -74,18 +74,18 @@ router.post('/uploadPost', upload.single('file'), function(req, res, next){
     } else {
       let d = new Date();
       let postInsertQuery = "INSERT INTO posts (email,title,url,description,file_name,school,stream,date_time) VALUES ('" + req.cookies.cookie +"','" + req.body.title +"','" + req.body.url +"','"+ req.body.description +"','"+ fileName + "','" + req.body.school+ "','"  + req.body.stream + "','" + new Date(d + 'UTC').toISOString().replace(/T/, ' ').replace(/\..+/, '') + "');";
-      console.log("post inster query "+postInsertQuery);
+      // console.log("post inster query "+postInsertQuery);
 
       con.query(postInsertQuery, function(err, results) {
         if(err) {
-          console.log(err.message);
+          // console.log(err.message);
           res.send({
             status: 0,
             msg: err.message,
             data: {},
           });
         } else {
-          console.log('Successfull');
+          // console.log('Successfull');
           res.send({
             status: 1,
             msg: 'Upload Successfull',

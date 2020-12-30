@@ -17,9 +17,9 @@ exports.savedPosts = (req, res) => {
             });
         } else {
             let query = "SELECT posts.* FROM saved RIGHT JOIN posts ON saved.postId = posts.idposts WHERE saved.email ='" + req.cookies.cookie + "';";
-            console.log("query "+ query);
+            // console.log("query "+ query);
             con.query(query, function(err, results) {
-                console.log("saved=" + results);
+                // console.log("saved=" + results);
                 if(err) {
                     res.send({
                         status: 0,
@@ -27,7 +27,7 @@ exports.savedPosts = (req, res) => {
                         data: {},
                     });
                 } else {
-                    console.log(results);
+                    // console.log(results);
                     res.send({
                         status: 1,
                         msg: 'Fetched Data',
