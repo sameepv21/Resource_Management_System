@@ -44,10 +44,10 @@ class ShowProfile extends Component{
                        </CardHeader>
                        <CardBody>
                         <div className="d-flex justify-content-center row ">
-                            <div className="mx-auto d-flex justify-content-end">
-                                <img className="rounded-circle d-flex justify-content-end" src={this.props.data.imageUrl}/>
+                            <div className="d-flex mr-3">
+                                <img className="rounded-circle justify-content-end" src={this.props.data.imageUrl}/>
                             </div>
-                            <div  className="mx-auto">
+                            <div className="mt-2">
                                 <h6>Name: {this.props.data.firstName} {this.props.data.lastName}</h6>
                                 <h6>Email: {this.props.data.email}</h6>
                                 <h6>Enrollment Number: AU{this.props.data.roll}</h6>

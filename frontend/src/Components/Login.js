@@ -273,10 +273,15 @@ class LoginForm extends Component {
                                             </div>
                                         <FormGroup className="d-flex justify-content-center">
                                             <GoogleLogin
-                                            clientId="671959910473-q5vu4qnig20dkibffi718pha5vcsjvn2.apps.googleusercontent.com"
-                                            buttonText="Login" onSuccess={this.responseGoogle} onFaliure={this.responseGoogle}
-                                            cookiePolicy={'single_host_origin'}
-                                            ></GoogleLogin>
+                                                clientId="671959910473-q5vu4qnig20dkibffi718pha5vcsjvn2.apps.googleusercontent.com"
+                                                buttonText="Login" onSuccess={this.responseGoogle} onFaliure={this.responseGoogle}
+                                                cookiePolicy={'single_host_origin'}
+                                                hostedDomain="ahduni.edu.in"
+                                                // className="bg-success"
+                                                render={renderProps => (
+                                                    <Button color="success" onClick={renderProps.onClick} disabled={renderProps.disabled}>Login With Google</Button>
+                                                )}
+                                            />
                                         </FormGroup>
                                     </Form>
                                 </CardBody>
