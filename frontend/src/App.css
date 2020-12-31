@@ -91,3 +91,59 @@ body {
 }
 
 /* GREEN COLOUR CODE: 31BF31 */
+
+body {
+	background: darkslategray;
+}
+.rotating-box {
+	width: 300px;
+	height: 300px;
+	margin: 10px auto;
+	perspective: 800px;
+}
+.single-rb {
+	width: 300px;
+	height: 300px;
+	animation: rotate 15s linear infinite;
+	transform-style: preserve-3d;
+	margin-top: 120px;
+}
+.single-rb img {
+	height: 300px;
+	width: 300px;
+}
+.single-rb div {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+}
+.front-side {
+	transform: translateZ(200px);
+}
+.back-side {
+	transform: rotateY(180deg) translateZ(100px);
+}
+.left-side {
+	transform: rotateY(-90deg) translateX(-100px);
+	transform-origin: left;
+}
+.right-side {
+	transform: rotateY(90deg) translateX(100px);
+	transform-origin: right;
+}
+.top-side {
+	transform: rotateX(-90deg) translateY(-100px);
+	transform-origin: top;
+}
+.bottom-side {
+	transform: rotateX(90deg) translateY(100px);
+	transform-origin: bottom;
+}
+@keyframes rotate {
+	0% {
+		transform: rotateY(0deg);
+	}
+	100% {
+		transform: rotateY(360deg);
+	}
+}

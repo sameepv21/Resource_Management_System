@@ -14,6 +14,7 @@ import Feed from './Feed';
 import SchoolDetails from '../Shared/SchoolDetails';
 import EditPost from './EditPost';
 import ContactUs from './ContactUs';
+import AboutUs from './AboutUs';
 
 class Main extends Component {
     render() {
@@ -47,6 +48,7 @@ class Main extends Component {
                 <Route path='/editProfile' component={EditProfile} />
                 <Route path='/editPost/:post' component={editPostWithId} />
                 <Route path='/contactUs' component={ContactUs} />
+                <Route path='/aboutUs' component={AboutUs} />
                 <Route exact path='/home/:schoolName' component={SchoolWithId} />
                 {/* <Route exact path='/home/:schoolName/:streamName' component={StreamWithId} /> */}
                 <Redirect to="/login" />
