@@ -164,6 +164,8 @@ class UserPosts extends Component{
                         postDetails: response.data.data.results,
                         redirectVar: true,
                     });
+                } else {
+                    alert(JSON.stringify(response.data.msg));
                 }
                 
             })

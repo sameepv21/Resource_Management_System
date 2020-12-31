@@ -50,6 +50,8 @@ class EditPost extends Component {
                     this.setState({
                         updated: true,
                     });
+                } else {
+                    alert(JSON.stringify(response.data.msg));
                 }
             })
             .catch(response => {
@@ -109,6 +111,8 @@ class EditPost extends Component {
                         url: response.data.data.url,
                         description: response.data.data.description,
                     });
+                } else {
+                    alert(JSON.stringify(response.data.msg));
                 }
             })
             .catch(response => {

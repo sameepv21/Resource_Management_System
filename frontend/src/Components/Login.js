@@ -57,7 +57,12 @@ class LoginForm extends Component {
                     this.setState({
                         redirectVar: true,
                     })
+                } else {
+                    alert(JSON.stringify(response.data.msg));
                 }
+            })
+            .catch((response) => {
+                alert(response.msg);
             })
     }
 
@@ -130,6 +135,9 @@ class LoginForm extends Component {
                             redirectVarSignUp: true,
                             otp: response.data.data.otp,
                         });
+                    }
+                    else {
+                        alert(JSON.stringify(response.data.msg));
                     }
                 })
                 .catch(response => {
