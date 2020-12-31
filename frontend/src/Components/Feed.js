@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Card, CardBody, CardImgOverlay, CardHeader, CardFooter, Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 import Header from './Header';
 import {NavLink} from 'react-router-dom';
+import NoPosts from './NoPosts';
 
 function ShowPosts({result}){
     
@@ -85,7 +86,7 @@ class Feed extends Component {
             return (
                 <div className="bg_fixed">
                     <Header />
-                    <h1 className="d-flex justify-content-center mt-3 text-light">No posts yet</h1>
+                    <NoPosts/>
                 </div>
             );
         } else{

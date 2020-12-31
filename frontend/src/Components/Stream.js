@@ -3,15 +3,6 @@ import {Card, CardHeader, CardImg, CardFooter, CardImgOverlay, CardBody, Button}
 import Header from './Header';
 import {Redirect} from 'react-router-dom';
 
-// class RenderStream extends Component{
-//     constructor(props){
-//         super(props)
-//     }
-//     render(){
-//         return();
-//     };
-// }
-
 class Stream extends Component{
 
     constructor(props){

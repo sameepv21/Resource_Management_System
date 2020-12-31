@@ -5,7 +5,6 @@ import React, {Component} from 'react';
 import { FormGroup, Input, Card, Button, CardBody, Label, CardHeader, FormFeedback, CardImg } from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 import axios from 'axios';
-import UserPosts from './UserPosts';
 
 class EditPost extends Component {
     constructor(props) {
@@ -15,6 +14,7 @@ class EditPost extends Component {
             url: '',
             file: '',
             description: '',
+            postId: this.props.details,
             updated: false,
             redirectVar: false,
             canceled: false,
@@ -98,11 +98,22 @@ class EditPost extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            title: this.props.details.title,
-            url: this.props.details.url,
-            description: this.props.details.description,
-        });
+        let post= {
+            postId: this.state.postId,
+        } 
+        axios.post('http://localhost:5000/getEditPost', post)
+            .then(response => {
+                if(response.data.current) {
+                    this.setState({
+                        title: response.data.data.title,
+                        url: response.data.data.url,
+                        description: response.data.data.description,
+                    });
+                }
+            })
+            .catch(response => {
+                alert(response);
+            })
     }
 
 

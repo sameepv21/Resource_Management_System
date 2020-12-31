@@ -87,7 +87,7 @@ constructor(props){
             );
         } else if(this.state.redirectEditPost) {
             return(
-                <EditPost details={this.props.particularPostDetail} />
+                <Redirect to = {`/editPost/${this.props.particularPostDetail.idposts}`} />
             );
         }
         let displayURL;
@@ -105,12 +105,12 @@ constructor(props){
                                 <DropdownToggle style={{backgroundColor: "black", borderColor:"black"}}>
                                     <i className="fa fa-ellipsis-v fa-dark ml-1" />
                                 </DropdownToggle>
-                                    <DropdownMenu>
-                                        <DropdownItem>
-                                            <Button className="btn m-1" color="warning" onClick={this.toggleEditPost}>Edit<span className="ml-2 fa fa-pencil"></span></Button>
+                                    <DropdownMenu style={{borderWidth:"2px", borderColor:'blue'}}>
+                                        <DropdownItem onClick={this.toggleEditPost}>
+                                            Edit Post<span className="ml-2 fa fa-pencil"></span>
                                         </DropdownItem>
-                                        <DropdownItem>
-                                            <Button className="btn" color="danger" onClick={this.toggleModal}>Delete<span className="ml-2 fa fa-trash-o"></span></Button>
+                                        <DropdownItem onClick={this.toggleModal}>
+                                            Delete <span className="ml-2 fa fa-trash-o"></span>
                                         </DropdownItem>
                                     </DropdownMenu>
                                 </Dropdown>

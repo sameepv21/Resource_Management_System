@@ -12,6 +12,7 @@ import UserPosts from './UserPosts';
 import Stream from './Stream';
 import Feed from './Feed';
 import SchoolDetails from '../Shared/SchoolDetails';
+import EditPost from './EditPost';
 
 class Main extends Component {
     render() {
@@ -26,6 +27,11 @@ class Main extends Component {
                 <Feed stream = {match.params.stream} />
             )
         }
+        const editPostWithId = ({match}) => {
+            return(
+                <EditPost details = {match.params.post} />
+            )
+        }
         return(
             <Switch>
                 <Route path="/login" component={Login} />
@@ -38,6 +44,7 @@ class Main extends Component {
                 <Route path='/feed/:stream' component={FeedWithId} />
                 <Route path='/savedPosts' component={SavedPost} />
                 <Route path='/editProfile' component={EditProfile} />
+                <Route path='/editPost/:post' component={editPostWithId} />
                 <Route exact path='/home/:schoolName' component={SchoolWithId} />
                 {/* <Route exact path='/home/:schoolName/:streamName' component={StreamWithId} /> */}
                 <Redirect to="/login" />
