@@ -11,10 +11,12 @@ class EditProfile extends Component {
         this.state = {
             firstName: '',
             lastName: '',
+            roll: '',
             redirectVar: false,
             touched: {
                 firstName: false,
                 lastName: false,
+                roll: false,
             },
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -42,23 +44,29 @@ class EditProfile extends Component {
         const data = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
+            roll: this.state.roll,
         }
 
         axios.defaults.withCredentials = true;
         axios.post('http://localhost:5000/editProfile', data)
             .then(response => {
+                alert(JSON.stringify(response.data.msg));
                 if(response.data.success) {
                     this.setState({
                         redirectVar: true,
                     });
                 }
-            });
+            })
+            .catch((err) => {
+                alert('Something went wrong with the server. Please try again later');
+            })
     }
 
-    validate(firstName, lastName) {
+    validate(firstName, lastName, roll) {
         const errors = {
             firstName: '',
             lastName: '',
+            roll: '',
         }
 
         if(this.state.touched.firstName && firstName.length < 3) {
@@ -73,6 +81,10 @@ class EditProfile extends Component {
             errors.lastName = 'Last Name should be less than 11 characters';
         }
 
+        if(this.state.touched.roll && roll.length !== 7) {
+            errors.roll = "Roll Number should be of exactly 7 digits"
+        }
+
         return errors;
     }
 
@@ -80,23 +92,25 @@ class EditProfile extends Component {
         this.setState({
             firstName: this.props.data.firstName,
             lastName: this.props.data.lastName,
+            roll: this.props.data.roll,
         });
     }
 
     render() {
-        const errors = this.validate(this.state.firstName, this.state.lastName);
+        const errors = this.validate(this.state.firstName, this.state.lastName, this.state.roll);
         if(this.state.redirectVar) {
             return(
                 <Redirect to='/profile' />
             );
         } else {
             return(
-                <div className="container d-flex justify-content-center mb-5" >
+                <div className="container mt-5 d-flex justify-content-center mb-5" >
                     <Card style={{width: "70%"}}>
-                        <Form className="m-5">
-                            <div className="d-flex justify-content-center">
-                                <img className="col-md-4 col-sm-10 rounded-circle" src="assets/images/sameep.jpg" />
+                        <Form className="m-5 row">
+                            <div className="col-md-6">
+                                <img className="col-md-12" src='assets/images/EditProfile.gif' />
                             </div>
+                            <div className="col-md-6 mt-5">
                                 <FormGroup>
                                     <Label htmlFor='firstName'>First Name</Label>
                                     <Input type="text" id="firstName" name="firstName"
@@ -111,13 +125,22 @@ class EditProfile extends Component {
                                         onBlur={this.handlerBlur('lastName')} valid={errors.lastName === ''}
                                         invalid={errors.lastName !== ''} onChange={this.handleInputChange}
                                         value={this.state.lastName} />
-                                    <FormFeedback>{errors.firstName }</FormFeedback>
+                                    <FormFeedback>{errors.lastName }</FormFeedback>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor='roll'>Last Name</Label>
+                                    <Input type="number" id="roll" name="roll"
+                                        onBlur={this.handlerBlur('roll')} valid={errors.roll === ''}
+                                        invalid={errors.roll !== ''} onChange={this.handleInputChange}
+                                        value={this.state.roll} />
+                                    <FormFeedback>{errors.roll }</FormFeedback>
                                 </FormGroup>
                                 <div className="d-flex justify-content-center">
                                     <Button onClick={this.handleSubmit} type='button' color="success">
                                         <span className="fa fa-check mr-2"></span>
-                                        Save Changes
+                                        Save
                                     </Button>
+                                </div>
                                 </div>
                         </Form>
                     </Card>

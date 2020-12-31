@@ -52,7 +52,7 @@ router.post('/deletePost', deletePost.deletePost);
 router.post('/getEditPost', getEditPost.getEditPost);
 
 let fileUpload = upload.single('file');
-router.post('/uploadPost', function(req, res, next){
+router.post('/uploadPost',  function(req, res, next){
   // console.log("File uploaded successfully!");
   fileUpload(req, res, function(err) {
     if(err) {
