@@ -33,9 +33,9 @@ class NewPost extends Component {
     }
 
     async handleSubmit(event) {
-        if(this.state.title === '') {
+        if(this.state.title === '' || (this.state.url === '' || !this.state.file)) {
             this.setState({
-                standardError: 'You have not added title',
+                standardError: 'You have not added title and either of url or file',
             });
         }
         if(this.state.standardError === '') {
