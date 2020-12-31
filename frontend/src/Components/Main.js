@@ -13,6 +13,7 @@ import Stream from './Stream';
 import Feed from './Feed';
 import SchoolDetails from '../Shared/SchoolDetails';
 import EditPost from './EditPost';
+import ContactUs from './ContactUs';
 
 class Main extends Component {
     render() {
@@ -45,6 +46,7 @@ class Main extends Component {
                 <Route path='/savedPosts' component={SavedPost} />
                 <Route path='/editProfile' component={EditProfile} />
                 <Route path='/editPost/:post' component={editPostWithId} />
+                <Route path='/contactUs' component={ContactUs} />
                 <Route exact path='/home/:schoolName' component={SchoolWithId} />
                 {/* <Route exact path='/home/:schoolName/:streamName' component={StreamWithId} /> */}
                 <Redirect to="/login" />

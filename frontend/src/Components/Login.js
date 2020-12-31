@@ -1,6 +1,3 @@
-// Contains an alert that needs to be handled
-
-
 import React, {Component} from 'react';
 import {Navbar, NavItem, Nav, Collapse, NavbarToggler, NavbarBrand, Form, FormGroup, Input, Card, Button, CardBody,Label, Modal, ModalHeader, ModalBody, CardHeader, FormFeedback} from 'reactstrap';
 import { Redirect } from 'react-router-dom';
@@ -46,7 +43,7 @@ class LoginForm extends Component {
     }
 
     responseGoogle = (response) => {
-        // console.log(response.profileObj.email);
+        alert(JSON.stringify(response.profileObj));
         let data = {
             google: true,
             email: response.profileObj.email,

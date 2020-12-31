@@ -8,6 +8,7 @@ var logout = require('./utils/logout');
 var editProfile = require('./utils/editProfile');
 var profile = require('./utils/profile');
 var verify = require('./utils/verify');
+var feedback = require('./utils/feedback');
 var userPost = require('./utils/userPost');
 var addToSavedPosts = require('./utils/addToSavedPosts');
 var deletePost = require('./utils/deletePost');
@@ -42,6 +43,8 @@ router.post('/signUp', signUp.signUp);
 router.post('/editPost', editPost.editPost);
 
 router.post('/verify', verify.verify);
+
+router.post('/feedback', feedback.feedback);
 
 router.post('/editProfile', editProfile.editProfile);
 
