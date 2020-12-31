@@ -108,7 +108,7 @@ class EditProfile extends Component {
                     <Card style={{width: "70%"}}>
                         <Form className="m-5 row">
                             <div className="col-md-6">
-                                <img className="col-md-12" src='assets/images/EditProfile.gif' />
+                                <img className="col-md-12" src='https://res.cloudinary.com/didf23s1x/image/upload/v1609433588/RMS/EditProfile_e2fjqw.gif' />
                             </div>
                             <div className="col-md-6 mt-5">
                                 <FormGroup>

@@ -25,7 +25,7 @@
 }
 
 .bg_fixed {
-  background-image: url(./images/background.jpg);
+  background-image: url("https://res.cloudinary.com/didf23s1x/image/upload/v1609433587/RMS/background_k5hp78.jpg");
   position: fixed;
   min-width: 100%;
   min-height: 100%;
@@ -34,7 +34,7 @@
 }
 
 .bg_relative {
-  background-image: url(./images/background.jpg);
+  background-image: url("https://res.cloudinary.com/didf23s1x/image/upload/v1609433587/RMS/background_k5hp78.jpg");
   /* position: fixed; */
   /* overflow-y: scroll; */
   min-width: 100%;

@@ -27,7 +27,7 @@ class NoPosts extends Component{
                                         <p>Nothing here yet</p>
                                     </div>
                                 </CardHeader>
-                                <CardImg className="mx-auto" src="\assets\images\NoPost.gif" style={{width:"60%"}}></CardImg>
+                                <CardImg className="mx-auto" src="https://res.cloudinary.com/didf23s1x/image/upload/v1609433586/RMS/NoPost_wllc5n.gif" style={{width:"60%"}}></CardImg>
                                 <CardFooter className="d-flex justify-content-center" style={{borderColor:"white", backgroundColor:"white"}}>
                                     <Button className="btn" color="success" onClick={()=> {
                                         this.setState({redirectVar:true})

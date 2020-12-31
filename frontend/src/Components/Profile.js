@@ -39,7 +39,7 @@ class ShowProfile extends Component{
                    <Card style={{width: "70%"}}>
                        <CardHeader style={{backgroundColor: "white", borderColor: "white"}}>
                        <div className="d-flex justify-content-center">
-                            <img src="\assets\images\Profile.gif" style={{width:"50%"}}></img>
+                            <img src="https://res.cloudinary.com/didf23s1x/image/upload/v1609433586/RMS/Profile_m5foto.gif" style={{width:"50%"}}></img>
                        </div>
                        </CardHeader>
                        <CardBody>

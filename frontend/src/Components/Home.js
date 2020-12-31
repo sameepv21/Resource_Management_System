@@ -56,7 +56,7 @@ class Home extends Component{
                 <Header />
                 <div >
                     <Card>
-                        <CardImg src ="assets/images/background.jpg" height="250vh"></CardImg>
+                        <CardImg src ="https://res.cloudinary.com/didf23s1x/image/upload/v1609433587/RMS/background_k5hp78.jpg" height="250vh"></CardImg>
                             <CardImgOverlay>
                                 <CardBody>
                                     <div className="d-flex justify-content-center">
