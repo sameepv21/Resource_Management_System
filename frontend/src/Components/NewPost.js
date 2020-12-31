@@ -24,16 +24,6 @@ class NewPost extends Component {
         this.handleBlur = this.handleBlur.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.selectStream = this.selectStream.bind(this);
-    }
-
-    selectStream(){
-        if(this.state.school === "seas"){
-        } else if(this.state.school === "sas"){
-        } else if(this.state.school === "amsom"){
-        } else{
-            
-        }
     }
 
     handleBlur = (field) => (evt) => {
@@ -59,7 +49,13 @@ class NewPost extends Component {
             formData.append('stream', this.state.stream);
 
             axios.defaults.withCredentials = true;
-            axios.post('http://localhost:5000/uploadPost', formData);
+            axios.post('http://localhost:5000/uploadPost', formData)
+                .then((response) => {
+                    alert(JSON.stringify(response.data.msg));
+                })
+                .catch((err) => {
+                    alert(err);
+                })
         }
     }
 
