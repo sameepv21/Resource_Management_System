@@ -68,10 +68,9 @@ exports.verify = (req, res) => {
                             }
                         });
 
-                        
                         res.send({
                             status: 1,
-                            msg: 'Email is unique',
+                            msg: 'Mail Sent',
                             success: true,
                             data: {otp: otp},
                         });

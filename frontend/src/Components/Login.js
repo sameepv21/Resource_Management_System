@@ -14,6 +14,7 @@ class LoginForm extends Component {
         super(props);
     
         this.state = {
+            TEMP: false,
             loginEmailError: '',
             loginPasswordError: '',
             loginError: '',
@@ -40,7 +41,6 @@ class LoginForm extends Component {
         this.toggleModal = this.toggleModal.bind(this);
         this.handlerBlur = this.handlerBlur.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
         this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
         this.responseGoogle = this.responseGoogle.bind(this);
     }
@@ -105,12 +105,16 @@ class LoginForm extends Component {
     }
 
     async handleSignUpSubmit(event) {
+        alert(this.state.firstname.length)
         if(this.state.firstname.length < 3 || this.state.lastname.length < 3 || this.state.roll.length < 3 || this.state.email.length === 0 ) {
             this.setState({
-                standardSignUpError: 'You have not filled all the fields',
+                TEMP: true,
+                standardSignUpError: "You have not filled all the fields",
             });
+            // alert("length123: " + this.state.standardSignUpError + " " + this.state.TEMP);
+
         }
-        if(true) {
+        if(this.state.standardSignUpError.length == 0) {
             event.preventDefault();
             this.setState({
                 redirectVarSignUp: true,
@@ -135,34 +139,6 @@ class LoginForm extends Component {
                     alert('Something went wrong. Please try again later');
                 })
         }
-    }
-
-    async handleLoginSubmit(event) {
-        if(this.state.email != ""){
-            this.setState({
-              loginError: "Please fill both the fields."  
-            })
-        }
-        else{
-            let data = {
-                email: this.state.email,
-            }
-    
-             axios.post('http://localhost:5000/login', data)
-                 .then(response => {
-                     if(response.data.success) {
-                        cookie.save("cookie", response.data.data.email, {path: '/'})
-                         this.setState({
-                             redirectVar: true,
-                         });
-                     } else {
-                        this.setState({
-                            loginError: response.data.msg
-                        })
-                     }
-                 });
-        }
-        
     }
 
     validate(firstname, lastname, roll, email) {

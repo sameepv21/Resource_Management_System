@@ -6,7 +6,6 @@ exports.signUp = (req, res) => {
     let lastName = req.body.lastname;
     let roll = req.body.roll;
     let email = req.body.email;
-    let password = req.body.password;
 
     let con = mysql.createConnection({
         host: "localhost",
@@ -23,11 +22,11 @@ exports.signUp = (req, res) => {
                data: {}, 
             });
         } else {
-            let insertQuery = "INSERT INTO temp (fname, lname, rollNo, email, password) VALUES  ('" + firstName + "','" + lastName + "','" + roll + "','" + email + "','" + password + "')";
-            // console.log('inserted here');
+            let insertQuery = "INSERT INTO temp (fname, lname, rollNo, email, imageUrl, role) VALUES  ('" + firstName + "','" + lastName + "','" + roll + "','" + email + "', 'null', 'U');";
+            console.log(insertQuery);
             con.query(insertQuery, function(err, result){
                 if(err){
-                    // console.log('error is: '+err.message);
+                    console.log('error is: '+err.message);
                     res.send({
                         status: 0,
                         msg: err.message,

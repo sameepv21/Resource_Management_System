@@ -13,11 +13,10 @@ var addToSavedPosts = require('./utils/addToSavedPosts');
 var deletePost = require('./utils/deletePost');
 var editPost = require('./utils/editPost');
 var savedPosts = require('./utils/savedPosts');
-var verifyChangePassword = require('./utils/verifyChangePassword');
-var changePassword = require('./utils/changePassword');
 var getFeed = require('./utils/getFeed');
 const { query } = require('express');
 var fileName = '';
+const size = 40 * 1024 * 1024;
 
 var storage  = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -29,15 +28,13 @@ var storage  = multer.diskStorage({
   }
 });
 
-var upload = multer({storage: storage});
+var upload = multer({storage: storage, limits: {fileSize: size}});
 
 router.get('/getFeed', getFeed.getFeed);
 
 router.post('/login', checkLogin.checkLogin);
 
 router.get('/savedPosts', savedPosts.savedPosts);
-
-router.post('/verifyChangePassword', verifyChangePassword.verifyChangePassword)
 
 router.post('/signUp', signUp.signUp);
 
@@ -46,8 +43,6 @@ router.post('/editPost', editPost.editPost);
 router.post('/verify', verify.verify);
 
 router.post('/editProfile', editProfile.editProfile);
-
-router.post('/changePassword', changePassword.changePassword);
 
 router.post('/addToSavedPosts', addToSavedPosts.addToSavedPosts);
 
