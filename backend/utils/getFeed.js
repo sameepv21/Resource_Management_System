@@ -17,10 +17,12 @@ exports.getFeed = (req, res) => {
             });
         } else {
             // console.log(req.headers.stream);
-            let query = 'SELECT temp.*, posts.* FROM posts FULL OUTER JOIN temp ON posts.email = temp.email WHERE posts.stream="' + req.headers.stream + '";';
-            // console.log("get Feed query: "+query);
+            // let query = 'SELECT * from posts LEFT JOIN temp ON posts.email = temp.email WHERE posts.stream="' + req.headers.stream + '" UNION SELECT * FROM posts RIGHT JOIN temp ON posts.email = temp.email WHERE posts.stream="' + req.headers.stream + '";"';
+            let query = "SELECT posts.* FROM posts LEFT JOIN temp ON posts.email = temp.email WHERE posts.stream ='" + req.headers.stream + "' UNION SELECT temp.* FROM posts LEFT JOIN temp ON posts.email = temp.email WHERE posts.stream ='" + req.headers.stream + "';";
+            // let query = '';
+            console.log("get Feed query: "+query);
             con.query(query, function(err, results) {
-                // console.log(results);
+                console.log(results);
                 if(err) {
                     res.send({
                         status: 0,

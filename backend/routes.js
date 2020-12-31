@@ -17,6 +17,7 @@ var getFeed = require('./utils/getFeed');
 var getEditPost = require('./utils/getEditPost');
 const { query } = require('express');
 var fileName = '';
+const size = 40 * 1024 * 1024;
 
 var storage  = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -28,7 +29,7 @@ var storage  = multer.diskStorage({
   }
 });
 
-var upload = multer({storage: storage});
+var upload = multer({storage: storage, limits: {fileSize: size}});
 
 router.get('/getFeed', getFeed.getFeed);
 

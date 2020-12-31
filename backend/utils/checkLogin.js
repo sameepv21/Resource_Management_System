@@ -2,8 +2,6 @@ var mysql = require('mysql');
 
 exports.checkLogin = (req, res) => {
     let email = req.body.email;
-    let password = req.body.password; 
-    let google = req.body.google;
     var con = mysql.createConnection({
         host: "localhost",
         user: "root",
@@ -11,7 +9,7 @@ exports.checkLogin = (req, res) => {
         database: "mydb",
     });
 
-    if(req.session.user) {
+    if (req.session.user) {
         res.send({
             status: 1,
             msg: 'User already logged in',
@@ -19,34 +17,34 @@ exports.checkLogin = (req, res) => {
             data: {},
         });
     } else {
-        con.connect(function(err){
-            if(err){
+        con.connect(function (err) {
+            if (err) {
                 res.send({
-                   status: 0,
-                   msg: 'Something is wrong with the server. Please try again later',
-                   data: {}, 
+                    status: 0,
+                    msg: 'Something is wrong with the server. Please try again later',
+                    data: {},
                 });
             } else {
                 let sqlQuery = "SELECT * FROM temp WHERE email='" + email + "'";
-                con.query(sqlQuery, function(err, results){
-                    if(err) {
+                con.query(sqlQuery, function (err, results) {
+                    if (err) {
                         res.send({
                             status: 0,
                             msg: err.message,
                             data: {},
                         });
                     }
-                    else if(results.length === 0) {
+                    else if (results.length === 0) {
                         res.send({
                             status: 1,
-                            msg: "User does not exist.",
+                            msg: "User does not exist. Sign Up First!",
                             data: {},
                         });
-                    } else if(google){
+                    } else {
                         let updateImage = "UPDATE temp SET imageUrl = '" + req.body.imageUrl + "' WHERE email='" + email + "';";
                         // console.log(updateImage); 
-                        con.query(updateImage,function(err,results){
-                            if(err){
+                        con.query(updateImage, function (err, results) {
+                            if (err) {
                                 // console.log(err.message);
                                 res.send({
                                     status: 0,
@@ -63,26 +61,7 @@ exports.checkLogin = (req, res) => {
                             status: 1,
                             msg: 'Welcome, you have successfully logged in.',
                             success: true,
-                            data: {email},
-                        });
-                    }
-                    else if(!google && results[0].password === password){
-
-                        res.cookie('cookie', email, { maxAge: 60 * 60 * 1000, httpOnly: false, path: '/' });
-                        req.session.user = email;
-                        // console.log(req.session.user);
-
-                        res.send({
-                            status: 1,
-                            msg: 'Welcome, you have successfully logged in.',
-                            success: true,
-                            data: {email},
-                        });
-                    } else if(!google){
-                        res.send({
-                            status: 1,
-                            msg: 'Invalid email or Password.',
-                            data: {},
+                            data: { email },
                         });
                     }
                 });
