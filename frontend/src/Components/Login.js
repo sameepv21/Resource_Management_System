@@ -43,7 +43,7 @@ class LoginForm extends Component {
     }
 
     responseGoogle = (response) => {
-        alert(JSON.stringify(response.profileObj));
+        // alert(JSON.stringify(response.profileObj));
         let data = {
             google: true,
             email: response.profileObj.email,

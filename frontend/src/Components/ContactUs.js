@@ -67,7 +67,7 @@ class ContactUs extends Component {
                         <CardHeader style={{border: "white"}} style={{backgroundColor:"black"}}><div className="d-flex justify-content-center text-light"><h3>Your message is valuable</h3></div></CardHeader>
                         </div>
                         <div className="row">
-                        <img src="\assets\images\ContactUs.gif" className="mr-5 mx-auto col-md-5"/>
+                        <img src="\assets\images\ContactUs.gif" className="mr-5 mx-auto col-md-7"/>
                         <CardBody className="mt-3 mr-3 ml-3 ">
                         <Form>
                             <FormGroup>

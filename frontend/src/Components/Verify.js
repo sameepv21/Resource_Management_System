@@ -7,7 +7,7 @@ import Header from './Header';
 import axios from 'axios';
 import cookie from 'react-cookies';
 import Card from 'reactstrap/lib/Card';
-import CardTitle from 'reactstrap/lib/CardTitle';
+import CardHeader from 'reactstrap/lib/CardTitle';
 import CardBody from 'reactstrap/lib/CardBody';
 
 class Verify extends Component {
@@ -78,18 +78,21 @@ class Verify extends Component {
             );
         } else {
             return(
-                <div className="bg_fixed h-100">
-                    <div className="d-flex h-100 row justify-content-center align-items-center">
-                        <Card className="col-md-3">
-                            <CardTitle className="mt-3 d-flex justify-content-center">OTP</CardTitle>
+                <div className="bg_relative ">
+                    <div className="d-flex justify-content-center ">
+                        <div className="col-md-5 col-12">
+                        <Card>
+                            <CardHeader className="d-flex justify-content-center color-nav text-light"><h3>OTP</h3></CardHeader>
+                            <img src="\assets\images\OTPVerify.gif" />
                             <CardBody>
                                 <Label htmlFor="otp">Enter the OTP</Label>
                                 <Input className="mb-3" onChange={this.handleInputChange}
                                     id="otp" name="otp"
                                     onBlur={this.handlerBlur('otp')} type='number' />
-                                <Button onClick={this.handleVerification} type="button" color="success">Verify</Button>
+                                <Button onClick={this.handleVerification} type="button" className="d-flex justify-content-center" color="success">Verify</Button>
                             </CardBody>
                         </Card>
+                        </div>
                     </div>
                 </div>
             );
