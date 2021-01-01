@@ -7,7 +7,7 @@ class Header extends Component {
  render() {
         return(
             <div className="color-nav sticky-bottom d-flex justify-content-center" dark>
-                <div className="row">
+                <div className="row mb-4">
                     <div className="col text-light">
                         <h5>Sameep Vani</h5>
                         <h6>sameep.v@ahduni.edu.in</h6>

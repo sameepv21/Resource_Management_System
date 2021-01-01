@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import { FormGroup, Input, Card, Button, CardBody, Label, CardHeader, FormFeedback, CardImg } from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 import axios from 'axios';
+import Header from './Header';
 
 class EditPost extends Component {
     constructor(props) {
@@ -130,6 +131,7 @@ class EditPost extends Component {
             let errors = this.validate(this.state.title);
         return(
             <div>
+                <Header />
                 <div className="bg_fixed">
                     <div className="d-flex justify-content-center mt-5">
                         <Card className=" mb-5">
