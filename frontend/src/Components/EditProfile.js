@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
-import { Form, FormGroup, Input, Label, Button, Card, FormFeedback } from 'reactstrap';
+import { Form, FormGroup, Input, Label, Button, Card, CardHeader, FormFeedback } from 'reactstrap';
 import axios from 'axios';
 import Header from './Header';
 
@@ -106,11 +106,12 @@ class EditProfile extends Component {
             return(
                 <div className="container mt-5 d-flex justify-content-center mb-5" >
                     <Card style={{width: "70%"}}>
+                    <CardHeader style={{border: "white"}} style={{backgroundColor:"black"}}><div className="d-flex justify-content-center text-light"><h3>Edit Profile</h3></div></CardHeader>
                         <Form className="m-5 row">
-                            <div className="col-md-6">
-                                <img className="col-md-12" src='https://res.cloudinary.com/didf23s1x/image/upload/v1609433588/RMS/EditProfile_e2fjqw.gif' />
+                            <div className="col-md-7">
+                                <img className="col-md-12" src='assets/images/EditProfile.gif'/>
                             </div>
-                            <div className="col-md-6 mt-5">
+                            <div className="col-md-5 mt-3">
                                 <FormGroup>
                                     <Label htmlFor='firstName'>First Name</Label>
                                     <Input type="text" id="firstName" name="firstName"
@@ -128,7 +129,7 @@ class EditProfile extends Component {
                                     <FormFeedback>{errors.lastName }</FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label htmlFor='roll'>Last Name</Label>
+                                    <Label htmlFor='roll'>AU Roll Number</Label>
                                     <Input type="number" id="roll" name="roll"
                                         onBlur={this.handlerBlur('roll')} valid={errors.roll === ''}
                                         invalid={errors.roll !== ''} onChange={this.handleInputChange}

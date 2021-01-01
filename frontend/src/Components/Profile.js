@@ -37,11 +37,10 @@ class ShowProfile extends Component{
             return(
                 <div className="mt-2 container d-flex justify-content-center ">
                    <Card style={{width: "70%"}}>
-                       <CardHeader style={{backgroundColor: "white", borderColor: "white"}}>
-                       <div className="d-flex justify-content-center">
-                            <img src="https://res.cloudinary.com/didf23s1x/image/upload/v1609433586/RMS/Profile_m5foto.gif" style={{width:"50%"}}></img>
+                    <CardHeader style={{border: "white"}} style={{backgroundColor:"black"}}><div className="d-flex justify-content-center text-light"><h3>My Profile</h3></div></CardHeader>
+                    <div className="d-flex justify-content-center">
+                            <img src="\assets\images\Profile.gif" style={{width:"70%"}} className="mt-4 mb-3"></img>
                        </div>
-                       </CardHeader>
                        <CardBody>
                         <div className="d-flex justify-content-center row ">
                             <div className="d-flex mr-3">
