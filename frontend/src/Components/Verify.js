@@ -88,7 +88,7 @@ class Verify extends Component {
                         <div className="mt-5 col-md-5 col-12">
                         <Card>
                             <CardHeader className="d-flex justify-content-center color-nav text-light"><h3>OTP</h3></CardHeader>
-                            <img src="\assets\images\OTPVerify.gif" />
+                            <img src="https://res.cloudinary.com/didf23s1x/image/upload/v1609509490/RMS/OTPVerify_ds3lrs.gif" />
                             <CardBody>
                                 <Label htmlFor="otp">Enter the OTP</Label>
                                 <Input className="mb-3" onChange={this.handleInputChange}

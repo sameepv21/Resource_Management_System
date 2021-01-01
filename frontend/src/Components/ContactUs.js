@@ -60,14 +60,14 @@ class ContactUs extends Component {
         return (
             <div className="bg_relative">
                 <Header/>
-                <div className="d-flex justify-content-center mb-3" style={{width:"90%", marginLeft:"5%"}}>
-                    <div className="col-md-10 mt-5">
+                <div className="d-flex justify-content-center mb-3 mx-auto">
+                    <div className="col-md-9 mt-5">
                     <Card className="shadow-black mb-3">
                         <div  className="background-red">
                         <CardHeader style={{border: "white"}} style={{backgroundColor:"black"}}><div className="d-flex justify-content-center text-light"><h3>Your message is valuable</h3></div></CardHeader>
                         </div>
                         <div className="row">
-                        <img src="\assets\images\ContactUs.gif" className="mr-5 mx-auto col-md-7"/>
+                        <img src="https://res.cloudinary.com/didf23s1x/image/upload/v1609433588/RMS/ContactUs_ifporj.gif" className="mr-5 mx-auto col-md-7"/>
                         <CardBody className="mt-3 mr-3 ml-3 ">
                         <Form>
                             <FormGroup>

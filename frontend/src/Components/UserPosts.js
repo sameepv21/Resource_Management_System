@@ -96,9 +96,10 @@ constructor(props){
             displayURL = <div className="mt-2"><strong>Want to view the site? </strong><a href={this.props.particularPostDetail.url} >Click Me</a></div>
         }
         return(
-                <div className="d-flex justify-content-center col-md-12 col-12">
-                    <Card className="mb-3 mt-1" style={{width: "70%"}}>
-                        <CardHeader style={{backgroundColor: "black", width:'100%', borderColor:"black"}}>
+            <div className="d-flex justify-content-center">
+                <div className="col-md-6">
+                    <Card className="mb-3 mt-1">
+                        <CardHeader style={{backgroundColor: "black", borderColor:"black"}}>
                             <div className="d-flex justify-content-center text-light">
                                 <h3>{this.props.particularPostDetail.title}</h3>
                                 <Dropdown isOpen={this.state.isDropdownOpen} toggle={this.handleToggle} className="ml-auto">
@@ -140,6 +141,7 @@ constructor(props){
                         </Modal>
                     </Card>
                 </div>
+            </div>
         );
     }
 }
