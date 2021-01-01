@@ -96,16 +96,16 @@ constructor(props){
             displayURL = <div className="mt-2"><strong>Want to view the site? </strong><a href={this.props.particularPostDetail.url} >Click Me</a></div>
         }
         return(
-                <div className="d-flex justify-content-center">
-                    <Card className="col-md-6 col-9 mb-3 shadow-white">
-                        <CardHeader style={{backgroundColor: "black", width:'100%'}}>
+                <div className="d-flex justify-content-center col-md-12 col-12">
+                    <Card className="mb-3 mt-1" style={{width: "70%"}}>
+                        <CardHeader style={{backgroundColor: "black", width:'100%', borderColor:"black"}}>
                             <div className="d-flex justify-content-center text-light">
                                 <h3>{this.props.particularPostDetail.title}</h3>
                                 <Dropdown isOpen={this.state.isDropdownOpen} toggle={this.handleToggle} className="ml-auto">
                                 <DropdownToggle style={{backgroundColor: "black", borderColor:"black"}}>
                                     <i className="fa fa-ellipsis-v fa-dark ml-1" />
                                 </DropdownToggle>
-                                    <DropdownMenu style={{borderWidth:"2px", borderColor:'blue'}}>
+                                    <DropdownMenu style={{borderWidth:"2px", borderColor:'black'}}>
                                         <DropdownItem onClick={this.toggleEditPost}>
                                             Edit Post<span className="ml-2 fa fa-pencil"></span>
                                         </DropdownItem>
