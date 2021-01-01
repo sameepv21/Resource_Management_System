@@ -154,6 +154,7 @@ class NewPost extends Component {
             <div className="bg_relative">
                 <Header />
                 <div className="d-flex justify-content-center mt-5">
+                    <div className="col-lg-4">
                     <Card className=" mb-5">
                         <CardHeader>
                             <div className="container d-flex justify-content-center">
@@ -204,6 +205,7 @@ class NewPost extends Component {
                             </div>
                         </CardBody>
                     </Card>
+                    </div>
                 </div>
             </div>
         );
