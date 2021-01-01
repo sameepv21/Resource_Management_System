@@ -58,7 +58,7 @@ class ContactUs extends Component {
 
     render() {
         return (
-            <div className="bg_relative ">
+            <div className="bg_relative">
                 <Header/>
                 <div className="d-flex justify-content-center mb-3" style={{width:"90%", marginLeft:"5%"}}>
                     <div className="col-md-10 mt-5">

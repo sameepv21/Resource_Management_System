@@ -43,7 +43,7 @@ class LoginForm extends Component {
     }
 
     responseGoogle = (response) => {
-        alert(JSON.stringify(response.profileObj));
+        // alert(JSON.stringify(response.profileObj));
         let data = {
             google: true,
             email: response.profileObj.email,
@@ -107,7 +107,7 @@ class LoginForm extends Component {
     }
 
     async handleSignUpSubmit(event) {
-        alert(this.state.firstname.length)
+        // alert(this.state.firstname.length)
         if(this.state.firstname.length < 3 || this.state.lastname.length < 3 || this.state.roll.length < 3 || this.state.email.length === 0 ) {
             this.setState({
                 TEMP: true,
@@ -210,7 +210,7 @@ class LoginForm extends Component {
                     </Navbar>
                     <div className="bg_fixed">
                         <div className="d-flex justify-content-center">
-                            <Card className="mb-5 mt-4">
+                            <Card className="mb-5 col-md-4 mt-4 mx-2">
                                 <CardHeader className="color-nav">
                                     <div className="container d-flex justify-content-center">
                                         <h3>Get all Resources to Learn at One Place</h3>
