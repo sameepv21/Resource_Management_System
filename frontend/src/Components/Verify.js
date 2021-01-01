@@ -63,8 +63,13 @@ class Verify extends Component {
                         this.setState({
                             redirectVar: true,
                         });
+                    } else {
+                        alert(response.data.msg);
                     }
-                });
+                })
+                .catch(err => {
+                    alert(err);
+                })
         } else {
             alert('Wrong OTP!');
         }
@@ -80,7 +85,7 @@ class Verify extends Component {
             return(
                 <div className="bg_relative ">
                     <div className="d-flex justify-content-center ">
-                        <div className="col-md-5 col-12">
+                        <div className="mt-5 col-md-5 col-12">
                         <Card>
                             <CardHeader className="d-flex justify-content-center color-nav text-light"><h3>OTP</h3></CardHeader>
                             <img src="\assets\images\OTPVerify.gif" />
