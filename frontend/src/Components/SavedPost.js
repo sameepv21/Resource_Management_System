@@ -3,14 +3,15 @@
 
 import React, {Component} from 'react';
 import ShowBreadcrumb from './ShowBreadcrumb';
-import {Card, CardHeader, CardBody, CardFooter, Button} from 'reactstrap';
 import axios from 'axios';
+import { Card, CardHeader, CardBody, CardImg, CardFooter, Button,Modal, ModalHeader, ModalBody, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import Header from './Header';
 
 class ShowSavedPost extends Component {
     constructor(props) {
         super(props);
     }
+
     render() {
         if(this.props.details.file){
             return(
@@ -35,22 +36,30 @@ class ShowSavedPost extends Component {
         }
        else{
             return(
-                <div>
-                    {/* <ShowBreadcrumb /> */}
-                    <div className="d-flex justify-content-center">
-                        <Card className="col-md-6 mb-2">
-                            <CardHeader className="bg-white"><div className="d-flex justify-content-center"><h3>{this.props.details.title}</h3></div></CardHeader>
-                            <CardBody>
-                                (*File comes here*)<br/>
-                                Description: {this.props.details.description}<br />
-                                Want to view the site? <a href={this.props.details.url} >Click Me</a>
-                            </CardBody>
-                            <CardFooter className="bg-white d-flex justify-content-center">
-                                <Button className="btn m-1" color="danger" onClick={this.addToSavePosts}>Unsave<span className="ml-1 fa fa-ban"></span></Button>
-                            </CardFooter>
-                        </Card>
-                    </div>
+                <div className="d-flex justify-content-center">
+                <div className="col-md-6">
+                    <Card className="mb-3 mt-1">
+                        <CardHeader style={{backgroundColor: "black", borderColor:"black"}}>
+                            <div className="d-flex justify-content-center text-light">
+                                <h3>{this.props.details.title}</h3>
+                            </div>
+                        </CardHeader>
+                        <CardBody className="bg-white">
+                           <strong> Description: </strong>{this.props.details.description}<br />
+                        </CardBody>
+                        <CardFooter className="bg-white">
+                            <div className="d-flex justify-content-center">
+                                <div>
+                                <h6 className="d-flex justify-content-start text-small" style={{textColor: "grey"}}>Aneri Dalwadi</h6>
+                                <h6 className="text-small">{this.props.details.date_time}</h6>
+                            </div>
+                                {/* <Button className="btn m-1" color="success">Download<span className="ml-2 fa fa-download"></span> </Button> */}
+                                <Button className="btn m-1 ml-auto" color="danger" onClick={this.addToSavePosts}>Unsave<span className="ml-2 fa fa-bookmark"></span></Button>
+                            </div>
+                        </CardFooter>
+                    </Card>
                 </div>
+            </div>
             );
        } 
     }

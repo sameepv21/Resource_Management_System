@@ -109,7 +109,7 @@ class EditProfile extends Component {
                     <CardHeader style={{border: "white"}} style={{backgroundColor:"black"}}><div className="d-flex justify-content-center text-light"><h3>Edit Profile</h3></div></CardHeader>
                         <Form className="m-5 row">
                             <div className="col-md-7">
-                                <img className="col-md-12" src='assets/images/EditProfile.gif'/>
+                                <img className="col-md-12" src='https://res.cloudinary.com/didf23s1x/image/upload/v1609433588/RMS/EditProfile_e2fjqw.gif'/>
                             </div>
                             <div className="col-md-5 mt-3">
                                 <FormGroup>
