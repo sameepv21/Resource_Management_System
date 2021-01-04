@@ -3,6 +3,7 @@ import {Card, CardImg, CardBody, CardImgOverlay, CardHeader, CardFooter, Button}
 import {Redirect, Link} from 'react-router-dom';
 import Header from './Header';
 import SchoolDetails from '../Shared/SchoolDetails';
+import { motion } from 'framer-motion';
 
 class RenderSchools extends Component{
     constructor(props) {
@@ -51,9 +52,22 @@ class RenderSchools extends Component{
 
 class Home extends Component{
     render(){
+        const pageVariants = {
+            initial: {
+              x: "-100vw",
+            },
+            in: {
+              x: 0,
+            },
+            out: {
+              x: "100vw",
+            }
+          };
         return(
             <div style={{overflowX: 'hidden'}}>
                 <Header />
+                <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
+
                 <div >
                     <Card>
                         <CardImg src ="https://res.cloudinary.com/didf23s1x/image/upload/v1609433587/RMS/background_k5hp78.jpg" height="250vh"></CardImg>
@@ -71,6 +85,8 @@ class Home extends Component{
                         <RenderSchools />
                     </div>
                 </div>
+            </motion.div>
+
             </div>
             
         );
