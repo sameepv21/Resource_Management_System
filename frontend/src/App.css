@@ -95,3 +95,6 @@ body {
 		transform: rotateY(360deg);
 	}
 }
+.close{
+  color: white ;
+}

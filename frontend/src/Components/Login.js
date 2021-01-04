@@ -241,7 +241,7 @@ class LoginForm extends Component {
                             </Card>
                         </div>
                         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                        <ModalHeader toggle={this.toggleModal}>Sign Up</ModalHeader>
+                        <ModalHeader toggle={this.toggleModal} >Sign Up</ModalHeader>
                         <Card>
                             <CardBody className="color-nav ml-3 mr-3 mb-3">
                                 <ModalBody>
