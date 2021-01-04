@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, FormGroup, Input, Card, Button, CardBody, Label, DropdownToggle, CardHeader, FormFeedback } from 'reactstrap';
 import Header from './Header';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 
 class NewPost extends Component {
     constructor(props) {
@@ -106,6 +107,17 @@ class NewPost extends Component {
 
     render() {
         // console.log(this.state.school);
+        const pageVariants = {
+            initial: {
+              x: "-100vw",
+            },
+            in: {
+              x: 0,
+            },
+            out: {
+              x: "100vw",
+            }
+          };
         let errors = this.validate(this.state.title, this.state.school);
         let streamVar;
         if(this.state.school === "seas") {
@@ -153,6 +165,7 @@ class NewPost extends Component {
         return (
             <div className="bg_relative">
                 <Header />
+                <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
                 <div className="d-flex justify-content-center mt-5">
                     <div className="col-lg-4">
                     <Card className=" mb-5">
@@ -206,7 +219,10 @@ class NewPost extends Component {
                         </CardBody>
                     </Card>
                     </div>
+                    
                 </div>
+            </motion.div>
+
             </div>
         );
     }

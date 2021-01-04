@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {Switch, Route, Redirect, useLocation} from 'react-router-dom';
 import Home from './Home';
 import NewPost from './NewPost';
 import Login from './Login';
@@ -15,9 +15,11 @@ import SchoolDetails from '../Shared/SchoolDetails';
 import EditPost from './EditPost';
 import ContactUs from './ContactUs';
 import AboutUs from './AboutUs';
+import { motion, AnimatePresence } from 'framer-motion';
 
 class Main extends Component {
     render() {
+
 
         const SchoolWithId = ({match}) =>{
             return(
@@ -35,24 +37,26 @@ class Main extends Component {
             )
         }
         return(
-            <Switch>
-                <Route path="/login" component={Login} />
-                <Route path='/logout' component={Logout} />
-                <Route path="/verify" component={Verify} />
-                <Route exact path="/home" component={Home} />
-                <Route path="/newPost" component={NewPost} />
-                <Route path="/profile" component={Profile} />
-                <Route path='/userPosts' component={UserPosts} />
-                <Route path='/feed/:stream' component={FeedWithId} />
-                <Route path='/savedPosts' component={SavedPost} />
-                <Route path='/editProfile' component={EditProfile} />
-                <Route path='/editPost/:post' component={editPostWithId} />
-                <Route path='/contactUs' component={ContactUs} />
-                <Route path='/aboutUs' component={AboutUs} />
-                <Route exact path='/home/:schoolName' component={SchoolWithId} />
-                {/* <Route exact path='/home/:schoolName/:streamName' component={StreamWithId} /> */}
-                <Redirect to="/login" />
-            </Switch>
+            <AnimatePresence>
+                <Switch location={window.location} key={window.location.pathname}>
+                    <Route path="/login" component={Login} />
+                    <Route path='/logout' component={Logout} />
+                    <Route path="/verify" component={Verify} />
+                    <Route exact path="/home" component={Home} />
+                    <Route path="/newPost" component={NewPost} />
+                    <Route path="/profile" component={Profile} />
+                    <Route path='/userPosts' component={UserPosts} />
+                    <Route path='/feed/:stream' component={FeedWithId} />
+                    <Route path='/savedPosts' component={SavedPost} />
+                    <Route path='/editProfile' component={EditProfile} />
+                    <Route path='/editPost/:post' component={editPostWithId} />
+                    <Route path='/contactUs' component={ContactUs} />
+                    <Route path='/aboutUs' component={AboutUs} />
+                    <Route exact path='/home/:schoolName' component={SchoolWithId} />
+                    {/* <Route exact path='/home/:schoolName/:streamName' component={StreamWithId} /> */}
+                    <Redirect to="/login" />
+                </Switch>
+            </AnimatePresence>
         );
     }
 }
