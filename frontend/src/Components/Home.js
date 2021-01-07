@@ -54,7 +54,7 @@ class Home extends Component{
     render(){
         const pageVariants = {
             initial: {
-              x: "-100vw",
+              x: "-10vw",
             },
             in: {
               x: 0,
