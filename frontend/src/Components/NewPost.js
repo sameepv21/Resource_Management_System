@@ -109,7 +109,7 @@ class NewPost extends Component {
         // console.log(this.state.school);
         const pageVariants = {
             initial: {
-              x: "-100vw",
+              x: "-10vw",
             },
             in: {
               x: 0,
