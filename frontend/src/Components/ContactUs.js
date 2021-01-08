@@ -77,7 +77,7 @@ class ContactUs extends Component {
                 <div className="bg_relative">
                     <Header />
                     <div className="d-flex justify-content-center mb-3 mx-auto">
-                        <div className="col-md-9 mt-5">
+                        <div className="col-md-6 mt-5">
                             <Card className="shadow-black mb-3">
                                 <div className="background-red">
                                     <CardHeader style={{ border: "white" }} style={{ backgroundColor: "black" }}><div className="d-flex justify-content-center text-light"><h3>Your message is valuable</h3></div></CardHeader>

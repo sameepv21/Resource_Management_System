@@ -24,23 +24,41 @@ class Stream extends Component {
         }
         let RenderStreams = this.props.school.stream.map((stream) => {
             return (
-                <Card className="mt-3 col-md-4">
-                    <CardHeader className="d-flex justify-content-center" style={{ background: "white" }}>
-                        <h4>{stream.streamName}</h4>
-                    </CardHeader>
-                    <CardImg className="img-fluid" src={stream.streamImage}></CardImg>
-                    <CardFooter style={{ background: "white" }}>
-                        <div className="d-flex justify-content-center">
-                            <Button role="button" onClick={(event) => {
+                // <Card className="mt-3 col-md-4">
+                //     <CardHeader className="d-flex justify-content-center" style={{ background: "white" }}>
+                //         <h4>{stream.streamName}</h4>
+                //     </CardHeader>
+                //     <CardImg className="img-fluid" src={stream.streamImage}></CardImg>
+                //     <CardFooter style={{ background: "white" }}>
+                //         <div className="d-flex justify-content-center">
+                //             <Button role="button" onClick={(event) => {
+                //                 event.preventDefault();
+                //                 this.setState({
+                //                     redirectVar: true,
+                //                     id: event.target.id,
+                //                 });
+                //             }} id={stream.streamAbstract} className="stretched-link btn btn-lg text-light" color="primary">Explore</Button>
+                //         </div>
+                //     </CardFooter>
+                // </Card>
+                <div className="mt-3 col-md-4" id="container">
+                    <Card id="card1">
+                        <CardImg id="img1" src={stream.streamImage} alt={stream.streamName} className="img-fluid" />
+                        <CardImgOverlay role="button" id={stream.streamAbstract} onClick={(event) => {
                                 event.preventDefault();
                                 this.setState({
                                     redirectVar: true,
                                     id: event.target.id,
                                 });
-                            }} id={stream.streamAbstract} className="stretched-link btn btn-lg text-light" color="primary">Explore</Button>
-                        </div>
-                    </CardFooter>
-                </Card>
+                            }} className="stretched-link btn btn-lg text-light p-1 rounded">
+                            <CardBody className="row h-100 d-flex justify-content-center">
+                                <div id="cardText" className="my-auto">
+                                    <p style={{color: 'black'}}>Click to Hop in</p>
+                                </div>
+                            </CardBody>
+                        </CardImgOverlay>
+                    </Card>
+                </div>
             );
         });
         return (
