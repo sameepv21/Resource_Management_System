@@ -7,6 +7,9 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
 import cookie from 'react-cookies';
+import { motion } from 'framer-motion';
+import { pageVariants } from '../Shared/PageVariants';
+
 
 class EditPost extends Component {
     constructor(props) {
@@ -143,46 +146,48 @@ class EditPost extends Component {
                 return (
                     <div>
                         <Header />
-                        <div className="bg_fixed">
-                            <div className="d-flex justify-content-center mt-5">
-                                <Card className=" mb-5">
-                                    <CardHeader>
-                                        <div className="container d-flex justify-content-center">
-                                            <h3>Help in sharing resources</h3>
-                                        </div>
-                                        <div className="container d-flex justify-content-center">
-                                            <p>"No one ever becomes poor by giving" by Anne Frank</p>
-                                        </div>
-                                    </CardHeader>
-                                    <CardBody className="color-nav">
-                                        <FormGroup>
-                                            <Label htmlFor="title" className="text-light">Title</Label>
-                                            <Input type="text" id="title" name="title" name="title"
-                                                value={this.state.title} onBlur={this.handleBlur('title')}
-                                                valid={errors.title === ''} invalid={errors.title !== ''}
-                                                onChange={this.handleInputChange} />
-                                            <FormFeedback>{errors.title}</FormFeedback>
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Label htmlFor="url" className="text-light">URL</Label>
-                                            <Input type="url" id="url" name="url" name="url"
-                                                value={this.state.url} onBlur={this.handleBlur('url')} onChange={this.handleInputChange} />
-                                        </FormGroup>
-                                        <CardImg src="./demo.jpg" />
-                                        <FormGroup>
-                                            <Label htmlFor="description" className="text-light">Add a Description</Label>
-                                            <Input type="textarea" rows="3" id="description" name="description"
-                                                value={this.state.description} onBlur={this.handleBlur('description')} onChange={this.handleInputChange} />
-                                        </FormGroup>
-                                        <div className="d-flex justify-content-center">
-                                            <Button type="button" onClick={this.handleSubmit} color="success">Save</Button>
-                                            <Button type="button" className="ml-2" onClick={this.cancelUpdate} color="danger">Cancel</Button>
-                                        </div>
+                        <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
+                            <div className="bg_fixed">
+                                <div className="d-flex justify-content-center mt-5">
+                                    <Card className=" mb-5">
+                                        <CardHeader>
+                                            <div className="container d-flex justify-content-center">
+                                                <h3>Help in sharing resources</h3>
+                                            </div>
+                                            <div className="container d-flex justify-content-center">
+                                                <p>"No one ever becomes poor by giving" by Anne Frank</p>
+                                            </div>
+                                        </CardHeader>
+                                        <CardBody className="color-nav">
+                                            <FormGroup>
+                                                <Label htmlFor="title" className="text-light">Title</Label>
+                                                <Input type="text" id="title" name="title" name="title"
+                                                    value={this.state.title} onBlur={this.handleBlur('title')}
+                                                    valid={errors.title === ''} invalid={errors.title !== ''}
+                                                    onChange={this.handleInputChange} />
+                                                <FormFeedback>{errors.title}</FormFeedback>
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Label htmlFor="url" className="text-light">URL</Label>
+                                                <Input type="url" id="url" name="url" name="url"
+                                                    value={this.state.url} onBlur={this.handleBlur('url')} onChange={this.handleInputChange} />
+                                            </FormGroup>
+                                            <CardImg src="./demo.jpg" />
+                                            <FormGroup>
+                                                <Label htmlFor="description" className="text-light">Add a Description</Label>
+                                                <Input type="textarea" rows="3" id="description" name="description"
+                                                    value={this.state.description} onBlur={this.handleBlur('description')} onChange={this.handleInputChange} />
+                                            </FormGroup>
+                                            <div className="d-flex justify-content-center">
+                                                <Button type="button" onClick={this.handleSubmit} color="success">Save</Button>
+                                                <Button type="button" className="ml-2" onClick={this.cancelUpdate} color="danger">Cancel</Button>
+                                            </div>
 
-                                    </CardBody>
-                                </Card>
+                                        </CardBody>
+                                    </Card>
+                                </div>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
                 );
             }

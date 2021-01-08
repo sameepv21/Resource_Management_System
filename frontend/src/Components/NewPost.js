@@ -3,6 +3,7 @@ import { Form, FormGroup, Input, Card, Button, CardBody, Label, DropdownToggle, 
 import Header from './Header';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import {pageVariants} from '../Shared/PageVariants';
 
 class NewPost extends Component {
     constructor(props) {

@@ -5,6 +5,7 @@ import Header from './Header';
 import SchoolDetails from '../Shared/SchoolDetails';
 import { motion } from 'framer-motion';
 import cookie from 'react-cookies';
+import {pageVariants} from '../Shared/PageVariants';
 
 class RenderSchools extends Component {
     constructor(props) {
@@ -75,17 +76,6 @@ class RenderSchools extends Component {
 
 class Home extends Component {
     render() {
-        const pageVariants = {
-            initial: {
-                x: "-100vw",
-            },
-            in: {
-                x: 0,
-            },
-            out: {
-                x: "100vw",
-            }
-        };
         return (
             <div style={{ overflowX: 'hidden' }}>
                 <Header />

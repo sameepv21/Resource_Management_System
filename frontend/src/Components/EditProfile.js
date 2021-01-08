@@ -4,6 +4,9 @@ import { Form, FormGroup, Input, Label, Button, Card, CardHeader, FormFeedback }
 import axios from 'axios';
 import Header from './Header';
 import cookie from 'react-cookies';
+import { motion } from 'framer-motion';
+import { pageVariants } from '../Shared/PageVariants';
+
 
 class EditProfile extends Component {
     constructor(props) {
@@ -110,48 +113,50 @@ class EditProfile extends Component {
             );
         } else {
             return (
-                <div className="container mt-5 d-flex justify-content-center mb-5" >
-                    <Card style={{ width: "70%" }}>
-                        <CardHeader style={{ border: "white" }} style={{ backgroundColor: "black" }}><div className="d-flex justify-content-center text-light"><h3>Edit Profile</h3></div></CardHeader>
-                        <Form className="m-5 row">
-                            <div className="col-md-7">
-                                <img className="col-md-12" src='https://res.cloudinary.com/didf23s1x/image/upload/v1609433588/RMS/EditProfile_e2fjqw.gif' />
-                            </div>
-                            <div className="col-md-5 mt-3">
-                                <FormGroup>
-                                    <Label htmlFor='firstName'>First Name</Label>
-                                    <Input type="text" id="firstName" name="firstName"
-                                        onBlur={this.handlerBlur('firstName')} valid={errors.firstName === ''}
-                                        invalid={errors.firstName !== ''} onChange={this.handleInputChange}
-                                        value={this.state.firstName} />
-                                    <FormFeedback>{errors.firstName}</FormFeedback>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label htmlFor='lastName'>Last Name</Label>
-                                    <Input type="text" id="lastName" name="lastName"
-                                        onBlur={this.handlerBlur('lastName')} valid={errors.lastName === ''}
-                                        invalid={errors.lastName !== ''} onChange={this.handleInputChange}
-                                        value={this.state.lastName} />
-                                    <FormFeedback>{errors.lastName}</FormFeedback>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label htmlFor='roll'>AU Roll Number</Label>
-                                    <Input type="number" id="roll" name="roll"
-                                        onBlur={this.handlerBlur('roll')} valid={errors.roll === ''}
-                                        invalid={errors.roll !== ''} onChange={this.handleInputChange}
-                                        value={this.state.roll} />
-                                    <FormFeedback>{errors.roll}</FormFeedback>
-                                </FormGroup>
-                                <div className="d-flex justify-content-center">
-                                    <Button onClick={this.handleSubmit} type='button' color="success">
-                                        <span className="fa fa-check mr-2"></span>
+                <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
+                    <div className="container mt-5 d-flex justify-content-center mb-5" >
+                        <Card style={{ width: "70%" }}>
+                            <CardHeader style={{ border: "white" }} style={{ backgroundColor: "black" }}><div className="d-flex justify-content-center text-light"><h3>Edit Profile</h3></div></CardHeader>
+                            <Form className="m-5 row">
+                                <div className="col-md-7">
+                                    <img className="col-md-12" src='https://res.cloudinary.com/didf23s1x/image/upload/v1609433588/RMS/EditProfile_e2fjqw.gif' />
+                                </div>
+                                <div className="col-md-5 mt-3">
+                                    <FormGroup>
+                                        <Label htmlFor='firstName'>First Name</Label>
+                                        <Input type="text" id="firstName" name="firstName"
+                                            onBlur={this.handlerBlur('firstName')} valid={errors.firstName === ''}
+                                            invalid={errors.firstName !== ''} onChange={this.handleInputChange}
+                                            value={this.state.firstName} />
+                                        <FormFeedback>{errors.firstName}</FormFeedback>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label htmlFor='lastName'>Last Name</Label>
+                                        <Input type="text" id="lastName" name="lastName"
+                                            onBlur={this.handlerBlur('lastName')} valid={errors.lastName === ''}
+                                            invalid={errors.lastName !== ''} onChange={this.handleInputChange}
+                                            value={this.state.lastName} />
+                                        <FormFeedback>{errors.lastName}</FormFeedback>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label htmlFor='roll'>AU Roll Number</Label>
+                                        <Input type="number" id="roll" name="roll"
+                                            onBlur={this.handlerBlur('roll')} valid={errors.roll === ''}
+                                            invalid={errors.roll !== ''} onChange={this.handleInputChange}
+                                            value={this.state.roll} />
+                                        <FormFeedback>{errors.roll}</FormFeedback>
+                                    </FormGroup>
+                                    <div className="d-flex justify-content-center">
+                                        <Button onClick={this.handleSubmit} type='button' color="success">
+                                            <span className="fa fa-check mr-2"></span>
                                         Save
                                     </Button>
+                                    </div>
                                 </div>
-                            </div>
-                        </Form>
-                    </Card>
-                </div>
+                            </Form>
+                        </Card>
+                    </div>
+                </motion.div>
             );
         }
     }
