@@ -16,7 +16,8 @@ exports.editPost = (req, res) => {
                 data: {},
             });
         } else {
-            let query = "UPDATE posts SET title='" + req.body.title + "', url='" + req.body.url + "', description='" + req.body.description + "' WHERE email='" + req.cookies.cookie + "';"; 
+            let obj = JSON.parse(req.cookies.cookie);
+            let query = "UPDATE posts SET title='" + req.body.title + "', url='" + req.body.url + "', description='" + req.body.description + "' WHERE email='" + obj.email + "';"; 
             // console.log(query);
             con.query(query, function(err, results) {
                 if(err) {

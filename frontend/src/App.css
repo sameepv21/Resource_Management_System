@@ -138,8 +138,8 @@ body {
 
 @media only screen and (max-width: 800) {
   #card1 {
-    /* width: 80%; */
-    /* margin: 10px auto; */
+    width: 80%;
+    margin: 10px auto;
   }
 }
 

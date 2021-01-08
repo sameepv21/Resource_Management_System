@@ -17,7 +17,8 @@ exports.userPost = (req, res) => {
                 data: {},
             });
         } else {
-            let query = "SELECT * FROM posts WHERE email='" + req.cookies.cookie + "';";
+            let obj = JSON.parse(req.cookies.cookie);
+            let query = "SELECT * FROM posts WHERE email='" + obj.email + "';";
             con.query(query, function(err, results) {
                 // console.log(results);
                 if(err) {

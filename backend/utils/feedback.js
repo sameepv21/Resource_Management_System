@@ -17,8 +17,9 @@ exports.feedback = (req, res) => {
                 data: {},
             });
         } else {
-            console.log("msg=" + req.body.msg);
-            let query = "INSERT INTO feedback (email,feedback) VALUES ('" + req.cookies.cookie + "','" + req.body.msg + "');";
+            // console.log("msg=" + req.body.msg);
+            let obj = JSON.parse(req.cookies.cookie);
+            let query = "INSERT INTO feedback (email,feedback) VALUES ('" + obj.email + "','" + req.body.msg + "');";
             con.query(query, function(err, results) {
                 if(err) {
                     res.send({

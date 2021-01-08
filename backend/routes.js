@@ -22,7 +22,8 @@ const size = 40 * 1024 * 1024;
 
 var storage  = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './uploads/'+req.cookies.cookie.email)
+    let obj = JSON.parse(req.cookies.cookie);
+    cb(null, './uploads/'+obj.email)
   },
   filename: function(req, file, cb) {
     fileName = Date.now() + "_" + file.originalname;
@@ -82,7 +83,8 @@ router.post('/uploadPost',  function(req, res, next){
           });
         } else {
           let d = new Date();
-          let postInsertQuery = "INSERT INTO posts (email,title,url,description,file_name,school,stream,date_time) VALUES ('" + req.cookies.cookie +"','" + req.body.title +"','" + req.body.url +"','"+ req.body.description +"','"+ fileName + "','" + req.body.school+ "','"  + req.body.stream + "','" + new Date(d + 'UTC').toISOString().replace(/T/, ' ').replace(/\..+/, '') + "');";
+          let obj = JSON.parse(req.cookies.cookie);
+          let postInsertQuery = "INSERT INTO posts (email,title,url,description,file_name,school,stream,date_time) VALUES ('" + obj.email +"','" + req.body.title +"','" + req.body.url +"','"+ req.body.description +"','"+ fileName + "','" + req.body.school+ "','"  + req.body.stream + "','" + new Date(d + 'UTC').toISOString().replace(/T/, ' ').replace(/\..+/, '') + "');";
           // console.log("post inster query "+postInsertQuery);
     
           con.query(postInsertQuery, function(err, results) {

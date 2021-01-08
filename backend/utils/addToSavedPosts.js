@@ -17,11 +17,12 @@ exports.addToSavedPosts = (req,res) => {
                 msg: err.message,
             })
         } else{
-            let check = "SELECT * FROM saved where email= '" + req.cookies.cookie + "' AND postId = " + req.body.id + ";" ;
+            let obj = JSON.parse(re.cookies.cookie);
+            let check = "SELECT * FROM saved where email= '" + obj.email + "' AND postId = " + req.body.id + ";" ;
             con.query(check,function(err,results){
                 // console.log(results);
                 if(results.length == 0){
-                    let query = "INSERT INTO saved (email,postId) VALUES ('" + req.cookies.cookie + "','" + req.body.id + "');";
+                    let query = "INSERT INTO saved (email,postId) VALUES ('" + obj.email + "','" + req.body.id + "');";
                     con.query(query, function(err, results) {
                         if(err){
                             res.send({
