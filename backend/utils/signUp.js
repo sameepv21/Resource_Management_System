@@ -33,7 +33,7 @@ exports.signUp = (req, res) => {
                         data: {},
                     });
                 } else {
-                    fs.mkdir("./uploads/AU"+roll, {recursive: true}, function(err){
+                    fs.mkdir("./uploads/"+email, {recursive: true}, function(err){
                         if(err) {
                             // console.log(err);
                             res.send({
