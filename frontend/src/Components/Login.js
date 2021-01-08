@@ -54,13 +54,8 @@ class LoginForm extends Component {
 
         axios.post("http://localhost:5000/login", data)
             .then((response) => {
-<<<<<<< HEAD
                 if(response.data.success){
                     cookie.save("cookie", {email:response.data.data.email, role:response.data.data.email}, {path: '/'});
-=======
-                if (response.data.success) {
-                    cookie.save("cookie", response.data.data.email, { path: '/' });
->>>>>>> b3bc29a46bb1d461743fd364795c543f50e26a26
                     this.setState({
                         redirectVar: true,
                     })
@@ -297,58 +292,7 @@ class LoginForm extends Component {
                                 </Card>
                             </Modal>
                         </div>
-<<<<<<< HEAD
-                        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                        <ModalHeader toggle={this.toggleModal} >Sign Up</ModalHeader>
-                        <Card>
-                            <CardBody className="color-nav ml-3 mr-3 mb-3">
-                                <ModalBody>
-                                    <Form method="post">
-                                        <FormGroup>
-                                            <Label className="text-light" htmlFor="firstname">First Name</Label>
-                                            <Input type="text" name="firstname" id="firstname" 
-                                                value={this.state.firstname} onBlur={this.handlerBlur('firstname')} 
-                                                valid={errors.firstname === ''} invalid={errors.firstname !== ''}
-                                                placeholder="First Name" onChange={this.handleInputChange} />
-                                            <FormFeedback>{errors.firstname}</FormFeedback>
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Label className="text-light" htmlFor="lastname">Last Name</Label>
-                                            <Input type="text" name="lastname" id="lastname" 
-                                                value={this.state.lastname} onBlur={this.handlerBlur('lastname')} 
-                                                valid={errors.lastname === ''} invalid={errors.lastname !== ''}
-                                                placeholder="Last Name" onChange={this.handleInputChange} />
-                                                <FormFeedback>{errors.lastname}</FormFeedback>
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Label className="text-light" htmlFor="roll">AU Roll Number</Label>
-                                            <Input type="number" name="roll" id="roll" 
-                                                value={this.state.roll} onBlur={this.handlerBlur('roll')} 
-                                                valid={errors.roll === ''} invalid={errors.roll !== ''}
-                                                placeholder="AU Roll Number" onChange={this.handleInputChange} />
-                                                <FormFeedback>{errors.roll}</FormFeedback>
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Label className="text-light" htmlFor="email">Email</Label>
-                                            <Input type="email" name="email" id="email" 
-                                                value={this.state.email} onBlur={this.handlerBlur('email')} 
-                                                valid={errors.email === ''} invalid={errors.email !== ''}
-                                                placeholder="Email" onChange={this.handleInputChange} />
-                                                <FormFeedback>{errors.email}</FormFeedback>
-                                        </FormGroup>
-                                        <p className="text-danger d-flex justify-content-center">{this.state.standardSignUpError}</p>
-                                        <div className="d-flex justify-content-center">
-                                            <Button type="button" onClick={this.handleSignUpSubmit} value="submit" color="success"><span className="fa fa-user fa-lg mr-1"></span> Sign Up</Button>
-                                        </div>
-                                    </Form>
-                                </ModalBody>
-                            </CardBody>
-                        </Card>
-                    </Modal>
-                    </div>
-=======
                     </motion.div>
->>>>>>> b3bc29a46bb1d461743fd364795c543f50e26a26
                 </div>
             );
         }
