@@ -1,18 +1,20 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Form, FormGroup, Input, Label, Button, Card, CardHeader, FormFeedback } from 'reactstrap';
 import axios from 'axios';
 import Header from './Header';
+import cookie from 'react-cookies';
 
 class EditProfile extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-    
+
         this.state = {
             firstName: '',
             lastName: '',
             roll: '',
             redirectVar: false,
+            redirectLogin: false,
             touched: {
                 firstName: false,
                 lastName: false,
@@ -26,7 +28,7 @@ class EditProfile extends Component {
 
     handlerBlur = (field) => (evt) => {
         this.setState({
-            touched: {...this.state.touched, [field]: true},
+            touched: { ...this.state.touched, [field]: true },
         });
     }
 
@@ -34,9 +36,9 @@ class EditProfile extends Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-    
+
         this.setState({
-          [name]: value
+            [name]: value
         });
     }
 
@@ -51,7 +53,7 @@ class EditProfile extends Component {
         axios.post('http://localhost:5000/editProfile', data)
             .then(response => {
                 alert(JSON.stringify(response.data.msg));
-                if(response.data.success) {
+                if (response.data.success) {
                     this.setState({
                         redirectVar: true,
                     });
@@ -69,19 +71,19 @@ class EditProfile extends Component {
             roll: '',
         }
 
-        if(this.state.touched.firstName && firstName.length < 3) {
+        if (this.state.touched.firstName && firstName.length < 3) {
             errors.firstName = 'First name should be greater than 2 characters';
-        } else if(this.state.touched.firstName && firstName.length > 10) {
+        } else if (this.state.touched.firstName && firstName.length > 10) {
             errors.firstName = 'First name should be less than 11 characters';
-        } 
-        
-        if(this.state.touched.lastName && lastName.length < 3) {
+        }
+
+        if (this.state.touched.lastName && lastName.length < 3) {
             errors.lastName = 'Last Name should be greater than 2 characters';
-        } else if(this.state.touched.lastName && lastName.length > 10) {
+        } else if (this.state.touched.lastName && lastName.length > 10) {
             errors.lastName = 'Last Name should be less than 11 characters';
         }
 
-        if(this.state.touched.roll && roll.length !== 7) {
+        if (this.state.touched.roll && roll.length !== 7) {
             errors.roll = "Roll Number should be of exactly 7 digits"
         }
 
@@ -89,27 +91,31 @@ class EditProfile extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            firstName: this.props.data.firstName,
-            lastName: this.props.data.lastName,
-            roll: this.props.data.roll,
-        });
+        if (!cookie.load("cookie")) {
+            this.setState({ redirectLogin: true });
+        } else {
+            this.setState({
+                firstName: this.props.data.firstName,
+                lastName: this.props.data.lastName,
+                roll: this.props.data.roll,
+            });
+        }
     }
 
     render() {
         const errors = this.validate(this.state.firstName, this.state.lastName, this.state.roll);
-        if(this.state.redirectVar) {
-            return(
+        if (this.state.redirectVar) {
+            return (
                 <Redirect to='/profile' />
             );
         } else {
-            return(
+            return (
                 <div className="container mt-5 d-flex justify-content-center mb-5" >
-                    <Card style={{width: "70%"}}>
-                    <CardHeader style={{border: "white"}} style={{backgroundColor:"black"}}><div className="d-flex justify-content-center text-light"><h3>Edit Profile</h3></div></CardHeader>
+                    <Card style={{ width: "70%" }}>
+                        <CardHeader style={{ border: "white" }} style={{ backgroundColor: "black" }}><div className="d-flex justify-content-center text-light"><h3>Edit Profile</h3></div></CardHeader>
                         <Form className="m-5 row">
                             <div className="col-md-7">
-                                <img className="col-md-12" src='https://res.cloudinary.com/didf23s1x/image/upload/v1609433588/RMS/EditProfile_e2fjqw.gif'/>
+                                <img className="col-md-12" src='https://res.cloudinary.com/didf23s1x/image/upload/v1609433588/RMS/EditProfile_e2fjqw.gif' />
                             </div>
                             <div className="col-md-5 mt-3">
                                 <FormGroup>
@@ -118,7 +124,7 @@ class EditProfile extends Component {
                                         onBlur={this.handlerBlur('firstName')} valid={errors.firstName === ''}
                                         invalid={errors.firstName !== ''} onChange={this.handleInputChange}
                                         value={this.state.firstName} />
-                                    <FormFeedback>{errors.firstName }</FormFeedback>
+                                    <FormFeedback>{errors.firstName}</FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label htmlFor='lastName'>Last Name</Label>
@@ -126,7 +132,7 @@ class EditProfile extends Component {
                                         onBlur={this.handlerBlur('lastName')} valid={errors.lastName === ''}
                                         invalid={errors.lastName !== ''} onChange={this.handleInputChange}
                                         value={this.state.lastName} />
-                                    <FormFeedback>{errors.lastName }</FormFeedback>
+                                    <FormFeedback>{errors.lastName}</FormFeedback>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label htmlFor='roll'>AU Roll Number</Label>
@@ -134,7 +140,7 @@ class EditProfile extends Component {
                                         onBlur={this.handlerBlur('roll')} valid={errors.roll === ''}
                                         invalid={errors.roll !== ''} onChange={this.handleInputChange}
                                         value={this.state.roll} />
-                                    <FormFeedback>{errors.roll }</FormFeedback>
+                                    <FormFeedback>{errors.roll}</FormFeedback>
                                 </FormGroup>
                                 <div className="d-flex justify-content-center">
                                     <Button onClick={this.handleSubmit} type='button' color="success">
@@ -142,7 +148,7 @@ class EditProfile extends Component {
                                         Save
                                     </Button>
                                 </div>
-                                </div>
+                            </div>
                         </Form>
                     </Card>
                 </div>

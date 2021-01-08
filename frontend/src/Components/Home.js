@@ -4,6 +4,7 @@ import { Redirect, Link } from 'react-router-dom';
 import Header from './Header';
 import SchoolDetails from '../Shared/SchoolDetails';
 import { motion } from 'framer-motion';
+import cookie from 'react-cookies';
 
 class RenderSchools extends Component {
     constructor(props) {
@@ -12,6 +13,7 @@ class RenderSchools extends Component {
         this.state = {
             redirectVar: false,
             id: 0,
+            redirectLogin: false,
         }
 
         this.exploreSchool = this.exploreSchool.bind(this);
@@ -24,10 +26,21 @@ class RenderSchools extends Component {
         });
     }
 
+    componentDidMount() {
+        if(!cookie.load("cookie")) {
+            this.setState({redirectLogin: true});
+        }
+    }
+
     render() {
         if (this.state.redirectVar) {
             return (
                 <Redirect to={`/home/${this.state.id}`} />
+            );
+        }
+        if(this.state.redirectLogin) {
+            return(
+                <Redirect to='/login' />
             );
         }
         var renderSchool = SchoolDetails.map((school) => {

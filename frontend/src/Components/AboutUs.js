@@ -1,9 +1,30 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import cookie from 'react-cookies';
+import { Redirect } from 'react-router-dom';
 
 class AboutUs extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            redirectLogin: false,
+        }
+    }
+
+    componentDidMount() {
+        if(!cookie.load("cookie")) {
+            this.setState({redirectLogin: true});
+        }
+    }
+
     render() {
+        if(this.state.redirectLogin) {
+            return(
+                <Redirect to='/login' />
+            ); 
+        }
         return (
             <div className="bg_relative">
                 <Header/>

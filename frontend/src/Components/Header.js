@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
-import {Navbar, NavbarBrand, NavItem, NavbarToggler, Collapse, Nav, Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
-import {NavLink} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Navbar, NavbarBrand, NavItem, NavbarToggler, Collapse, Nav, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import cookie from 'react-cookies';
 
 class Header extends Component {
     constructor(props) {
@@ -16,17 +17,19 @@ class Header extends Component {
         this.handleToggle = this.handleToggle.bind(this);
     }
 
-    componentDidMount(){
-        axios.defaults.withCredentials = true;
-        axios.get('http://localhost:5000/profile')
-            .then(response => {
-                this.setState({
-                    data: JSON.parse(response.data.data),
+    componentDidMount() {
+        if (cookie.load("cookie")) {
+            axios.defaults.withCredentials = true;
+            axios.get('http://localhost:5000/profile')
+                .then(response => {
+                    this.setState({
+                        data: JSON.parse(response.data.data),
+                    })
                 })
-            })
-            .catch(response => {
-                alert(response);
-            })
+                .catch(response => {
+                    alert(response);
+                })
+        }
     }
 
     toggleNav() {
@@ -42,7 +45,7 @@ class Header extends Component {
     }
 
     render() {
-        return(
+        return (
             <Navbar className="color-nav sticky-top" dark expand="md">
                 <div className="container">
                     <NavbarBrand className="mr-auto" href="/">Resource Management System</NavbarBrand>
@@ -71,7 +74,7 @@ class Header extends Component {
                             </NavItem>
                             <NavItem>
                                 <Dropdown isOpen={this.state.isDropdownOpen} toggle={this.handleToggle}>
-                                    <DropdownToggle style={{backgroundColor: "black", borderColor: "black"}} className="mt-1">
+                                    <DropdownToggle style={{ backgroundColor: "black", borderColor: "black" }} className="mt-1">
                                         <img src={this.state.data.imageUrl} className="rounded-circle mr-2" width="35px" height="35px"></img>
                                         <i className="fa fa-caret-down ml-1" />
                                     </DropdownToggle>
@@ -86,12 +89,12 @@ class Header extends Component {
                                             <NavLink className="nav-link text-dark text-decoration-none" to='/userPosts'>Your Posts</NavLink>
                                         </DropdownItem>
                                         <DropdownItem>
-                                        <NavLink className="nav-link text-dark text-decoration-none" to='/logout'>Sign Out</NavLink>
+                                            <NavLink className="nav-link text-dark text-decoration-none" to='/logout'>Sign Out</NavLink>
                                         </DropdownItem>
                                     </DropdownMenu>
                                 </Dropdown>
                             </NavItem>
-                        </Nav>  
+                        </Nav>
                     </Collapse>
                 </div>
             </Navbar>
