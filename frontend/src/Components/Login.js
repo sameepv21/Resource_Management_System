@@ -54,7 +54,6 @@ class LoginForm extends Component {
             .then((response) => {
                 if(response.data.success){
                     cookie.save("cookie", {email:response.data.data.email, role:response.data.data.email}, {path: '/'});
-                    alert("COOKIEE:" + JSON.stringify(cookie.load("cookie")))
                     this.setState({
                         redirectVar: true,
                     })

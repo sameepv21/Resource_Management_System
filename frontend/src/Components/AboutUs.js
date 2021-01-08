@@ -1,21 +1,43 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import { motion } from 'framer-motion';
+import cookie from 'react-cookies';
+import { Redirect } from 'react-router-dom';
+import {motion} from 'framer-motion';
+
 
 class AboutUs extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            redirectLogin: false,
+        }
+    }
+
+    componentDidMount() {
+        if(!cookie.load("cookie")) {
+            this.setState({redirectLogin: true});
+        }
+    }
+
     render() {
         const pageVariants = {
             initial: {
-              x: "-10vw",
+                x: "-100vw",
             },
             in: {
-              x: 0,
+                x: 0,
             },
             out: {
-              x: "100vw",
+                x: "100vw",
             }
-          };
+        };
+        if(this.state.redirectLogin) {
+            return(
+                <Redirect to='/login' />
+            ); 
+        }
         return (
             <div className="bg_relative">
                 <Header/>
