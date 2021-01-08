@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import {Card, CardImg, CardBody, CardImgOverlay, CardHeader, CardFooter, Button} from 'reactstrap';
-import {Redirect, Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Card, CardImg, CardBody, CardImgOverlay, CardHeader, CardFooter, Button } from 'reactstrap';
+import { Redirect, Link } from 'react-router-dom';
 import Header from './Header';
 import SchoolDetails from '../Shared/SchoolDetails';
 import { motion } from 'framer-motion';
 
-class RenderSchools extends Component{
+class RenderSchools extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             redirectVar: false,
             id: 0,
@@ -25,24 +25,34 @@ class RenderSchools extends Component{
     }
 
     render() {
-        if(this.state.redirectVar) {
-            return(
+        if (this.state.redirectVar) {
+            return (
                 <Redirect to={`/home/${this.state.id}`} />
             );
         }
-        var renderSchool = SchoolDetails.map((school)=>{
-            return(
-                <Card className="mt-3 col-md-4">
-                    <CardHeader className="d-flex justify-content-center" style = {{background: "white"}}>
-                            <h3>{school.schoolName}</h3>
-                    </CardHeader>
-                    <CardImg className="img-fluid" src={school.image}></CardImg>
-                    <CardFooter style = {{background: "white"}}>
-                        <div className="d-flex justify-content-center">
-                            <Button role="button" id={school.schoolName} onClick={this.exploreSchool} className="stretched-link btn btn-lg text-light p-1 rounded" color="primary">Explore</Button>
+        var renderSchool = SchoolDetails.map((school) => {
+            return (
+                // <div className="mt-3 col-md-4">
+                //     <Card>
+                //         <CardHeader className="d-flex justify-content-center" style={{ background: "white" }}>
+                //             <h3>{school.schoolName}</h3>
+                //         </CardHeader>
+                //         <CardImg className="img-fluid" src={school.image}></CardImg>
+                //         <CardFooter style={{ background: "white" }}>
+                //             <div className="d-flex justify-content-center">
+                //                 <Button role="button" id={school.schoolName} onClick={this.exploreSchool} className="stretched-link btn btn-lg text-light p-1 rounded" color="primary">Explore</Button>
+                //             </div>
+                //         </CardFooter>
+                //     </Card>
+                // </div>
+                <div className="mt-3 col-md-4" id="container">
+                    <Card id="card1">
+                        <CardImg id="img1" src={school.image} alt={school.name} className="img-fluid" />
+                        <div id="cardText">
+                            <Button className="mt-3 d-flex justidy-content-center mx-auto btn btn-lg" color="primary">Explore</Button>
                         </div>
-                    </CardFooter>
-                </Card>
+                    </Card>
+                </div>
             );
         });
 
@@ -50,27 +60,26 @@ class RenderSchools extends Component{
     }
 }
 
-class Home extends Component{
-    render(){
+class Home extends Component {
+    render() {
         const pageVariants = {
             initial: {
-              x: "-100vw",
+                x: "-100vw",
             },
             in: {
-              x: 0,
+                x: 0,
             },
             out: {
-              x: "100vw",
+                x: "100vw",
             }
-          };
-        return(
-            <div style={{overflowX: 'hidden'}}>
+        };
+        return (
+            <div style={{ overflowX: 'hidden' }}>
                 <Header />
                 <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
-
-                <div >
-                    <Card>
-                        <CardImg src ="https://res.cloudinary.com/didf23s1x/image/upload/v1609433587/RMS/background_k5hp78.jpg" height="250vh"></CardImg>
+                    <div >
+                        <Card>
+                            <CardImg src="https://res.cloudinary.com/didf23s1x/image/upload/v1609433587/RMS/background_k5hp78.jpg" height="250vh"></CardImg>
                             <CardImgOverlay>
                                 <CardBody>
                                     <div className="d-flex justify-content-center">
@@ -80,15 +89,14 @@ class Home extends Component{
                                     </div>
                                 </CardBody>
                             </CardImgOverlay>
-                    </Card>
-                    <div className="row d-flex justify-content-center">
-                        <RenderSchools />
+                        </Card>
+                        <div className="row d-flex justify-content-center">
+                            <RenderSchools />
+                        </div>
                     </div>
-                </div>
-            </motion.div>
-
+                </motion.div>
             </div>
-            
+
         );
     }
 }
