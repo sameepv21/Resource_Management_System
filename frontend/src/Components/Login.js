@@ -53,7 +53,8 @@ class LoginForm extends Component {
         axios.post("http://localhost:5000/login", data)
             .then((response) => {
                 if(response.data.success){
-                    cookie.save("cookie", response.data.data.email, {path: '/'});
+                    cookie.save("cookie", {email:response.data.data.email, role:response.data.data.email}, {path: '/'});
+                    alert("COOKIEE:" + JSON.stringify(cookie.load("cookie")))
                     this.setState({
                         redirectVar: true,
                     })
@@ -64,6 +65,7 @@ class LoginForm extends Component {
             .catch((response) => {
                 alert(response.msg);
             })
+
     }
 
     toggleNav() {

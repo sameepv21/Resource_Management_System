@@ -22,7 +22,7 @@ const size = 40 * 1024 * 1024;
 
 var storage  = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './uploads/AU1940049')
+    cb(null, './uploads/'+req.cookies.cookie.email)
   },
   filename: function(req, file, cb) {
     fileName = Date.now() + "_" + file.originalname;
