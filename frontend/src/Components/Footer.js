@@ -9,8 +9,8 @@ import { pageVariants } from '../Shared/PageVariants';
 class Header extends Component {
     render() {
         return (
-            <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
-                <div className="color-nav sticky-bottom d-flex justify-content-center" dark>
+            <div className="color-nav fixed-bottom d-flex justify-content-center" dark>
+                <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
                     <div className="row mb-4">
                         <div className="col text-light">
                             <h5>Sameep Vani</h5>
@@ -25,9 +25,8 @@ class Header extends Component {
                             <span className="fa fa-linkedin fa-lg  ml-2"></span>
                         </div>
                     </div>
-                </div>
-            </motion.div>
-
+                </motion.div>
+            </div>
         );
     }
 

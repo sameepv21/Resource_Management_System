@@ -99,13 +99,13 @@ class Profile extends Component {
 
     render() {
         return (
-            <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
-                <div className="bg_fixed">
+            <div className="bg_fixed">
+                <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
                     <Header />
                     {/* <ShowBreadcrumb /> */}
                     <ShowProfile data={this.state.data} />
-                </div>
-            </motion.div>
+                </motion.div>
+            </div>
         );
     }
 }

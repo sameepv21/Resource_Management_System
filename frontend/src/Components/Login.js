@@ -194,8 +194,8 @@ class LoginForm extends Component {
             );
         } else {
             return (
-                <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
-                    <div>
+                <div className="bg_fixed">
+                    <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
                         <Navbar className="color-nav" dark expand="sm">
                             <div className="container">
                                 <NavbarBrand>Resource Management System</NavbarBrand>
@@ -291,8 +291,8 @@ class LoginForm extends Component {
                                 </Card>
                             </Modal>
                         </div>
-                    </div>
-                </motion.div>
+                    </motion.div>
+                </div>
             );
         }
     }
