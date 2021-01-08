@@ -1,11 +1,13 @@
-import React,{Component} from 'react';
-import {Card, CardHeader, CardImg, CardFooter, CardImgOverlay, CardBody, Button} from 'reactstrap';
+import React, { Component } from 'react';
+import { Card, CardHeader, CardImg, CardFooter, CardImgOverlay, CardBody, Button } from 'reactstrap';
 import Header from './Header';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { pageVariants } from '../Shared/PageVariants';
 
-class Stream extends Component{
+class Stream extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -14,20 +16,20 @@ class Stream extends Component{
         }
     }
 
-    render(){
-        if(this.state.redirectVar) {
-            return(
+    render() {
+        if (this.state.redirectVar) {
+            return (
                 <Redirect to={`/feed/${this.state.id}`} />
             );
         }
         let RenderStreams = this.props.school.stream.map((stream) => {
-            return(
+            return (
                 <Card className="mt-3 col-md-4">
-                    <CardHeader className="d-flex justify-content-center" style = {{background: "white"}}>
-                            <h4>{stream.streamName}</h4>
+                    <CardHeader className="d-flex justify-content-center" style={{ background: "white" }}>
+                        <h4>{stream.streamName}</h4>
                     </CardHeader>
                     <CardImg className="img-fluid" src={stream.streamImage}></CardImg>
-                    <CardFooter style = {{background: "white"}}>
+                    <CardFooter style={{ background: "white" }}>
                         <div className="d-flex justify-content-center">
                             <Button role="button" onClick={(event) => {
                                 event.preventDefault();
@@ -41,12 +43,13 @@ class Stream extends Component{
                 </Card>
             );
         });
-        return(
+        return (
             <div>
                 <Header />
-                <div>
-                    <Card>
-                        <CardImg src ="https://res.cloudinary.com/didf23s1x/image/upload/v1609433587/RMS/background_k5hp78.jpg" height="250vh"></CardImg>
+                <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
+                    <div>
+                        <Card>
+                            <CardImg src="https://res.cloudinary.com/didf23s1x/image/upload/v1609433587/RMS/background_k5hp78.jpg" height="250vh"></CardImg>
                             <CardImgOverlay>
                                 <CardBody>
                                     <div className="d-flex justify-content-center">
@@ -56,11 +59,12 @@ class Stream extends Component{
                                     </div>
                                 </CardBody>
                             </CardImgOverlay>
-                    </Card>
-                </div>
-                <div className="row d-flex justify-content-center">
-                    {RenderStreams}
-                </div>
+                        </Card>
+                    </div>
+                    <div className="row d-flex justify-content-center">
+                        {RenderStreams}
+                    </div>
+                </motion.div>
             </div>
         );
     }

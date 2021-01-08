@@ -194,15 +194,15 @@ body {
 }
 
 #cardText::before {
-  border-bottom: 1px solid;
-  border-top: 1px solid;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
   transform: scale(0, 1);
   transition: transform ease-out 0.5s;
 }
 
 #cardText::after {
-  border-left: 1px solid;
-  border-right: 1px solid;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
   transform: scale(1, 0);
   transition: transform ease-out 0.5s;
 }
