@@ -5,7 +5,7 @@ import Header from './Header';
 import SchoolDetails from '../Shared/SchoolDetails';
 import { motion } from 'framer-motion';
 import cookie from 'react-cookies';
-import {pageVariants} from '../Shared/PageVariants';
+import { pageVariants } from '../Shared/PageVariants';
 
 class RenderSchools extends Component {
     constructor(props) {
@@ -28,8 +28,8 @@ class RenderSchools extends Component {
     }
 
     componentDidMount() {
-        if(!cookie.load("cookie")) {
-            this.setState({redirectLogin: true});
+        if (!cookie.load("cookie")) {
+            this.setState({ redirectLogin: true });
         }
     }
 
@@ -39,8 +39,8 @@ class RenderSchools extends Component {
                 <Redirect to={`/home/${this.state.id}`} />
             );
         }
-        if(this.state.redirectLogin) {
-            return(
+        if (this.state.redirectLogin) {
+            return (
                 <Redirect to='/login' />
             );
         }
@@ -62,9 +62,13 @@ class RenderSchools extends Component {
                 <div className="mt-3 col-md-4" id="container">
                     <Card id="card1">
                         <CardImg id="img1" src={school.image} alt={school.name} className="img-fluid" />
-                        <div id="cardText">
-                            <Button className="mt-3 d-flex justidy-content-center mx-auto btn btn-lg" color="primary">Explore</Button>
-                        </div>
+                        <CardImgOverlay role="button" id={school.schoolName} onClick={this.exploreSchool} className="stretched-link btn btn-lg text-light p-1 rounded">
+                            <CardBody className="row h-100 d-flex justify-content-center">
+                                <div id="cardText" className="my-auto">
+                                    <p style={{color: 'black'}}>Click to Hop in</p>
+                                </div>
+                            </CardBody>
+                        </CardImgOverlay>
                     </Card>
                 </div>
             );
