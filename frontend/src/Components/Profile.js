@@ -100,8 +100,9 @@ class Profile extends Component {
     render() {
         return (
             <div className="bg_fixed">
+                <Header />
                 <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
-                    <Header />
+
                     {/* <ShowBreadcrumb /> */}
                     <ShowProfile data={this.state.data} />
                 </motion.div>

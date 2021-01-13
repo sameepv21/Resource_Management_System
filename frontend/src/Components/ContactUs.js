@@ -73,9 +73,9 @@ class ContactUs extends Component {
             );
         }
         return (
-            <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
                 <div className="bg_relative">
                     <Header />
+            <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
                     <div className="d-flex justify-content-center mb-3 mx-auto">
                         <div className="col-md-6 mt-5">
                             <Card className="shadow-black mb-3">
@@ -88,7 +88,7 @@ class ContactUs extends Component {
                                         <Form>
                                             <FormGroup>
                                                 <Label htmlFor="email">Email</Label>
-                                                <Input type="email" name="email" value={cookie.load("cookie")} />
+                                                <Input type="email" name="email" value={cookie.load("cookie").email} />
                                             </FormGroup>
                                             <FormGroup>
                                                 <Label htmlFor="msg">Message/ Feedback</Label>
@@ -105,8 +105,8 @@ class ContactUs extends Component {
                             </Card>
                         </div>
                     </div>
-                </div>
             </motion.div>
+                </div>
         );
     }
 }

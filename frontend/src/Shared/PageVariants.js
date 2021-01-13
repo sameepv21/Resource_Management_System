@@ -1,11 +1,11 @@
 export const pageVariants = {
     initial: {
-        x: "-100vw",
+        x: "-10vw",
     },
     in: {
         x: 0,
     },
     out: {
-        x: "100vw",
+        x: "10vw",
     }
 };
