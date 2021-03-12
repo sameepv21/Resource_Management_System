@@ -22,7 +22,7 @@ exports.signUp = (req, res) => {
                data: {}, 
             });
         } else {
-            let insertQuery = "INSERT INTO temp (fname, lname, rollNo, email, imageUrl, role) VALUES  ('" + firstName + "','" + lastName + "','" + roll + "','" + email + "', 'null', 'U');";
+            let insertQuery = "INSERT INTO temp (fname, lname, rollNo, email, imageUrl, role) VALUES  ('" + firstName + "','" + lastName + "','" + roll + "','" + email + "', 'https://res.cloudinary.com/didf23s1x/image/upload/v1610778072/RMS/defaultProfilePicture_cq1mlw.jpg', 'U');";
             console.log(insertQuery);
             con.query(insertQuery, function(err, result){
                 if(err){

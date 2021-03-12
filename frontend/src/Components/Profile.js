@@ -37,7 +37,7 @@ class ShowProfile extends Component {
         }
         else {
             return (
-                <div className="mt-2 container d-flex justify-content-center ">
+                <div className="mt-2 d-flex justify-content-center ">
                     <Card>
                         <CardHeader style={{ border: "white" }} style={{ backgroundColor: "black" }}><div className="d-flex justify-content-center text-light"><h3>My Profile</h3></div></CardHeader>
                         <div className="d-flex justify-content-center">

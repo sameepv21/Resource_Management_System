@@ -46,7 +46,7 @@ exports.verify = (req, res) => {
     
                         let mailOptions = {
                             from: 'sameep.v@ahduni.edu.in',
-                            to: email,
+                            to: 'aneri.d@ahduni.edu.in',
                             subject: 'OTP for verification (RMS)',
                             text: 'OTP for verification is: ' + otp + '. It will last for 5 minutes',
                         }
@@ -68,6 +68,7 @@ exports.verify = (req, res) => {
                             }
                         });
 
+                        console.log('OTP Sent Succsessfully')
                         res.send({
                             status: 1,
                             msg: 'Mail Sent',
