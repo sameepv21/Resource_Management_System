@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+var bcrypt = require('bcrypt');
 
 exports.checkLogin = (req, res) => {
     let email = req.body.email;
@@ -41,28 +42,45 @@ exports.checkLogin = (req, res) => {
                             data: {},
                         });
                     } else {
-                        let updateImage = "UPDATE temp SET imageUrl = '" + req.body.imageUrl + "' WHERE email='" + email + "';";
-                        // console.log(updateImage); 
-                        con.query(updateImage, function (err, results) {
-                            if (err) {
-                                // console.log(err.message);
-                                res.send({
-                                    status: 0,
-                                    msg: err.message,
-                                    data: null,
-                                });
-                            }
-                        })
-                        res.cookie('cookie', email, { maxAge: 60 * 60 * 1000, httpOnly: false, path: '/' });
-                        req.session.user = email;
-                        // console.log(req.session.user);
+                        if (req.body.google) {
+                            let updateImage = "UPDATE temp SET imageUrl = '" + req.body.imageUrl + "' WHERE email='" + email + "';";
+                            // console.log(updateImage); 
+                            con.query(updateImage, function (err, results) {
+                                if (err) {
+                                    // console.log(err.message);
+                                    res.send({
+                                        status: 0,
+                                        msg: err.message,
+                                        data: null,
+                                    });
+                                }
+                            })
+                            res.cookie('cookie', email, { maxAge: 60 * 60 * 1000, httpOnly: false, path: '/' });
+                            req.session.user = email;
+                            // console.log(req.session.user);
 
-                        res.send({
-                            status: 1,
-                            msg: 'Welcome, you have successfully logged in.',
-                            success: true,
-                            data: { email },
-                        });
+                            res.send({
+                                status: 1,
+                                msg: 'Welcome, you have successfully logged in.',
+                                success: true,
+                                data: { email },
+                            });
+                        }
+                        else {
+                            bcrypt.compare(req.body.password, result.password, function (err, login) {
+                                if (login) {
+                                    res.cookie('cookie', email, { maxAge: 60 * 60 * 1000, httpOnly: false, path: '/' });
+                                    req.session.user = email;
+
+                                    res.send({
+                                        status: 1,
+                                        msg: 'Welcome, you have successfully logged in.',
+                                        success: true,
+                                        data: { email },
+                                    });
+                                }
+                            })
+                        }
                     }
                 });
             }

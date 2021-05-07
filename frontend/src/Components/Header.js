@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, NavItem, NavbarToggler, Collapse, Nav, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Navbar, NavbarBrand, NavItem, NavbarToggler, Collapse, Nav, Dropdown, Input,DropdownToggle, Button,DropdownMenu, DropdownItem } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import cookie from 'react-cookies';
@@ -16,6 +16,7 @@ class Header extends Component {
         }
         this.toggleNav = this.toggleNav.bind(this);
         this.handleToggle = this.handleToggle.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
     }
 
     componentDidMount() {
@@ -45,6 +46,10 @@ class Header extends Component {
         });
     }
 
+    toggleModal(){
+
+    }
+
     render() {
         return (
             <Navbar className="color-nav sticky-top" dark expand="md">
@@ -53,6 +58,14 @@ class Header extends Component {
                     <NavbarToggler onClick={this.toggleNav} />
                     <Collapse isOpen={this.state.isNavOpen} navbar className="dark">
                         <Nav navbar className="ml-auto">
+                            <NavItem className="mt-2">
+                                <input placeholder="Search">
+                                   
+                                </input>
+                            </NavItem>
+                            <NavItem>
+                                <Button className="btn-sm btn mt-2" style={{backgroundColor: "#0F4756"}}>Go</Button>
+                            </NavItem>
                             <NavItem className="mt-1">
                                 <NavLink className="nav-link" to='/home'>
                                     <span className="fa fa-home fa-lg mr-2"></span>Home
@@ -63,20 +76,21 @@ class Header extends Component {
                                     <span className="fa fa-plus fa-lg mr-2 mt-1"></span>New Post
                                 </NavLink>
                             </NavItem>
+                            
                             <NavItem className="mt-1">
                                 <NavLink className="nav-link" to='/aboutUs'>
                                     <span className="fa fa-info fa-lg mr-2"></span>About Us
                                 </NavLink>
                             </NavItem>
-                            <NavItem className="mt-1">
-                                <NavLink className="nav-link" to='/contactUs'>
-                                    <span className="fa fa-phone fa-lg mr-2"></span>Contact Us
-                                </NavLink>
-                            </NavItem>
+                                <NavItem className="mt-1">
+                                    <NavLink className="nav-link" to='/contactUs'>
+                                        <span className="fa fa-phone fa-lg mr-2"></span>Contact Us
+                                    </NavLink>
+                                </NavItem>
                             <NavItem>
                                 <Dropdown isOpen={this.state.isDropdownOpen} toggle={this.handleToggle}>
                                     <DropdownToggle style={{ backgroundColor: "black", borderColor: "black" }} className="mt-1">
-                                        <img src={this.state.data.imageUrl} className="rounded-circle mr-2" ></img>
+                                        <img src={this.state.data.imageUrl} className="rounded-circle mr-2" style={{height:"38px", width:"38px"}} ></img>
                                         <i className="fa fa-caret-down ml-1" />
                                     </DropdownToggle>
                                     <DropdownMenu>
