@@ -55,7 +55,7 @@ class ShowSavedPost extends Component {
                                 <CardFooter className="bg-white">
                                     <div className="d-flex justify-content-center">
                                         <div>
-                                            <h6 className="d-flex justify-content-start text-small" style={{ textColor: "grey" }}>Aneri Dalwadi</h6>
+                                            <h6 className="d-flex justify-content-start text-small" style={{ textColor: "grey" }}>{this.props.details.email}</h6>
                                             <h6 className="text-small">{this.props.details.date_time}</h6>
                                         </div>
                                         {/* <Button className="btn m-1" color="success">Download<span className="ml-2 fa fa-download"></span> </Button> */}

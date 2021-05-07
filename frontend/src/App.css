@@ -18,11 +18,9 @@
 
 .bg_relative {
   background-image: url("https://res.cloudinary.com/didf23s1x/image/upload/v1609433587/RMS/background_k5hp78.jpg");
-  /* position: fixed; */
-  /* overflow-y: scroll; */
   min-width: 100%;
   min-height: 100vh;
-  background-size: cover;
+  background-size: repeat;
   background-position: center;
 }
 
@@ -104,16 +102,10 @@ body {
   color: white;
 }
 
-/* #heading > p{
-  font-size: 28px;
-} */
-
 #container > p {
   font-family: "Kaushan Script", cursive;
-  /* font-size: 25px; */
 }
 
-/* ------------------------ Card 1-------------------------------  */
 #container {
   display: inline-block;
   width: 100%;
@@ -127,9 +119,6 @@ body {
 @media only screen and (min-width: 800) {
   #card1 {
     float: left;
-    /* width: 50%;
-    height: 50%; */
-    /* margin: 10px auto; */
   }
   #card1:first-child {
     margin-left: 88px;
@@ -157,17 +146,6 @@ body {
 }
 
  #cardText {
-/*  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 83%;
-  height: 70%;
-  padding: 10px;
-  text-align: center;
-  font-family: "Bigelow Rules", cursive;
-  font-size: 30px;
-  letter-spacing: 2px; */
   opacity: 0;
   transition: opacity ease-out 0.5s;
 }
@@ -176,12 +154,6 @@ body {
   opacity: 1;
   overflow-y: hidden;
 }
-/* 
-@media only screen and (max-width: 800px) {
-  #cardText {
-    font-size: 20px;
-  }
-} */
 
 #cardText::before,
 #cardText::after {

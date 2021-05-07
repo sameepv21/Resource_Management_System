@@ -37,7 +37,7 @@ class ShowProfile extends Component {
         }
         else {
             return (
-                <div className="mt-2 container d-flex justify-content-center ">
+                <div className="mt-2 d-flex justify-content-center ">
                     <Card>
                         <CardHeader style={{ border: "white" }} style={{ backgroundColor: "black" }}><div className="d-flex justify-content-center text-light"><h3>My Profile</h3></div></CardHeader>
                         <div className="d-flex justify-content-center">
@@ -100,8 +100,9 @@ class Profile extends Component {
     render() {
         return (
             <div className="bg_fixed">
+                <Header />
                 <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
-                    <Header />
+
                     {/* <ShowBreadcrumb /> */}
                     <ShowProfile data={this.state.data} />
                 </motion.div>

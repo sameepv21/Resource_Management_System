@@ -30,12 +30,17 @@ exports.profile = (req, res) =>{
                     });
                 }
                 else{
+                    let IURL = 'https://res.cloudinary.com/didf23s1x/image/upload/v1610778072/RMS/defaultProfilePicture_cq1mlw.jpg'
+                    if(results[0].imageUrl) {
+                        // console.log('Image Found');
+                        IURL = results[0].imageUrl;
+                    }
                     var content = {
                         firstName: results[0].fname,
                         lastName: results[0].lname,
                         email: results[0].email,
                         roll: results[0].rollNo,
-                        imageUrl: results[0].imageUrl,
+                        imageUrl: IURL,
                     }
                     res.send({
                         status: 1,

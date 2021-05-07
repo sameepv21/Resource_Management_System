@@ -28,9 +28,9 @@ class AboutUs extends Component {
             );
         }
         return (
-            <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
-                <div className="bg_relative">
-                    <Header />
+            <div className="bg_relative">
+                <Header />
+                <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
                     <div className="rotating-box">
                         <div className="single-rb">
                             <div className="front-side"><img alt="Sameep Vani" src="https://res.cloudinary.com/didf23s1x/image/upload/v1609433587/RMS/sameep2_isbelf.jpg" /></div>
@@ -39,11 +39,11 @@ class AboutUs extends Component {
                             <div className="right-side"><img alt="Aneri Dalwadi" src="https://res.cloudinary.com/didf23s1x/image/upload/v1609433587/RMS/aneri1_lzwrni.jpg" /></div>
                         </div>
                     </div>
-                    <div className="fixed-bottom">
-                        <Footer />
-                    </div>
+                </motion.div>
+                <div className="fixed-bottom">
+                    <Footer />
                 </div>
-            </motion.div>
+            </div>
         );
     }
 }

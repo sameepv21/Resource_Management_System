@@ -73,9 +73,9 @@ class ContactUs extends Component {
             );
         }
         return (
-            <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
                 <div className="bg_relative">
                     <Header />
+            <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
                     <div className="d-flex justify-content-center mb-3 mx-auto">
                         <div className="col-md-6 mt-5">
                             <Card className="shadow-black mb-3">
@@ -83,12 +83,12 @@ class ContactUs extends Component {
                                     <CardHeader style={{ border: "white" }} style={{ backgroundColor: "black" }}><div className="d-flex justify-content-center text-light"><h3>Your message is valuable</h3></div></CardHeader>
                                 </div>
                                 <div className="row">
-                                    <img src="https://res.cloudinary.com/didf23s1x/image/upload/v1609433588/RMS/ContactUs_ifporj.gif" className="mr-5 mx-auto col-md-7" />
+                                    <img src="https://res.cloudinary.com/didf23s1x/image/upload/v1609433588/RMS/ContactUs_ifporj.gif" className="mx-auto col-md-7" style={{width: "60%"}} />
                                     <CardBody className="mt-3 mr-3 ml-3 ">
                                         <Form>
                                             <FormGroup>
                                                 <Label htmlFor="email">Email</Label>
-                                                <Input type="email" name="email" value={cookie.load("cookie")} />
+                                                <Input type="email" name="email" value={cookie.load("cookie").email} />
                                             </FormGroup>
                                             <FormGroup>
                                                 <Label htmlFor="msg">Message/ Feedback</Label>
@@ -105,8 +105,8 @@ class ContactUs extends Component {
                             </Card>
                         </div>
                     </div>
-                </div>
             </motion.div>
+                </div>
         );
     }
 }

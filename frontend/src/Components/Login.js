@@ -119,7 +119,7 @@ class LoginForm extends Component {
             // alert("length123: " + this.state.standardSignUpError + " " + this.state.TEMP);
 
         }
-        if (this.state.standardSignUpError.length == 0) {
+        if (this.state.TEMP || this.state.standardSignUpError.length == 0) {
             event.preventDefault();
             this.setState({
                 redirectVarSignUp: true,
