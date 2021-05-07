@@ -76,7 +76,7 @@ class Header extends Component {
                             <NavItem>
                                 <Dropdown isOpen={this.state.isDropdownOpen} toggle={this.handleToggle}>
                                     <DropdownToggle style={{ backgroundColor: "black", borderColor: "black" }} className="mt-1">
-                                        <img src={this.state.data.imageUrl} className="rounded-circle mr-2" width="35px" height="35px"></img>
+                                        <img src={this.state.data.imageUrl} className="rounded-circle mr-2" ></img>
                                         <i className="fa fa-caret-down ml-1" />
                                     </DropdownToggle>
                                     <DropdownMenu>
