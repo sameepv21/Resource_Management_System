@@ -10,13 +10,16 @@ class Header extends Component {
         super(props);
 
         this.state = {
+            search : "",
             isNavOpen: false,
             isDropdownOpen: false,
             data: {},
         }
         this.toggleNav = this.toggleNav.bind(this);
         this.handleToggle = this.handleToggle.bind(this);
-        this.toggleModal = this.toggleModal.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleGo = this.handleGo.bind(this);
     }
 
     componentDidMount() {
@@ -34,6 +37,46 @@ class Header extends Component {
         }
     }
 
+    handleBlur = (field) => (evt) => {
+        this.setState({
+            touched: { ...this.state.touched, [field]: true },
+        });
+    }
+
+    handleInputChange(event){
+        let target = event.target;
+        let value = target.type === 'checkbox' ? target.checked : target.value;
+        let name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleGo(){
+        if(this.state.search == ""){
+            alert("No input");
+        } else{
+
+            let data= {
+                search : this.state.search
+            }
+            axios.defaults.withCredentials = true;
+            axios.post('http://localhost:5000/search', data)
+                .then(response => {
+                    if (response.data.success) {
+                        this.setState({
+                            redirectVarSearch: true,
+                            otp: response.data.data.otp,
+                        });
+                    }
+                    else {
+                        alert(JSON.stringify(response.data.msg));
+                    }
+                })
+        }
+    }
+
     toggleNav() {
         this.setState({
             isNavOpen: !this.state.isNavOpen,
@@ -46,10 +89,6 @@ class Header extends Component {
         });
     }
 
-    toggleModal(){
-
-    }
-
     render() {
         return (
             <Navbar className="color-nav sticky-top" dark expand="md">
@@ -59,12 +98,13 @@ class Header extends Component {
                     <Collapse isOpen={this.state.isNavOpen} navbar className="dark">
                         <Nav navbar className="ml-auto">
                             <NavItem className="mt-2">
-                                <input placeholder="Search">
-                                   
+                                <input placeholder="Search" id="search" 
+                                    onBlur= {this.handleBlur("search")}
+                                    onChange={this.handleInputChange}>
                                 </input>
                             </NavItem>
                             <NavItem>
-                                <Button className="btn-sm btn mt-2" style={{backgroundColor: "#0F4756"}}>Go</Button>
+                                <Button className="btn-sm btn mt-2" style={{backgroundColor: "#0F4756"}} onClick={handleGo}>Go</Button>
                             </NavItem>
                             <NavItem className="mt-1">
                                 <NavLink className="nav-link" to='/home'>

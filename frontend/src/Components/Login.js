@@ -121,6 +121,7 @@ class LoginForm extends Component {
         }
         if (this.state.TEMP || this.state.standardSignUpError.length == 0) {
             event.preventDefault();
+            //1. DO WE NEED THIS HERE
             this.setState({
                 redirectVarSignUp: true,
             });
@@ -135,6 +136,7 @@ class LoginForm extends Component {
                     if (response.data.success) {
                         this.setState({
                             google: false,
+                            //2. OR HERE WILL DO?
                             redirectVarSignUp: true,
                             otp: response.data.data.otp,
                         });

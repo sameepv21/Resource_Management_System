@@ -15,6 +15,7 @@ var deletePost = require('./utils/deletePost');
 var editPost = require('./utils/editPost');
 var savedPosts = require('./utils/savedPosts');
 var getFeed = require('./utils/getFeed');
+var search = require('./utils/search');
 var getEditPost = require('./utils/getEditPost');
 // const { query } = require('express');
 var fileName = '';
@@ -32,6 +33,8 @@ var storage  = multer.diskStorage({
 });
 
 var upload = multer({storage: storage, limits: {fileSize: size}});
+
+router.post('/search', search.search);
 
 router.get('/getFeed', getFeed.getFeed);
 
