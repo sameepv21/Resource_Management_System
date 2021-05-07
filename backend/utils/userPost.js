@@ -20,9 +20,7 @@ exports.userPost = (req, res) => {
             let obj = JSON.parse(req.cookies.cookie);
             // let query = "SELECT * FROM posts WHERE email='" + obj.email + "';";
             let query = "SELECT temp.* FROM posts RIGHT JOIN posts ON posts.email = temp.email WHERE posts.email ='" + obj.email + "';";
-            console.log(query);
             con.query(query, function(err, results) {
-                console.log(results);
                 if(err) {
                     res.send({
                         status: 0,

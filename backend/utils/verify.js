@@ -54,6 +54,7 @@ exports.verify = (req, res) => {
     
                         transporter.sendMail(mailOptions, function(err, info){
                             if(err) {
+                                // console.log(err.message);
                                 res.send({
                                     status: 0,
                                     msg: err.message,

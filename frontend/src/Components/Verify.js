@@ -65,8 +65,6 @@ class Verify extends Component {
                         this.setState({
                             redirectVar: true,
                         });
-                    } else {
-                        alert(response.data.msg);
                     }
                 })
                 .catch(err => {

@@ -23,6 +23,8 @@ class LoginForm extends Component {
             lastname: '',
             roll: '',
             email: '',
+            password: '',
+            cPassword: '',
             redirectVar: false,
             redirectVarSignUp: false,
             google: false,
@@ -116,8 +118,6 @@ class LoginForm extends Component {
                 TEMP: true,
                 standardSignUpError: "You have not filled all the fields",
             });
-            // alert("length123: " + this.state.standardSignUpError + " " + this.state.TEMP);
-
         }
         if (this.state.TEMP || this.state.standardSignUpError.length == 0) {
             event.preventDefault();
@@ -132,7 +132,8 @@ class LoginForm extends Component {
             axios.defaults.withCredentials = true;
             axios.post('http://localhost:5000/verify', data)
                 .then(response => {
-                    if (response.data.success) {
+                    alert(JSON.stringify(response.data));
+                    if (response.data.status === 1) {
                         this.setState({
                             google: false,
                             redirectVarSignUp: true,
@@ -149,12 +150,13 @@ class LoginForm extends Component {
         }
     }
 
-    validate(firstname, lastname, roll, email) {
+    validate(firstname, lastname, roll, email, password, cPassword) {
         let errors = {
             firstname: '',
             lastname: '',
             roll: '',
             email: '',
+            cPassword: '',
         }
 
         if (this.state.touched.firstname && firstname.length < 3) {
@@ -179,12 +181,15 @@ class LoginForm extends Component {
         if (this.state.touched.email && email.split('@').filter(x => x === 'ahduni.edu.in').length !== 1) {
             errors.email = 'Email should contain @ahduni.edu.in';
         }
+        if(this.state.touched.cPassword && password !== cPassword) {
+            errors.cPassword = 'Passwords do not match';
+        }
         return errors;
 
     }
 
     render() {
-        let errors = this.validate(this.state.firstname, this.state.lastname, this.state.roll, this.state.email)
+        let errors = this.validate(this.state.firstname, this.state.lastname, this.state.roll, this.state.email, this.state.password, this.state.cPassword)
         if (this.state.redirectVar) {
             return (
                 <Redirect to="/home" />
@@ -281,6 +286,21 @@ class LoginForm extends Component {
                                                         valid={errors.email === ''} invalid={errors.email !== ''}
                                                         placeholder="Email" onChange={this.handleInputChange} />
                                                     <FormFeedback>{errors.email}</FormFeedback>
+                                                </FormGroup>
+                                                <FormGroup>
+                                                    <Label className="text-light" htmlFor="password">Password</Label>
+                                                    <Input type="password" name="password" id="password"
+                                                        value={this.state.password} onBlur={this.handlerBlur('password')}
+                                                        // valid={errors.password === ''} invalid={errors.password !== ''}
+                                                        placeholder="Password" onChange={this.handleInputChange} />
+                                                </FormGroup>
+                                                <FormGroup>
+                                                    <Label className="text-light" htmlFor="cPassword">Confirm Password</Label>
+                                                    <Input type="password" name="cPassword" id="cPassword"
+                                                        value={this.state.cPassword} onBlur={this.handlerBlur('cPassword')}
+                                                        valid={errors.cPassword === ''} invalid={errors.cPassword !== ''}
+                                                        placeholder="Retype Password" onChange={this.handleInputChange} />
+                                                    <FormFeedback>{errors.cPassword}</FormFeedback>
                                                 </FormGroup>
                                                 <p className="text-danger d-flex justify-content-center">{this.state.standardSignUpError}</p>
                                                 <div className="d-flex justify-content-center">
