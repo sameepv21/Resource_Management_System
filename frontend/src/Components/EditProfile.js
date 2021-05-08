@@ -114,8 +114,9 @@ class EditProfile extends Component {
         } else {
             return (
                 <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
-                    <div className="container mt-5 d-flex justify-content-center mb-5" >
-                        <Card style={{ width: "70%" }}>
+                    <div className="my-5 d-flex justify-content-center" >
+                        <div className="col-lg-4">
+                        <Card>
                             <CardHeader style={{ border: "white" }} style={{ backgroundColor: "black" }}><div className="d-flex justify-content-center text-light"><h3>Edit Profile</h3></div></CardHeader>
                             <Form className="m-5 row">
                                 <div className="col-md-7">
@@ -155,6 +156,7 @@ class EditProfile extends Component {
                                 </div>
                             </Form>
                         </Card>
+                        </div>
                     </div>
                 </motion.div>
             );

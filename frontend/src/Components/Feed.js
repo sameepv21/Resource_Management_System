@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import axios from 'axios';
-import { Card, CardBody, CardImgOverlay, CardHeader, CardFooter, Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Card, CardBody, Modal, ModalHeader, ModalBody, CardImgOverlay, CardHeader, CardFooter, Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import Header from './Header';
 import { NavLink } from 'react-router-dom';
 import NoPosts from './NoPosts';
@@ -11,6 +11,11 @@ import { pageVariants } from '../Shared/PageVariants';
 function ShowPosts({ result }) {
 
     const [isDropdownOpen, changeisDropdownOpen] = useState(false);
+    const [isModalOpen, changeisModalOpen] = useState(false);
+
+    function toggleModal() {
+        changeisModalOpen(!isModalOpen);
+    }
 
     function handleToggle() {
         changeisDropdownOpen(!isDropdownOpen);
@@ -18,52 +23,37 @@ function ShowPosts({ result }) {
     var display = result.map((post) => {
         let displayURL;
         if (post.url) {
-            displayURL = <div>Reference: <a href={post.url} className="text-decoration-none">Click Here</a></div>
+            displayURL = <div className="mt-2"><strong>Want to view the site? </strong><a href={post.url} >Click Me</a></div>
         }
         return (
             <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
                 <div className="d-flex justify-content-center">
-                    <Card className="col-md-6 mb-2">
-                        <CardHeader className="bg-white">
-                            <div className="d-flex justify-content-center">
-                                <h3>{post.title}</h3>
-                            </div>
-                            <div className="d-flex justify-content-end">
-                                <Dropdown isOpen={isDropdownOpen} toggle={handleToggle}>
-                                    <DropdownToggle>HEY
-                                <i className="fa fa-caret-down ml-1" />
-                                    </DropdownToggle>
-                                    <DropdownMenu>
-                                        <DropdownItem>
-                                            <NavLink className="nav-link text-dark text-decoration-none" to='/profile'>Account</NavLink>
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            <NavLink className="nav-link text-dark text-decoration-none" to='/savedPosts'>Saved Posts</NavLink>
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            <NavLink className="nav-link text-dark text-decoration-none" to='/userPosts'>Your Posts</NavLink>
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            <NavLink className="nav-link text-dark text-decoration-none" to='/logout'>Sign Out</NavLink>
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                </Dropdown>
-                            </div>
-                        </CardHeader>
-                        <CardBody>
-                            Description: {post.description}<br />
-                            {displayURL}
-                        </CardBody>
-                        <div className="d-flex justify-content-center">
+                    <div className="col-md-6">
+                        <Card className="mb-3 mt-1">
+                            <CardHeader style={{ backgroundColor: "black", borderColor: "black" }}>
+                                <div className="d-flex justify-content-center text-light">
+                                    <h3>{post.title}</h3>
+                                    
+                                </div>
+                            </CardHeader>
+                            <CardBody className="bg-white">
+                                <strong> Description: </strong>{post.description}<br />
+                                {displayURL}
+                            </CardBody>
                             <CardFooter className="bg-white">
-                                <a href={post.file_name} role="button" className="btn m-1" color="success" download>Download<span className="ml-2 fa fa-download"></span> </a>
-                                <Button className="btn m-1" color="primary">Save<span className="ml-2 fa fa-bookmark"></span></Button>
+                                <div className="d-flex justify-content-center">
+                                    <div>
+                                        <h6 className="d-flex justify-content-start text-small" style={{ textColor: "grey" }}>{post.fname} {post.lname}</h6>
+                                        <h6 className="text-small">{post.date_time}</h6>
+                                    </div>
+                                    {/* <Button className="btn m-1" color="success">Download<span className="ml-2 fa fa-download"></span> </Button> */}
+                                    <Button className="btn m-1 ml-auto" color="primary" >Save<span className="ml-2 fa fa-bookmark"></span></Button>
+                                </div>
                             </CardFooter>
-                        </div>
-                    </Card>
+                        </Card>
+                    </div>
                 </div>
             </motion.div>
-
         );
     })
 

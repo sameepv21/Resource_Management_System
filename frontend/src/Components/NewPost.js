@@ -3,7 +3,7 @@ import { Form, FormGroup, Input, Card, Button, CardBody, Label, DropdownToggle, 
 import Header from './Header';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import {pageVariants} from '../Shared/PageVariants';
+import { pageVariants } from '../Shared/PageVariants';
 
 class NewPost extends Component {
     constructor(props) {
@@ -35,12 +35,12 @@ class NewPost extends Component {
     }
 
     async handleSubmit(event) {
-        if(this.state.title === '' || (this.state.url === '' || !this.state.file)) {
+        if (this.state.title === '' || (this.state.url === '' || !this.state.file)) {
             this.setState({
                 standardError: 'You have not added title and either of url or file',
             });
         }
-        if(this.state.standardError === '') {
+        if (this.state.standardError === '') {
             event.preventDefault();
             let formData = new FormData();
             formData.append('school', this.state.school);
@@ -75,7 +75,7 @@ class NewPost extends Component {
         } else {
             value = target.value;
             let name = target.name;
-            if(name === 'title') {
+            if (name === 'title') {
                 this.setState({
                     standardError: '',
                 });
@@ -99,7 +99,7 @@ class NewPost extends Component {
             errors.title = 'Required';
         }
 
-        if(school == "chooseSchool") {
+        if (school == "chooseSchool") {
             errors.schoolOption = 'Please Choose this field';
         }
 
@@ -110,31 +110,31 @@ class NewPost extends Component {
         // console.log(this.state.school);
         const pageVariants = {
             initial: {
-              x: "-10vw",
+                x: "-10vw",
             },
             in: {
-              x: 0,
+                x: 0,
             },
             out: {
-              x: "100vw",
+                x: "100vw",
             }
-          };
+        };
         let errors = this.validate(this.state.title, this.state.school);
         let streamVar;
-        if(this.state.school === "seas") {
+        if (this.state.school === "seas") {
             streamVar = <FormGroup>
-                <Label htmlFor="title" className="text-light">Choose stream</Label><br/>
-                <select name="stream" style={{width: "100%"}} id= "stream" onBlur={this.handleInputChange}>
+                <Label htmlFor="title" className="text-light">Choose stream</Label><br />
+                <select name="stream" style={{ width: "100%" }} id="stream" onBlur={this.handleInputChange}>
                     <option value="cse">Computer Science and Engineering</option>
                     <option value="ce">Chemical Engineering</option>
                     <option value="me">Mechanical Engineering</option>
                 </select>
-                <FormFeedback>{errors.schoolOption}</FormFeedback>   
+                <FormFeedback>{errors.schoolOption}</FormFeedback>
             </FormGroup>
-        } else if(this.state.school === "amsom") {
+        } else if (this.state.school === "amsom") {
             streamVar = <FormGroup>
-                <Label htmlFor="title" className="text-light">Choose stream</Label><br/>
-                <select name="stream" style={{width: "100%"}} id= "stream" onChange={this.handleInputChange}>
+                <Label htmlFor="title" className="text-light">Choose stream</Label><br />
+                <select name="stream" style={{ width: "100%" }} id="stream" onChange={this.handleInputChange}>
                     <option value="af">Accounting and Finance</option>
                     <option value="ba">Business Analytics</option>
                     <option value="f">Finance</option>
@@ -145,14 +145,14 @@ class NewPost extends Component {
                     <option value="ors">Operations Research and Statistics</option>
                     <option value="scm">Supply Chain Management</option>
                 </select>
-                <FormFeedback>{errors.schoolOption}</FormFeedback>   
+                <FormFeedback>{errors.schoolOption}</FormFeedback>
             </FormGroup>
-        }  else if(this.state.school === "sas") {
+        } else if (this.state.school === "sas") {
             streamVar = <FormGroup>
-                <Label htmlFor="title" className="text-light">Choose stream</Label><br/>
-                <select name="stream" style={{width: "100%"}} id= "stream" onBlur={this.handleInputChange}>
-                    <option value="cs">Computer Science</option> 
-                    <option value="economics">Economics</option> 
+                <Label htmlFor="title" className="text-light">Choose stream</Label><br />
+                <select name="stream" style={{ width: "100%" }} id="stream" onBlur={this.handleInputChange}>
+                    <option value="cs">Computer Science</option>
+                    <option value="economics">Economics</option>
                     <option value="history">History</option>
                     <option value="ls">Life Sciences</option>
                     <option value="phl">Philosophy, History and Languages</option>
@@ -160,69 +160,69 @@ class NewPost extends Component {
                     <option value="psychology">Psychology</option>
                     <option value="sps">Social and Political Sciences</option>
                 </select>
-                <FormFeedback>{errors.schoolOption}</FormFeedback>   
+                <FormFeedback>{errors.schoolOption}</FormFeedback>
             </FormGroup>
         }
         return (
             <div className="bg_relative">
                 <Header />
                 <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
-                <div className="d-flex justify-content-center mt-5">
-                    <div className="col-lg-4">
-                    <Card className=" mb-5">
-                        <CardHeader>
-                            <div className="container d-flex justify-content-center">
-                                <h3>Help in sharing resources</h3>
-                            </div>
-                            <div className="container d-flex justify-content-center">
-                                <p>"No one ever becomes poor by giving" by Anne Frank</p>
-                            </div>
-                        </CardHeader>
-                        <CardBody className="color-nav">
-                            <FormGroup>
-                                <Label htmlFor="title" className="text-light">Choose school to post in</Label><br/>
-                                <select name="school" id= "school" style={{width: '100%'}} onChange={this.handleInputChange}>
-                                    <option value="seas">SEAS</option>
-                                    <option value="sas">SAS</option>
-                                    <option value="amsom">AMSOM</option>
-                                </select> 
-                            </FormGroup>
-                            {streamVar}
-                            <FormGroup>
-                                <Label htmlFor="title" className="text-light">Title</Label>
-                                <Input type="text" id="title" name="title" placeholder="Title"
-                                    value={this.state.title} onBlur={this.handleBlur('title')}
-                                    valid={errors.title === ''} invalid={errors.title !== ''}
-                                    onChange={this.handleInputChange} />
-                                <FormFeedback>{errors.title}</FormFeedback>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="url" className="text-light">URL</Label>
-                                <Input type="url" id="url" name="url" placeholder="Place your link here"
-                                    value={this.state.url} onBlur={this.handleBlur('url')} onChange={this.handleInputChange} />
-                            </FormGroup>
-                            {/* <FormGroup> */}
-                            <form method="post" action="" enctype='multipart/form-data'>
-                                <Label htmlFor="file" className="text-light">Upload a document here</Label>
-                                <input type="file" id="file1" name="file1" className="form-control mb-1 bg-light"
-                                    onChange={this.handleInputChange} />
-                            </form>
-                            {/* </FormGroup>     */}
-                            <FormGroup>
-                                <Label htmlFor="description" className="text-light">Add a Description</Label>
-                                <Input type="textarea" rows="3" id="description" name="description"
-                                    value={this.state.description} onBlur={this.handleBlur('description')} onChange={this.handleInputChange} />
-                            </FormGroup>
-                            <p className="d-flex justify-content-center text-danger">{this.state.standardError}</p>
-                            <div className="d-flex justify-content-center">
-                                <Button type="button" onClick={this.handleSubmit} color="success">Upload and Publish</Button>
-                            </div>
-                        </CardBody>
-                    </Card>
+                    <div className="d-flex justify-content-center mt-5">
+                        <div className="col-lg-4">
+                            <Card className="mb-5">
+                                <CardHeader>
+                                    <div className="container d-flex justify-content-center">
+                                        <h3>Help in sharing resources</h3>
+                                    </div>
+                                    <div className="container d-flex justify-content-center">
+                                        <p>"No one ever becomes poor by giving" by Anne Frank</p>
+                                    </div>
+                                </CardHeader>
+                                <CardBody className="color-nav">
+                                    <FormGroup>
+                                        <Label htmlFor="title" className="text-light">Choose school to post in</Label><br />
+                                        <select name="school" id="school" style={{ width: '100%' }} onChange={this.handleInputChange}>
+                                            <option value="seas">SEAS</option>
+                                            <option value="sas">SAS</option>
+                                            <option value="amsom">AMSOM</option>
+                                        </select>
+                                    </FormGroup>
+                                    {streamVar}
+                                    <FormGroup>
+                                        <Label htmlFor="title" className="text-light">Title</Label>
+                                        <Input type="text" id="title" name="title" placeholder="Title"
+                                            value={this.state.title} onBlur={this.handleBlur('title')}
+                                            valid={errors.title === ''} invalid={errors.title !== ''}
+                                            onChange={this.handleInputChange} />
+                                        <FormFeedback>{errors.title}</FormFeedback>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label htmlFor="url" className="text-light">URL</Label>
+                                        <Input type="url" id="url" name="url" placeholder="Place your link here"
+                                            value={this.state.url} onBlur={this.handleBlur('url')} onChange={this.handleInputChange} />
+                                    </FormGroup>
+                                    {/* <FormGroup> */}
+                                    <form method="post" action="" enctype='multipart/form-data'>
+                                        <Label htmlFor="file" className="text-light">Upload a document here</Label>
+                                        <input type="file" id="file1" name="file1" className="form-control mb-1 bg-light"
+                                            onChange={this.handleInputChange} />
+                                    </form>
+                                    {/* </FormGroup>     */}
+                                    <FormGroup>
+                                        <Label htmlFor="description" className="text-light">Add a Description</Label>
+                                        <Input type="textarea" rows="3" id="description" name="description"
+                                            value={this.state.description} onBlur={this.handleBlur('description')} onChange={this.handleInputChange} />
+                                    </FormGroup>
+                                    <p className="d-flex justify-content-center text-danger">{this.state.standardError}</p>
+                                    <div className="d-flex justify-content-center">
+                                        <Button type="button" onClick={this.handleSubmit} color="success">Upload and Publish</Button>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </div>
+
                     </div>
-                    
-                </div>
-            </motion.div>
+                </motion.div>
 
             </div>
         );

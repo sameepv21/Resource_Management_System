@@ -29,7 +29,6 @@ exports.deletePost = (req, res) => {
                 } else {
                     fs.unlink('../backend/uploads/AU1940049/' + req.body.fileName, function(err) {
                         if(err){
-                            // console.log(err);
                             res.send({
                                 status: 0,
                                 msg: err.message,

@@ -37,11 +37,11 @@ class ShowProfile extends Component {
         }
         else {
             return (
-                <div className="mt-2 d-flex justify-content-center ">
+                <div className="mt-2 d-flex justify-content-center">
                     <Card>
                         <CardHeader style={{ border: "white" }} style={{ backgroundColor: "black" }}><div className="d-flex justify-content-center text-light"><h3>My Profile</h3></div></CardHeader>
                         <div className="d-flex justify-content-center">
-                            <img src="https://res.cloudinary.com/didf23s1x/image/upload/v1609509151/RMS/Profile_dkfrx4.gif" className="mt-4 mb-3"></img>
+                            <img src="https://res.cloudinary.com/didf23s1x/image/upload/v1609509151/RMS/Profile_dkfrx4.gif" style={{maxWidth: '100%'}} className="mt-4 mb-3"></img>
                         </div>
                         <CardBody>
                             <div className="d-flex justify-content-center row ">
