@@ -230,7 +230,7 @@ class LoginForm extends Component {
                                     <CardBody >
                                         <Form method="post">
                                             <div className="d-flex justify-content-center">
-                                                <img src="https://res.cloudinary.com/didf23s1x/image/upload/v1609433589/RMS/Login_tjskfe.gif" width="80%" height="80%" />
+                                                <img src="https://res.cloudinary.com/didf23s1x/image/upload/v1609433589/RMS/Login_tjskfe.gif" />
                                             </div>
                                             <FormGroup className="d-flex justify-content-center">
                                                 <GoogleLogin
