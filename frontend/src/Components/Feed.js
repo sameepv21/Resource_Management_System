@@ -56,7 +56,7 @@ function ShowPosts({ result }) {
                         </CardBody>
                         <div className="d-flex justify-content-center">
                             <CardFooter className="bg-white">
-                                <Button className="btn m-1" color="success" download>Download<span className="ml-2 fa fa-download"></span> </Button>
+                                <a href={post.file_name} role="button" className="btn m-1" color="success" download>Download<span className="ml-2 fa fa-download"></span> </a>
                                 <Button className="btn m-1" color="primary">Save<span className="ml-2 fa fa-bookmark"></span></Button>
                             </CardFooter>
                         </div>

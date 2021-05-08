@@ -3,14 +3,15 @@ use mydb;
 
 create table temp (
     idtemp int auto_increment,
-    fName varchar(50), 
-    lName varchar(50), 
+    fname varchar(50), 
+    lname varchar(50), 
     rollNo int, 
     email varchar(150), 
     password varchar(100) default null,
     imageUrl varchar(500), 
     role varchar(5), 
-    primary key (idtemp)
+    primary key (idtemp),
+    unique key unique_fields (email, rollNo)
 );
 
 create table posts (

@@ -2,7 +2,7 @@ var nodemailer = require('nodemailer');
 var mysql = require('mysql');
 
 exports.verify = (req, res) => {
-    // console.log('Entered verify');
+    console.log('Entered verify');
 
     let email = req.body.email;
 
@@ -15,7 +15,7 @@ exports.verify = (req, res) => {
 
     con.connect(function(err){
         if(err){
-            // console.log('error connecting the database ' + err.message);
+            console.log('error connecting the database ' + err.message);
             res.send({
                status: 0,
                msg: 'Something is wrong with the server. Please try again later',
@@ -41,7 +41,6 @@ exports.verify = (req, res) => {
                                 pass: 'a07s21)&@!',
                             },
                         });
-    
                         let otp = Math.floor(100000 + Math. random() * 900000);
     
                         let mailOptions = {
@@ -55,11 +54,11 @@ exports.verify = (req, res) => {
                         transporter.sendMail(mailOptions, function(err, info){
                             if(err) {
                                 console.log(err.message);
-                                // res.send({
-                                //     status: 0,
-                                //     msg: err.message,
-                                //     data: {},
-                                // });
+                                res.send({
+                                    status: 0,
+                                    msg: err.message,
+                                    data: {},
+                                });
                             } else {
                                 res.send({
                                     status: 1,

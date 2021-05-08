@@ -8,22 +8,17 @@ exports.getFeed = (req, res) => {
         database: "mydb",
     });
 
-    con.connect(function(err) {
-        if(err) {
+    con.connect(function (err) {
+        if (err) {
             res.send({
                 status: 0,
                 msg: err.message,
                 data: null,
             });
         } else {
-            // console.log(req.headers.stream);
-             let query = 'SELECT * from posts LEFT JOIN temp ON posts.email = temp.email WHERE posts.stream="' + req.headers.stream + '" UNION SELECT * FROM posts RIGHT JOIN temp ON posts.email = temp.email WHERE posts.stream="' + req.headers.stream + '";"';
-            // let query = "SELECT * FROM temp, post WHERE temp.email = post.email, posts.stream ='" + req.headers.stream + "' temp.stream ='" + req.headers.stream + "';";
-            // let query = '';
-            console.log("get Feed query: "+query);
-            con.query(query, function(err, results) {
-                console.log(results);
-                if(err) {
+            let query = 'select t.*, p.* from temp t right join posts p on t.email = p.email where p.stream = "' + req.headers.stream + '";';
+            con.query(query, function (err, results) {
+                if (err) {
                     res.send({
                         status: 0,
                         msg: err.message,

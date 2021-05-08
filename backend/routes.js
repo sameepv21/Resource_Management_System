@@ -18,7 +18,7 @@ var getFeed = require('./utils/getFeed');
 var getEditPost = require('./utils/getEditPost');
 // const { query } = require('express');
 var fileName = '';
-const size = 40 * 1024 * 1024;
+const size = 40 * 1024 * 1024; //40mb
 
 var storage  = multer.diskStorage({
   destination: (req, file, cb) => {
