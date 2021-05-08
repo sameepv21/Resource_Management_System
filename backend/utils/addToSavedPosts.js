@@ -17,7 +17,7 @@ exports.addToSavedPosts = (req,res) => {
                 msg: err.message,
             })
         } else{
-            let obj = JSON.parse(re.cookies.cookie);
+            let obj = JSON.parse(req.cookies.cookie);
             let check = "SELECT * FROM saved where email= '" + obj.email + "' AND postId = " + req.body.id + ";" ;
             con.query(check,function(err,results){
                 // console.log(results);

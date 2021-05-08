@@ -17,7 +17,7 @@ exports.editPost = (req, res) => {
             });
         } else {
             let obj = JSON.parse(req.cookies.cookie);
-            let query = "UPDATE posts SET title='" + req.body.title + "', url='" + req.body.url + "', description='" + req.body.description + "' WHERE email='" + obj.email + "';"; 
+            let query = "UPDATE posts SET title='" + req.body.title + "', url='" + req.body.url + "', description='" + req.body.description + "' WHERE idposts='" + req.body.idposts + "';"; 
             // console.log(query);
             con.query(query, function(err, results) {
                 if(err) {

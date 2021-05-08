@@ -47,6 +47,7 @@ class EditPost extends Component {
             title: this.state.title,
             description: this.state.description,
             url: this.state.url,
+            idposts: this.state.postId,
         }
 
         axios.defaults.withCredentials = true;

@@ -18,8 +18,7 @@ exports.userPost = (req, res) => {
             });
         } else {
             let obj = JSON.parse(req.cookies.cookie);
-            // let query = "SELECT * FROM posts WHERE email='" + obj.email + "';";
-            let query = "SELECT temp.* FROM posts RIGHT JOIN posts ON posts.email = temp.email WHERE posts.email ='" + obj.email + "';";
+            let query = "SELECT temp.*, posts.* FROM temp RIGHT JOIN posts ON posts.email = temp.email WHERE temp.email ='" + obj.email + "' order by posts.date_time desc;";
             con.query(query, function(err, results) {
                 if(err) {
                     res.send({

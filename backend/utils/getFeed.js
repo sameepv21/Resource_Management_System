@@ -16,7 +16,7 @@ exports.getFeed = (req, res) => {
                 data: null,
             });
         } else {
-            let query = 'select t.*, p.* from temp t right join posts p on t.email = p.email where p.stream = "' + req.headers.stream + '";';
+            let query = 'select t.*, p.* from temp t right join posts p on t.email = p.email where p.stream = "' + req.headers.stream + '" order by p.date_time desc;';
             con.query(query, function (err, results) {
                 if (err) {
                     res.send({
