@@ -7,7 +7,7 @@ exports.signUp = (req, res) => {
     let firstName = req.body.firstname;
     let lastName = req.body.lastname;
     let roll = req.body.roll;
-    let email = req.body.emai;
+    let email = req.body.email;
     let password = req.body.password;
 
     let con = mysql.createConnection({
@@ -27,7 +27,6 @@ exports.signUp = (req, res) => {
         } else {
             bcrypt.hash(password, saltRounds, function (err, hash) {
                 let insertQuery = "INSERT INTO temp (fname, lname, rollNo, email, imageUrl, role, password) VALUES  ('" + firstName + "','" + lastName + "','" + roll + "','" + email + "', 'https://res.cloudinary.com/didf23s1x/image/upload/v1610778072/RMS/defaultProfilePicture_cq1mlw.jpg', 'U','"+ hash + "');";
-                console.log(insertQuery);
                 con.query(insertQuery, function (err, result) {
                     if (err) {
                         console.log('error is: ' + err.message);

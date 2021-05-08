@@ -17,8 +17,8 @@ exports.profile = (req, res) =>{
             });
         }
         else{
-            let obj = JSON.parse(req.cookies.cookie);
-            var query = "SELECT * FROM temp WHERE email='"+ obj.email +"';" ;
+            let email = JSON.parse(req.cookies.cookie);
+            var query = "SELECT * FROM temp WHERE email='"+ email.email +"';" ;
             // console.log('Query: ' + obj.email);
             con.query(query, function(err,results){
                 // console.log("results: "+ JSON.stringify(results));

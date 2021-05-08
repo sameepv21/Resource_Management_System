@@ -37,15 +37,15 @@ exports.verify = (req, res) => {
                         let transporter = nodemailer.createTransport({
                             service: 'gmail',
                             auth: {
-                                user: 'sameep.v@ahduni.edu.in',
-                                pass: 'Sameep211001!',
+                                user: 'noreply.resource.manage.system@gmail.com',
+                                pass: 'a07s21)&@!',
                             },
                         });
     
                         let otp = Math.floor(100000 + Math. random() * 900000);
     
                         let mailOptions = {
-                            from: 'sameep.v@ahduni.edu.in',
+                            from: 'noreply.resource.manage.system@gmail.com',
                             to: 'aneri.d@ahduni.edu.in',
                             subject: 'OTP for verification (RMS)',
                             text: 'OTP for verification is: ' + otp + '. It will last for 5 minutes',
@@ -54,12 +54,12 @@ exports.verify = (req, res) => {
     
                         transporter.sendMail(mailOptions, function(err, info){
                             if(err) {
-                                // console.log(err.message);
-                                res.send({
-                                    status: 0,
-                                    msg: err.message,
-                                    data: {},
-                                });
+                                console.log(err.message);
+                                // res.send({
+                                //     status: 0,
+                                //     msg: err.message,
+                                //     data: {},
+                                // });
                             } else {
                                 res.send({
                                     status: 1,

@@ -132,7 +132,6 @@ class LoginForm extends Component {
             axios.defaults.withCredentials = true;
             axios.post('http://localhost:5000/verify', data)
                 .then(response => {
-                    alert(JSON.stringify(response.data));
                     if (response.data.status === 1) {
                         this.setState({
                             google: false,
