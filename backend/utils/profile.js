@@ -44,7 +44,8 @@ exports.profile = (req, res) =>{
                     }
                     res.send({
                         status: 1,
-                        msg: "data provided : )",
+                        success: true,
+                        msg: "Data provided",
                         data: JSON.stringify(content),
                     });
                 }

@@ -30,6 +30,7 @@ exports.userPost = (req, res) => {
                     res.send({
                         status: 1,
                         msg: 'Fetched Data',
+                        success: true,
                         data: {results: results},
                     });
                 }

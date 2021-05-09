@@ -7,6 +7,7 @@ import EditPost from './EditPost';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { pageVariants } from '../Shared/PageVariants';
+import NoPosts from './NoPosts';
 
 class ShowPost extends Component {
     constructor(props) {
@@ -16,6 +17,7 @@ class ShowPost extends Component {
             deleterRdirectVar: false,
             redirectEditPost: false,
             isDropdownOpen: false,
+            noPost: false,
         }
         this.addToSavePosts = this.addToSavePosts.bind(this);
         this.toggleEditPost = this.toggleEditPost.bind(this);
@@ -51,7 +53,7 @@ class ShowPost extends Component {
 
         axios.post('http://localhost:5000/deletePost', data)
             .then(response => {
-                if(response.data.success) {
+                if (response.data.success) {
                     this.setState({
                         deleteRedirectVar: true,
                     })
@@ -75,7 +77,7 @@ class ShowPost extends Component {
         axios.defaults.withCredentials = true;
         axios.post('/addToSavedPosts', data)
             .then((response) => {
-                if(response.data.success) {
+                if (response.data.success) {
                     this.setState({
                         successMsg: 'Saved!'
                     })
@@ -178,7 +180,9 @@ class UserPosts extends Component {
                         redirectVar: true,
                     });
                 } else {
-                    alert(response.data.msg);
+                    this.setState({
+                        noPost: true,
+                    })
                 }
 
             })
@@ -193,6 +197,14 @@ class UserPosts extends Component {
                 <ShowPost particularPostDetail={post} />
             );
         });
+        if (this.state.noPost) {
+            return (
+                <div className="bg_fixed">
+                    <Header />  
+                    <NoPosts />
+                </div>
+            );
+        }
         if (this.state.redirectVar) {
             return (
                 <div className="bg_relative">

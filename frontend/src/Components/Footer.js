@@ -15,14 +15,15 @@ class Header extends Component {
                         <div className="col text-light">
                             <h5>Sameep Vani</h5>
                             <h6>sameep.v@ahduni.edu.in</h6>
-                            <span className="fa fa-instagram fa-lg"></span>
-                            <span className="fa fa-linkedin fa-lg ml-2"></span>
+                            <a className='text-light' href="https://www.instagram.com/vanisameep/"><span className="fa fa-instagram fa-lg"></span></a>
+                            <a className='text-light' href="https://www.linkedin.com/in/sameep-vani/"><span className="fa fa-linkedin fa-lg  ml-2"></span></a>
+
                         </div>
                         <div className="col text-light">
                             <h5>Aneri Dalwadi</h5>
                             <h6 >aneri.d@ahduni.edu.in</h6>
-                            <span className="fa fa-instagram fa-lg"></span>
-                            <span className="fa fa-linkedin fa-lg  ml-2"></span>
+                            <a className='text-light' href="https://www.instagram.com/aneriddalwadi/"><span className="fa fa-instagram fa-lg"></span></a>
+                            <a className='text-light' href="https://www.linkedin.com/in/aneri-dalwadi/"><span className="fa fa-linkedin fa-lg  ml-2"></span></a>
                         </div>
                     </div>
                 </motion.div>

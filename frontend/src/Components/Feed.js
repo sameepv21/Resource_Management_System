@@ -100,8 +100,7 @@ class Feed extends Component {
             })
     }
     render() {
-        // console.log(JSON.stringify(this.state));
-        if (this.state.result === null) {
+        if (this.state.result.length === 0) {
             return (
                 <div className="bg_fixed">
                     <Header />

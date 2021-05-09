@@ -5,6 +5,7 @@ import { Card, CardHeader, CardBody, CardImg, CardFooter, Button, Modal, ModalHe
 import { motion } from 'framer-motion';
 import Header from './Header';
 import { pageVariants } from '../Shared/PageVariants';
+import NoPosts from './NoPosts';
 
 class ShowSavedPost extends Component {
     constructor(props) {
@@ -75,6 +76,7 @@ class SavedPost extends Component {
 
         this.state = {
             details_saved: [],
+            noPost: false,
             redirectVar: false,
         }
     }
@@ -83,14 +85,16 @@ class SavedPost extends Component {
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:5000/savedPosts')
             .then(response => {
-                if(response.data.success) {
+                if(response.data.data.results.length !== 0) {
                     this.setState({
                         details_saved: response.data.data.results,
                         redirectVar: true,
                     });
                 }
                 else {
-                    alert(response.data.msg);
+                    this.setState({
+                        noPost: true,
+                    })
                 }
             })
             .catch(response => {
@@ -132,7 +136,7 @@ class SavedPost extends Component {
         return (
             <div className="bg_relative">
                 <Header />
-                {/* <ShowBreadcrumb /> */}
+                <NoPosts />
             </div>
         );
     }
