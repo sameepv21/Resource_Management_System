@@ -4,6 +4,25 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import cookie from 'react-cookies';
 
+class Name extends Component {
+    render(){
+        return(
+            <li className="text-light">
+                {this.props.name}
+            </li>
+        )
+    }
+}
+
+class SearchList extends Component {
+        render(){
+            return(
+                <ul style={{maxHeight: 100, overflow: 'auto'}}>
+                    {this.props.items.map(name => <Name name = {name}/>)}
+                </ul>
+            )
+        }
+}
 
 class Header extends Component {
     constructor(props) {
@@ -14,12 +33,15 @@ class Header extends Component {
             isNavOpen: false,
             isDropdownOpen: false,
             data: {},
+            searchItems: [],
         }
         this.toggleNav = this.toggleNav.bind(this);
         this.handleToggle = this.handleToggle.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleGo = this.handleGo.bind(this);
+        this.dynamicSearch = this.dynamicSearch.bind(this);
+        this.handleFocus = this.handleFocus.bind(this);
     }
 
     componentDidMount() {
@@ -40,16 +62,24 @@ class Header extends Component {
     handleBlur = (field) => (evt) => {
         this.setState({
             touched: { ...this.state.touched, [field]: true },
+            searchItems: []
         });
+        
+    }
+    handleFocus = (field) => (evt) => {
+        this.setState({
+            touched: { ...this.state.touched, [field]: true },
+            searchItems: ["Aneri", "Sameep", "Jhil", "Nirja","Drishti", "Anu", "#brute", "#tree"]
+        });
+        
     }
 
     handleInputChange(event){
         let target = event.target;
         let value = target.type === 'checkbox' ? target.checked : target.value;
-        let name = target.name;
-
+        
         this.setState({
-            [name]: value
+            search: value
         });
     }
 
@@ -57,25 +87,29 @@ class Header extends Component {
         if(this.state.search == ""){
             alert("No input");
         } else{
-
-            let data= {
-                search : this.state.search
-            }
-            axios.defaults.withCredentials = true;
-            axios.post('http://localhost:5000/search', data)
-                .then(response => {
-                    if (response.data.success) {
-                        this.setState({
-                            redirectVarSearch: true,
-                            otp: response.data.data.otp,
-                        });
-                    }
-                    else {
-                        alert(JSON.stringify(response.data.msg));
-                    }
-                })
+            alert("Searching "+this.state.search+ " in database");
+            // let data= {
+            //     search : this.state.search
+            // }
+            // axios.defaults.withCredentials = true;
+            // axios.post('http://localhost:5000/search', data)
+            //     .then(response => {
+            //         if (response.data.success) {
+            //             this.setState({
+            //                 redirectVarSearch: true,
+            //                 otp: response.data.data.otp,
+            //             });
+            //         }
+            //         else {
+            //             alert(JSON.stringify(response.data.msg));
+            //         }
+            //     })
         }
     }
+
+    dynamicSearch(){
+        return this.state.searchItems.filter(searchItems => searchItems.toLowerCase().includes(this.state.search.toLowerCase()));
+    }   
 
     toggleNav() {
         this.setState({
@@ -98,13 +132,15 @@ class Header extends Component {
                     <Collapse isOpen={this.state.isNavOpen} navbar className="dark">
                         <Nav navbar className="ml-auto">
                             <NavItem className="mt-2">
-                                <input placeholder="Search" id="search" 
+                                <input type="text" placeholder="Search" id="search" 
                                     onBlur= {this.handleBlur("search")}
+                                    onFocus= {this.handleFocus("search")}
                                     onChange={this.handleInputChange}>
                                 </input>
+                                <SearchList items = {this.dynamicSearch()} />
                             </NavItem>
                             <NavItem>
-                                <Button className="btn-sm btn mt-2" style={{backgroundColor: "#0F4756"}} onClick={handleGo}>Go</Button>
+                                <Button className="btn-sm btn mt-2" style={{backgroundColor: "#0F4756"}} onClick={this.handleGo}>Go</Button>
                             </NavItem>
                             <NavItem className="mt-1">
                                 <NavLink className="nav-link" to='/home'>
