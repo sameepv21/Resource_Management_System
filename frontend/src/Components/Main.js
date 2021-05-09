@@ -15,11 +15,12 @@ import SchoolDetails from '../Shared/SchoolDetails';
 import EditPost from './EditPost';
 import ContactUs from './ContactUs';
 import AboutUs from './AboutUs';
+import SearchTag from './SearchTag';
+import SearchName from './SearchName';
 import { motion, AnimatePresence } from 'framer-motion';
 
 class Main extends Component {
     render() {
-
 
         const SchoolWithId = ({match}) =>{
             return(
@@ -34,6 +35,16 @@ class Main extends Component {
         const editPostWithId = ({match}) => {
             return(
                 <EditPost details = {match.params.post} />
+            )
+        }
+        const SearchNameWithId = ({match}) => {
+            return(
+            <SearchName search = {match.params.name} />
+            )
+        }
+        const SearchTagWithId = ({match}) => {
+            return(
+            <SearchTag search = {match.params.tag} />
             )
         }
         return(
@@ -53,6 +64,8 @@ class Main extends Component {
                     <Route path='/contactUs' component={ContactUs} />
                     <Route path='/aboutUs' component={AboutUs} />
                     <Route exact path='/home/:schoolName' component={SchoolWithId} />
+                    <Route exact path='/searchName/:name' component={SearchNameWithId} />
+                    <Route exact path='/searchTag/:tag' component={SearchTagWithId} />
                     {/* <Route exact path='/home/:schoolName/:streamName' component={StreamWithId} /> */}
                     <Redirect to="/login" />
                 </Switch>

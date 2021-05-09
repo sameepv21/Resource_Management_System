@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, NavItem, NavbarToggler, Collapse, Nav, Dropdown, Input,DropdownToggle, Button,DropdownMenu, DropdownItem } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+import { Navbar, NavbarBrand, NavItem, NavbarToggler, Collapse, Nav, Dropdown, Input, DropdownToggle, Button, DropdownMenu, DropdownItem } from 'reactstrap';
+import { NavLink, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import cookie from 'react-cookies';
 
 class Name extends Component {
-    render(){
-        return(
-            <li className="text-light">
+    render() {
+        return (
+            <li className="text-light" id={this.props.name}>
                 {this.props.name}
             </li>
         )
@@ -15,13 +15,13 @@ class Name extends Component {
 }
 
 class SearchList extends Component {
-        render(){
-            return(
-                <ul style={{maxHeight: 100, overflow: 'auto'}}>
-                    {this.props.items.map(name => <Name name = {name}/>)}
-                </ul>
-            )
-        }
+    render() {
+        return (
+            <ul style={{ maxHeight: 100, overflow: 'auto' }}>
+                {this.props.items.map(name => <Name name={name} />)}
+            </ul>
+        )
+    }
 }
 
 class Header extends Component {
@@ -29,10 +29,12 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            search : "",
+            search: "",
             isNavOpen: false,
             isDropdownOpen: false,
             data: {},
+            redirectVarTag: false,
+            redirectVarName: false,
             searchItems: [],
         }
         this.toggleNav = this.toggleNav.bind(this);
@@ -64,52 +66,44 @@ class Header extends Component {
             touched: { ...this.state.touched, [field]: true },
             searchItems: []
         });
-        
+
     }
     handleFocus = (field) => (evt) => {
         this.setState({
             touched: { ...this.state.touched, [field]: true },
-            searchItems: ["Aneri", "Sameep", "Jhil", "Nirja","Drishti", "Anu", "#brute", "#tree"]
+            searchItems: ["Aneri", "Sameep", "Jhil", "Nirja", "Drishti", "Anu", "#brute", "#tree"]
         });
-        
+
     }
 
-    handleInputChange(event){
+    handleInputChange(event) {
         let target = event.target;
         let value = target.type === 'checkbox' ? target.checked : target.value;
-        
+
         this.setState({
             search: value
         });
     }
 
-    handleGo(){
-        if(this.state.search == ""){
+    handleGo() {
+        if (this.state.search == "") {
             alert("No input");
-        } else{
-            alert("Searching "+this.state.search+ " in database");
-            // let data= {
-            //     search : this.state.search
-            // }
-            // axios.defaults.withCredentials = true;
-            // axios.post('http://localhost:5000/search', data)
-            //     .then(response => {
-            //         if (response.data.success) {
-            //             this.setState({
-            //                 redirectVarSearch: true,
-            //                 otp: response.data.data.otp,
-            //             });
-            //         }
-            //         else {
-            //             alert(JSON.stringify(response.data.msg));
-            //         }
-            //     })
+        } else {
+            if (this.state.search.charAt(0) == '#') {
+                this.setState({
+                    redirectVarTag: true,
+                });
+            }
+            else {
+                this.setState({
+                    redirectVarName: true,
+                });
+            }
         }
     }
-
-    dynamicSearch(){
+    dynamicSearch() {
         return this.state.searchItems.filter(searchItems => searchItems.toLowerCase().includes(this.state.search.toLowerCase()));
-    }   
+    }
 
     toggleNav() {
         this.setState({
@@ -124,23 +118,33 @@ class Header extends Component {
     }
 
     render() {
+        if (this.state.redirectVarName) {
+            return (
+                <Redirect to={`/searchName/${this.state.search}`} />
+            )
+        }
+        if (this.state.redirectVarTag) {
+            return (
+                <Redirect to={`/searchTag/${this.state.search.substring[1, this.state.search.length]}`} />
+            )
+        }
         return (
-            <Navbar className="color-nav sticky-top" dark expand="md">
+            <Navbar className="color-nav sticky-top" dark expand="lg">
                 <div className="container">
                     <NavbarBrand className="mr-auto" href="/">Resource Management System</NavbarBrand>
                     <NavbarToggler onClick={this.toggleNav} />
                     <Collapse isOpen={this.state.isNavOpen} navbar className="dark">
                         <Nav navbar className="ml-auto">
                             <NavItem className="mt-2">
-                                <input type="text" placeholder="Search" id="search" 
-                                    onBlur= {this.handleBlur("search")}
-                                    onFocus= {this.handleFocus("search")}
+                                <input type="text" placeholder="Search" id="search"
+                                    onBlur={this.handleBlur("search")}
+                                    onFocus={this.handleFocus("search")}
                                     onChange={this.handleInputChange}>
                                 </input>
-                                <SearchList items = {this.dynamicSearch()} />
+                                <SearchList items={this.dynamicSearch()} />
                             </NavItem>
                             <NavItem>
-                                <Button className="btn-sm btn mt-2" style={{backgroundColor: "#0F4756"}} onClick={this.handleGo}>Go</Button>
+                                <Button className="btn-sm btn mt-2" style={{ backgroundColor: "#0F4756" }} onClick={this.handleGo}>Go</Button>
                             </NavItem>
                             <NavItem className="mt-1">
                                 <NavLink className="nav-link" to='/home'>
@@ -152,21 +156,21 @@ class Header extends Component {
                                     <span className="fa fa-plus fa-lg mr-2 mt-1"></span>New Post
                                 </NavLink>
                             </NavItem>
-                            
+
                             <NavItem className="mt-1">
                                 <NavLink className="nav-link" to='/aboutUs'>
                                     <span className="fa fa-info fa-lg mr-2"></span>About Us
                                 </NavLink>
                             </NavItem>
-                                <NavItem className="mt-1">
-                                    <NavLink className="nav-link" to='/contactUs'>
-                                        <span className="fa fa-phone fa-lg mr-2"></span>Contact Us
+                            <NavItem className="mt-1">
+                                <NavLink className="nav-link" to='/contactUs'>
+                                    <span className="fa fa-phone fa-lg mr-2"></span>Contact Us
                                     </NavLink>
-                                </NavItem>
+                            </NavItem>
                             <NavItem>
                                 <Dropdown isOpen={this.state.isDropdownOpen} toggle={this.handleToggle}>
                                     <DropdownToggle style={{ backgroundColor: "black", borderColor: "black" }} className="mt-1">
-                                        <img src={this.state.data.imageUrl} className="rounded-circle mr-2" style={{height:"38px", width:"38px"}} ></img>
+                                        <img src={this.state.data.imageUrl} className="rounded-circle mr-2" style={{ height: "38px", width: "38px" }} ></img>
                                         <i className="fa fa-caret-down ml-1" />
                                     </DropdownToggle>
                                     <DropdownMenu>

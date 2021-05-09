@@ -59,7 +59,7 @@ class RenderSchools extends Component {
                 //         </CardFooter>
                 //     </Card>
                 // </div>
-                <div className="mt-3 col-md-4" id="container">
+                <div className="mt-3 col-lg-4" id="container">
                     <Card id="card1">
                         <CardImg id="img1" src={school.image} alt={school.name} className="img-fluid" />
                         <CardImgOverlay role="button" id={school.schoolName} onClick={this.exploreSchool} className="stretched-link btn btn-lg text-light p-1 rounded">

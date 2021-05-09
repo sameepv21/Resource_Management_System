@@ -69,7 +69,7 @@ exports.search = (req,res) => {
     //                     res.send({
     //                         status: 1,
     //                         msg: 'Successfully Updated',
-    //                         searchType: "tag",
+    //                         searchType: "name",
     //                         current: true,
     //                         data: {
     //                             results
@@ -77,10 +77,6 @@ exports.search = (req,res) => {
     //                     })
     //                 }
     //             });
-    //         }
-    //         // for name
-    //         else{
-                
     //         }
     //     }
     // });
