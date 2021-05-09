@@ -1,6 +1,3 @@
-//Contains an alert that needs to be handled
-
-
 import React, { Component } from 'react';
 import ShowBreadcrumb from './ShowBreadcrumb';
 import axios from 'axios';
@@ -86,13 +83,18 @@ class SavedPost extends Component {
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:5000/savedPosts')
             .then(response => {
-                this.setState({
-                    details_saved: response.data.data.results,
-                    redirectVar: true,
-                });
+                if(response.data.success) {
+                    this.setState({
+                        details_saved: response.data.data.results,
+                        redirectVar: true,
+                    });
+                }
+                else {
+                    alert('Something went wrong, please try again later!');
+                }
             })
             .catch(response => {
-                alert(response);
+                alert('Something went wrong, please try again later!');
             })
     }
 

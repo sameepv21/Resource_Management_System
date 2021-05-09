@@ -1,6 +1,3 @@
-// Contains an alert that needs to be handled
-
-
 import React, { Component } from 'react';
 import { FormGroup, Input, Card, Button, CardBody, Label, CardHeader, FormFeedback, CardImg } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
@@ -24,6 +21,7 @@ class EditPost extends Component {
             redirectVar: false,
             canceled: false,
             redirectLogin: false,
+            errorMsg: '',
             touched: {
                 title: false,
             },
@@ -58,11 +56,13 @@ class EditPost extends Component {
                         updated: true,
                     });
                 } else {
-                    alert(JSON.stringify(response.data.msg));
+                    this.setState({
+                        errorMsg: 'Could not update, server error!',
+                    });
                 }
             })
-            .catch(response => {
-                alert(response);
+            .catch(err => {
+                alert('Something went wrong, please try again later!');
             })
     }
 
@@ -122,11 +122,11 @@ class EditPost extends Component {
                             description: response.data.data.description,
                         });
                     } else {
-                        alert(JSON.stringify(response.data.msg));
+                        alert("Could not fetch data, please try again later");
                     }
                 })
                 .catch(response => {
-                    alert(response);
+                    alert('Something went wrong, please try again later!');
                 })
         }
     }

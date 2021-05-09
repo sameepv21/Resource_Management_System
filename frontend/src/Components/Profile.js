@@ -1,5 +1,3 @@
-// Contains an alert that needs to be handled
-
 import React, { Component } from 'react';
 import Header from './Header';
 import { Button, Card, CardImg, CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap';
@@ -88,12 +86,18 @@ class Profile extends Component {
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:5000/profile')
             .then(response => {
-                this.setState({
-                    data: JSON.parse(response.data.data),
-                })
+
+                if(response.data.success) {
+                    this.setState({
+                        data: JSON.parse(response.data.data),
+                    })
+                }
+                else {
+                    alert('Something went wrong, please try again later!')
+                }
             })
             .catch(response => {
-                alert(response);
+                alert('Something went wrong, please try again later!');
             })
     }
 

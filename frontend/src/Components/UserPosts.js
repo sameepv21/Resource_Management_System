@@ -1,5 +1,3 @@
-//Contains many alerts to be handled
-
 import React, { Component } from 'react';
 import axios from 'axios';
 import Header from "./Header";
@@ -53,13 +51,17 @@ class ShowPost extends Component {
 
         axios.post('http://localhost:5000/deletePost', data)
             .then(response => {
-                // alert(response.data.msg);
-                this.setState({
-                    deleteRedirectVar: true,
-                })
+                if(response.data.success) {
+                    this.setState({
+                        deleteRedirectVar: true,
+                    })
+                }
+                else {
+                    alert('Something went wrong, please try again later!');
+                }
             })
             .catch(response => {
-                alert(response);
+                alert('Something went wrong, please try again later!');
             });
     }
 
@@ -73,14 +75,20 @@ class ShowPost extends Component {
         axios.defaults.withCredentials = true;
         axios.post('/addToSavedPosts', data)
             .then((response) => {
-                alert(response.data.msg);
+                if(response.data.success) {
+                    this.setState({
+                        successMsg: 'Saved!'
+                    })
+                }
+                else {
+                    alert('Something went wrong, please try again later!');
+                }
             })
             .catch((response) => {
-                alert(response);
+                alert('Something went wrong, please try again later!');
             })
     }
 
-    //alert(JSON.stringify(particularPostDetail));
     render() {
         let filePath = '../../backend/uploads/AU1940049' + '/' + this.props.particularPostDetail.file_name;
         if (this.state.deleteRedirectVar) {
@@ -164,19 +172,18 @@ class UserPosts extends Component {
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:5000/userPost')
             .then(response => {
-                //alert(JSON.stringify(response.data.data.results[0].email) + "             " + typeof response.data.data.results);
                 if (response.data.data.results.length !== 0) {
                     this.setState({
                         postDetails: response.data.data.results,
                         redirectVar: true,
                     });
                 } else {
-                    alert(JSON.stringify(response.data.msg));
+                    alert('Something went wrong, please try again later!');
                 }
 
             })
             .catch(response => {
-                alert(response);
+                alert('Something went wrong, please try again later!');
             });
     }
 

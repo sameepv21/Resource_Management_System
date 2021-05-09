@@ -35,7 +35,7 @@ class NewPost extends Component {
     }
 
     async handleSubmit(event) {
-        if (this.state.title === '' || (this.state.url === '' || !this.state.file)) {
+        if (this.state.title === '' || (this.state.url === '' && !this.state.file)) {
             this.setState({
                 standardError: 'You have not added title and either of url or file',
             });
@@ -53,10 +53,18 @@ class NewPost extends Component {
             axios.defaults.withCredentials = true;
             axios.post('http://localhost:5000/uploadPost', formData)
                 .then((response) => {
-                    alert(JSON.stringify(response.data.msg));
+                    if (response.data.success) {
+
+                        this.setState({
+                            successMsg: 'Uploaded',
+                        })
+                    }
+                    else {
+                        alert('Something went wrong, please try again later!');
+                    }
                 })
                 .catch((err) => {
-                    alert(err);
+                    alert('Something went wrong, please try again later!');
                 })
         }
     }

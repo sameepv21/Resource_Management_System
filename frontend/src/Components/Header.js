@@ -29,7 +29,7 @@ class Header extends Component {
                     })
                 })
                 .catch(response => {
-                    alert(response);
+                    alert('Something went wrong, please try again later!');
                 })
         }
     }

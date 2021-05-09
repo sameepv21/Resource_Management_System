@@ -1,5 +1,3 @@
-// Contains an alert that needs to be handled
-
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Input, Button, Label } from 'reactstrap';
@@ -19,6 +17,7 @@ class Verify extends Component {
         this.state = {
             redirectVar: false,
             otp: '',
+            errorMsg: '',
             touched: {
                 otp: false,
             }
@@ -68,10 +67,12 @@ class Verify extends Component {
                     }
                 })
                 .catch(err => {
-                    alert(err);
+                    alert('Something went wrong, please try again later!');
                 })
         } else {
-            alert('Wrong OTP!');
+            this.setState({
+                errorMsg: 'Wrong OTP!'
+            })
         }
     }
 

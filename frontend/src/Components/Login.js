@@ -47,7 +47,6 @@ class LoginForm extends Component {
     }
 
     responseGoogle = (response) => {
-        // alert(JSON.stringify(response.profileObj));
         let data = {
             google: true,
             email: response.profileObj.email,
@@ -62,11 +61,11 @@ class LoginForm extends Component {
                         redirectVar: true,
                     })
                 } else {
-                    alert(JSON.stringify(response.data.msg));
+                    alert('Something went wrong, please try again later!');
                 }
             })
             .catch((response) => {
-                alert(response.msg);
+                alert('Something went wrong, please try again later!');
             })
 
     }
@@ -112,7 +111,6 @@ class LoginForm extends Component {
     }
 
     async handleSignUpSubmit(event) {
-        // alert(this.state.firstname.length)
         if (this.state.firstname.length < 3 || this.state.lastname.length < 3 || this.state.roll.length < 3 || this.state.email.length === 0) {
             this.setState({
                 TEMP: true,
@@ -140,7 +138,7 @@ class LoginForm extends Component {
                         });
                     }
                     else {
-                        alert(JSON.stringify(response.data.msg));
+                        alert("Something went wrong, please try again later!");
                     }
                 })
                 .catch(response => {

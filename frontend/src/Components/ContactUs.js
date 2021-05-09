@@ -48,7 +48,9 @@ class ContactUs extends Component {
                             successMsg: 'Your message has been sent!',
                         });
                     } else {
-                        alert(response.data.msg)
+                        this.setState({
+                            errorMsg: 'Due to some error, your msg could not be sent!',
+                        })
                     }
                 })
         }
