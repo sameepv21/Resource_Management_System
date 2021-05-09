@@ -58,13 +58,12 @@ class ShowPost extends Component {
                         deleteRedirectVar: true,
                     })
                 }
-                else {
-                    alert(response.data.msg);
-                }
             })
             .catch(response => {
                 alert('Something went wrong, please try again later!');
             });
+
+        window.location.reload(true);
     }
 
     addToSavePosts(event) {
@@ -200,7 +199,7 @@ class UserPosts extends Component {
         if (this.state.noPost) {
             return (
                 <div className="bg_fixed">
-                    <Header />  
+                    <Header />
                     <NoPosts />
                 </div>
             );

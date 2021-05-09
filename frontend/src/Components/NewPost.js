@@ -17,6 +17,7 @@ class NewPost extends Component {
             stream: 'cse',
             description: '',
             redirectVar: false,
+            successMsg: '',
             standardError: '',
             touched: {
                 title: false,
@@ -40,7 +41,7 @@ class NewPost extends Component {
                 standardError: 'You have not added title and either of url or file',
             });
         }
-        if (this.state.standardError === '') {
+        else {
             event.preventDefault();
             let formData = new FormData();
             formData.append('school', this.state.school);
@@ -54,7 +55,6 @@ class NewPost extends Component {
             axios.post('http://localhost:5000/uploadPost', formData)
                 .then((response) => {
                     if (response.data.success) {
-
                         this.setState({
                             successMsg: 'Uploaded',
                         })
@@ -66,6 +66,7 @@ class NewPost extends Component {
                 .catch((err) => {
                     alert('Something went wrong, please try again later!');
                 })
+
         }
     }
 
@@ -222,6 +223,9 @@ class NewPost extends Component {
                                             value={this.state.description} onBlur={this.handleBlur('description')} onChange={this.handleInputChange} />
                                     </FormGroup>
                                     <p className="d-flex justify-content-center text-danger">{this.state.standardError}</p>
+                                    <div className="d-flex justify-content-center">
+                                        <p className="text-success">{this.state.successMsg}</p>
+                                    </div>
                                     <div className="d-flex justify-content-center">
                                         <Button type="button" onClick={this.handleSubmit} color="success">Upload and Publish</Button>
                                     </div>

@@ -12,6 +12,7 @@ function ShowPosts({ result }) {
 
     const [isDropdownOpen, changeisDropdownOpen] = useState(false);
     const [isModalOpen, changeisModalOpen] = useState(false);
+    const [successMsg, changeSuccessMsg] = useState('');
 
     function addToSavePosts(event) {
         event.preventDefault();
@@ -23,12 +24,10 @@ function ShowPosts({ result }) {
         axios.post('/addToSavedPosts', data)
             .then((response) => {
                 if(response.data.success) {
-                    this.setState({
-                        successMsg: 'Saved!'
-                    })
+                    changeSuccessMsg('Saved')
                 }
                 else {
-                    alert(response.data.msg);
+                    changeSuccessMsg('Already Saved!');
                 }
             })
             .catch((response) => {
@@ -36,17 +35,14 @@ function ShowPosts({ result }) {
             })
     }
 
-    function toggleModal() {
-        changeisModalOpen(!isModalOpen);
-    }
-
-    function handleToggle() {
-        changeisDropdownOpen(!isDropdownOpen);
-    }
     var display = result.map((post) => {
         let displayURL;
         if (post.url) {
-            displayURL = <div className="mt-2"><strong>Want to view the site? </strong><a href={post.url} >Click Me</a></div>
+            displayURL = <div className="mt-2"><strong>Want to view the site? </strong><a href={post.url} className="text-decoration-none">Click Me</a></div>
+        }
+        let displayFile;
+        if(post.file_name) {
+            displayFile = <a href={post.file_name} role="button" className="btn m-1" color="success" download>Download<span className="ml-2 fa fa-download"></span></a>
         }
         return (
             <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
@@ -56,7 +52,6 @@ function ShowPosts({ result }) {
                             <CardHeader style={{ backgroundColor: "black", borderColor: "black" }}>
                                 <div className="d-flex justify-content-center text-light">
                                     <h3>{post.title}</h3>
-                                    
                                 </div>
                             </CardHeader>
                             <CardBody className="bg-white">
@@ -69,8 +64,9 @@ function ShowPosts({ result }) {
                                         <h6 className="d-flex justify-content-start text-small" style={{ textColor: "grey" }}>{post.fname} {post.lname}</h6>
                                         <h6 className="text-small">{post.date_time}</h6>
                                     </div>
-                                    {/* <Button className="btn m-1" color="success">Download<span className="ml-2 fa fa-download"></span> </Button> */}
+                                    {displayFile}
                                     <Button id={post.idposts} className="btn m-1 ml-auto" color="primary" onClick={addToSavePosts}>Save<span className="ml-2 fa fa-bookmark"></span></Button>
+                                    {/* <p className="text-success ml-2 mt-2">{successMsg}</p> */}
                                 </div>
                             </CardFooter>
                         </Card>

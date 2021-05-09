@@ -34,6 +34,7 @@ exports.addToSavedPosts = (req,res) => {
                             res.send({
                                 status: 1,
                                 msg: "Post saved successfully",
+                                success: true,
                                 data: {}
                             })
                         }
@@ -41,6 +42,7 @@ exports.addToSavedPosts = (req,res) => {
                 } else {
                     res.send({
                         status: 1,
+                        success: false,
                         msg: 'Already Saved!',
                         data: {},
                     })

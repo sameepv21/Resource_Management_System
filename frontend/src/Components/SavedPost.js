@@ -19,7 +19,7 @@ class ShowSavedPost extends Component {
 
         axios.post('http://localhost:5000/unsavePost', data)
             .then(response => {
-                if(response.data.success) {
+                if (response.data.success) {
                     alert('Unsaved!');
                 }
                 else {
@@ -29,6 +29,8 @@ class ShowSavedPost extends Component {
             .catch(err => {
                 alert(err.message)
             })
+
+        window.location.reload(true);
     }
 
     render() {
@@ -104,7 +106,7 @@ class SavedPost extends Component {
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:5000/savedPosts')
             .then(response => {
-                if(response.data.data.results.length !== 0) {
+                if (response.data.data.results.length !== 0) {
                     this.setState({
                         details_saved: response.data.data.results,
                         redirectVar: true,
