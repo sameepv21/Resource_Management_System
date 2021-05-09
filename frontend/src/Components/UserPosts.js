@@ -57,7 +57,7 @@ class ShowPost extends Component {
                     })
                 }
                 else {
-                    alert('Something went wrong, please try again later!');
+                    alert(response.data.msg);
                 }
             })
             .catch(response => {
@@ -81,7 +81,7 @@ class ShowPost extends Component {
                     })
                 }
                 else {
-                    alert('Something went wrong, please try again later!');
+                    alert(response.data.msg);
                 }
             })
             .catch((response) => {
@@ -178,7 +178,7 @@ class UserPosts extends Component {
                         redirectVar: true,
                     });
                 } else {
-                    alert('Something went wrong, please try again later!');
+                    alert(response.data.msg);
                 }
 
             })

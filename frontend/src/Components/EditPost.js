@@ -122,7 +122,7 @@ class EditPost extends Component {
                             description: response.data.data.description,
                         });
                     } else {
-                        alert("Could not fetch data, please try again later");
+                        alert(response.data.msg);
                     }
                 })
                 .catch(response => {

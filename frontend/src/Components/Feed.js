@@ -13,6 +13,29 @@ function ShowPosts({ result }) {
     const [isDropdownOpen, changeisDropdownOpen] = useState(false);
     const [isModalOpen, changeisModalOpen] = useState(false);
 
+    function addToSavePosts(event) {
+        event.preventDefault();
+        let data = {
+            id: event.target.id,
+        }
+
+        axios.defaults.withCredentials = true;
+        axios.post('/addToSavedPosts', data)
+            .then((response) => {
+                if(response.data.success) {
+                    this.setState({
+                        successMsg: 'Saved!'
+                    })
+                }
+                else {
+                    alert(response.data.msg);
+                }
+            })
+            .catch((response) => {
+                alert('Something went wrong, please try again later!');
+            })
+    }
+
     function toggleModal() {
         changeisModalOpen(!isModalOpen);
     }
@@ -47,7 +70,7 @@ function ShowPosts({ result }) {
                                         <h6 className="text-small">{post.date_time}</h6>
                                     </div>
                                     {/* <Button className="btn m-1" color="success">Download<span className="ml-2 fa fa-download"></span> </Button> */}
-                                    <Button className="btn m-1 ml-auto" color="primary" >Save<span className="ml-2 fa fa-bookmark"></span></Button>
+                                    <Button id={post.idposts} className="btn m-1 ml-auto" color="primary" onClick={addToSavePosts}>Save<span className="ml-2 fa fa-bookmark"></span></Button>
                                 </div>
                             </CardFooter>
                         </Card>

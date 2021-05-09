@@ -60,7 +60,7 @@ class NewPost extends Component {
                         })
                     }
                     else {
-                        alert('Something went wrong, please try again later!');
+                        alert(response.data.msg);
                     }
                 })
                 .catch((err) => {
