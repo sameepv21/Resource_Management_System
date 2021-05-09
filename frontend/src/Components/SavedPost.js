@@ -12,6 +12,25 @@ class ShowSavedPost extends Component {
         super(props);
     }
 
+    unsavePost(event) {
+        let data = {
+            idsaved: event.target.id,
+        }
+
+        axios.post('http://localhost:5000/unsavePost', data)
+            .then(response => {
+                if(response.data.success) {
+                    alert('Unsaved!');
+                }
+                else {
+                    alert("Some Error Occured")
+                }
+            })
+            .catch(err => {
+                alert(err.message)
+            })
+    }
+
     render() {
         if (this.props.details.file) {
             return (
@@ -28,7 +47,7 @@ class ShowSavedPost extends Component {
                                 </CardBody>
                                 <CardFooter className="bg-white d-flex justify-content-center">
                                     <Button className="btn m-1" color="success">Download<span className="ml-2 fa fa-download"></span> </Button>
-                                    <Button className="btn m-1" color="danger" onClick={this.addToSavePosts}>Unsave<span className="ml-2 fa fa-ban"></span></Button>
+                                    <Button id={this.props.details.idsaved} className="btn m-1" color="danger" onClick={this.unsavePost}>Unsave<span className="ml-2 fa fa-ban"></span></Button>
                                 </CardFooter>
                             </Card>
                         </div>
@@ -57,7 +76,7 @@ class ShowSavedPost extends Component {
                                             <h6 className="text-small">{this.props.details.date_time}</h6>
                                         </div>
                                         {/* <Button className="btn m-1" color="success">Download<span className="ml-2 fa fa-download"></span> </Button> */}
-                                        <Button className="btn m-1 ml-auto" color="danger" onClick={this.addToSavePosts}>Unsave<span className="ml-2 fa fa-bookmark"></span></Button>
+                                        <Button id={this.props.details.idsaved} className="btn m-1 ml-auto" color="danger" onClick={this.unsavePost}>Unsave<span className="ml-2 fa fa-bookmark"></span></Button>
                                     </div>
                                 </CardFooter>
                             </Card>

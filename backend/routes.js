@@ -16,6 +16,7 @@ var editPost = require('./utils/editPost');
 var savedPosts = require('./utils/savedPosts');
 var getFeed = require('./utils/getFeed');
 var getEditPost = require('./utils/getEditPost');
+var unsavePost = require('./utils/unsavePost');
 // const { query } = require('express');
 var fileName = '';
 const size = 40 * 1024 * 1024; //40mb
@@ -54,6 +55,8 @@ router.post('/addToSavedPosts', addToSavedPosts.addToSavedPosts);
 router.post('/deletePost', deletePost.deletePost);
 
 router.post('/getEditPost', getEditPost.getEditPost);
+
+router.post('/unsavePost', unsavePost.unsavePost);
 
 let fileUpload = upload.single('file');
 router.post('/uploadPost',  function(req, res, next){
