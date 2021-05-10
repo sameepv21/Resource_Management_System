@@ -128,7 +128,9 @@ class Header extends Component {
     render() {
 
         if(redirectVarMain){
+            alert("got redirect var" + redirectToMain);
             if (redirectToMain.charAt(0) == '#') {
+                alert("gotcha!!!");
                 return (
                     <Redirect to={`/searchTag/${redirectToMain.substring[1, redirectToMain.length]}`} />
                 )
