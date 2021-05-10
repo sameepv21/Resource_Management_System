@@ -3,12 +3,20 @@ import { Navbar, NavbarBrand, NavItem, NavbarToggler, Collapse, Nav, Dropdown, I
 import { NavLink, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import cookie from 'react-cookies';
-
+let redirectVarMain = false;
+let redirectToMain = "";
 class Name extends Component {
+
     render() {
         return (
-            <li className="text-light" id={this.props.name}>
-                {this.props.name}
+            <li className="text-light" id={this.props.name}
+                role="button"
+                onClick={() => {
+                    console.log("clicked "+this.props.name)
+                    redirectVarMain= true;
+                    redirectToMain = this.props.name; 
+                }}>
+                        {this.props.name}
             </li>
         )
     }
@@ -118,6 +126,19 @@ class Header extends Component {
     }
 
     render() {
+
+        if(redirectVarMain){
+            if (redirectToMain.charAt(0) == '#') {
+                return (
+                    <Redirect to={`/searchTag/${redirectToMain.substring[1, redirectToMain.length]}`} />
+                )
+            }
+            else {
+                return (
+                    <Redirect to={`/searchName/${redirectToMain}`} />
+                )
+            }
+        }
         if (this.state.redirectVarName) {
             return (
                 <Redirect to={`/searchName/${this.state.search}`} />
